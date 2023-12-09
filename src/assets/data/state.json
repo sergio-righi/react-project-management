@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "6573c26025d0612aeb11c1e9",
+    "name": "Draft",
+    "briefdescription": "Tasks in the initial stage, created but not yet actively worked on. They are in a preliminary state and may undergo further refinement."
+  },
+  {
+    "_id": "6573c2654022bd4fe3a6da45",
+    "name": "Opened",
+    "briefdescription": "Tasks that have been created and are ready for action. They are available for assignment or initiation by team members."
+  },
+  {
+    "_id": "6573c26a87264af48763a923",
+    "name": "In Progress",
+    "briefdescription": "Tasks that are actively being worked on. Team members are currently engaged in completing the associated activities and making progress."
+  },
+  {
+    "_id": "6573c26ecce5bbdafa52a8ca",
+    "name": "Closed",
+    "briefdescription": "Tasks that have been successfully completed. They are considered finished, and no further action is required."
+  },
+  {
+    "_id": "6573c2727ec2e6ac8265a209",
+    "name": "Cancelled",
+    "briefdescription": "Tasks that have been intentionally terminated or abandoned before completion. They are no longer in progress and won't be pursued further."
+  },
+  {
+    "_id": "6573c27641b353522d4e3bf2",
+    "name": "Waiting External Action",
+    "briefdescription": "Tasks that are temporarily on hold, awaiting input or action from external sources or stakeholders."
+  },
+  {
+    "_id": "6573c27c3a53800eab2b9ffd",
+    "name": "Testing",
+    "briefdescription": "Tasks that have been completed and are currently undergoing testing or quality assurance processes to ensure they meet the required standards."
+  },
+  {
+    "_id": "6573c281069ba1ba66009d43",
+    "name": "Waiting Approval",
+    "briefdescription": "Tasks that are completed and awaiting approval from relevant stakeholders or authorities before they can be considered officially finished."
+  },
+  {
+    "_id": "6573c285c2522e89053e2d7a",
+    "name": "Analysing",
+    "briefdescription": "Tasks in the phase of analysis, where the requirements and details are being carefully examined before active work begins."
+  },
+  {
+    "_id": "6573c28fdf40bab61647cb0c",
+    "name": "On Hold",
+    "briefdescription": "Tasks that are temporarily paused or put on hold. They are not actively being worked on, but may resume progress at a later time."
+  }
+]

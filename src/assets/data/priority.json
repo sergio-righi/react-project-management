@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "6573bb67d791a9def76f6dfb",
+    "name": "Low",
+    "briefdescription": ""
+  },
+  {
+    "_id": "6573bb90d02e8854f91fa277",
+    "name": "Medium",
+    "briefdescription": ""
+  },
+  {
+    "_id": "6573bb94a859b621a65d849a",
+    "name": "High",
+    "briefdescription": ""
+  },
+  {
+    "_id": "6573bb98b690719728c19afa",
+    "name": "Critical",
+    "briefdescription": ""
+  }
+]

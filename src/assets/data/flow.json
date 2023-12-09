@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "6573bf0bb8ad6b408b5c1426",
+    "name": "Planning",
+    "briefdescription": "Define project scope, objectives, and requirements in collaboration with stakeholders",
+    "states": []
+  },
+  {
+    "_id": "6573bf11005cf9bc715f7230",
+    "name": "Analysis",
+    "briefdescription": "Create high-level and low-level design specifications",
+    "states": []
+  },
+  {
+    "_id": "6573bf165027c0a814939aa3",
+    "name": "Design",
+    "briefdescription": "UI/UX Designer",
+    "states": []
+  },
+  {
+    "_id": "6573bf1c890d1e52f102864d",
+    "name": "Implementation",
+    "briefdescription": "Software Developer",
+    "states": []
+  },
+  {
+    "_id": "6573bf222f2d0576b97cbada",
+    "name": "Testing",
+    "briefdescription": "Conduct various testing activities, including unit testing, integration testing, system testing, and acceptance testing",
+    "states": []
+  },
+  {
+    "_id": "6573bf2643012be87dff251f",
+    "name": "Deployment",
+    "briefdescription": "Manage the deployment process and ensure smooth transitions between development and production environments",
+    "states": []
+  }
+]

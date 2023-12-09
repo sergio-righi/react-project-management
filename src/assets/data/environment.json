@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "6573bb3586406f446ea91355",
+    "name": "DEV",
+    "briefdescription": "Development"
+  },
+  {
+    "_id": "6573bb3d4f16ac5a6d03ac7d",
+    "name": "SIT",
+    "briefdescription": "System Integration Test"
+  },
+  {
+    "_id": "6573bb42f09b43c122a81ddd",
+    "name": "UAT",
+    "briefdescription": "User Acceptance Test"
+  },
+  {
+    "_id": "6573bb48e8d5ca00eedebdad",
+    "name": "PROD",
+    "briefdescription": "Production"
+  }
+]
