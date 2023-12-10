@@ -7,9 +7,12 @@ import {
   IProject,
   IState,
   ITask,
+  IUser,
 } from "interfaces";
+import { BoardType } from "types";
 
 interface ProvidedValueType {
+  board: () => BoardType[];
   environment: IEnvironment | null;
   setEnvironment: (environment: IEnvironment) => void;
   flow: IFlow | null;
@@ -18,6 +21,8 @@ interface ProvidedValueType {
   setProject: (project: IProject) => void;
   task: ITask | null;
   setTask: (task: ITask) => void;
+  user: IUser | null;
+  setUser: (user: IUser) => void;
   categories: ICategory[];
   setCategories: (categories: ICategory[]) => void;
   environments: IEnvironment[];
@@ -40,6 +45,7 @@ const initialState = {
 };
 
 export const DataContext = createContext<ProvidedValueType>({
+  board: () => [],
   environment: initialState.obj,
   setEnvironment: () => {},
   flow: initialState.obj,
@@ -48,6 +54,9 @@ export const DataContext = createContext<ProvidedValueType>({
   setProject: () => {},
   task: initialState.obj,
   setTask: () => {},
+  user: initialState.obj,
+  setUser: () => {},
+  // data
   categories: initialState.array,
   setCategories: () => {},
   environments: initialState.array,
@@ -77,6 +86,7 @@ export const DataProvider = React.memo<Props>(({ children }) => {
     initialState.obj
   );
   const [task, setTask] = React.useState<ITask | null>(initialState.obj);
+  const [user, setUser] = React.useState<IUser | null>(initialState.obj);
 
   const [categories, setCategories] = React.useState<ICategory[]>(
     initialState.array
@@ -94,12 +104,30 @@ export const DataProvider = React.memo<Props>(({ children }) => {
   const [states, setStates] = React.useState<IState[]>(initialState.array);
   const [tasks, setTasks] = React.useState<ITask[]>(initialState.array);
 
-  // const setUserCallback = React.useCallback((newUser: PairValue[] | null) => {
-  //   setUser((currentUser: PairValue[] | null) => newUser);
-  // }, []);
+  const setUserCallback = React.useCallback((newUser: IUser | null) => {
+    setUser((currentUser: IUser | null) => {
+      if (newUser) {
+        setFlow(newUser.flows[0] as IFlow);
+      }
+      return newUser;
+    });
+  }, []);
+
+  const board = React.useCallback(() => {
+    if (!flow) return [] as BoardType[];
+    return flow.states.map((state: string | IState) => {
+      const boardItem = {} as BoardType;
+      boardItem.state = state as IState;
+      boardItem.tasks = tasks?.filter(
+        (task: ITask) => (task.state as IState)._id === (state as IState)._id
+      );
+      return boardItem;
+    }) as BoardType[];
+  }, [flow, tasks, user]);
 
   const MemoizedValue = React.useMemo(() => {
     const value: ProvidedValueType = {
+      board,
       environment,
       setEnvironment,
       flow,
@@ -108,6 +136,8 @@ export const DataProvider = React.memo<Props>(({ children }) => {
       setProject,
       task,
       setTask,
+      user,
+      setUser: setUserCallback,
       categories,
       setCategories,
       environments,
@@ -125,6 +155,7 @@ export const DataProvider = React.memo<Props>(({ children }) => {
     };
     return value;
   }, [
+    board,
     categories,
     environment,
     environments,
@@ -136,6 +167,7 @@ export const DataProvider = React.memo<Props>(({ children }) => {
     states,
     task,
     tasks,
+    user,
   ]);
 
   return (

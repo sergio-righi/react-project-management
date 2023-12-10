@@ -1,6 +1,6 @@
 import { ApiResponse } from "types";
 import { IFlow } from "interfaces";
-import { Enums } from "utils";
+import { Enums, ORM } from "utils";
 import { Auxiliars } from "helpers";
 import { Flows } from "assets/data";
 
@@ -12,7 +12,7 @@ export class FlowData implements IFlowData {
 
   async flows(): Promise<ApiResponse<IFlow[]>> {
     return await Auxiliars.asyncMethod(() => ({
-      status: Enums.EnumResponse.Success, payload: Flows
+      status: Enums.EnumResponse.Success, payload: Flows.map((item: IFlow) => ORM.populateFlow(item))
     }));
   }
 }

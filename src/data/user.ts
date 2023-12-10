@@ -1,6 +1,6 @@
 import { ApiResponse } from "types";
 import { IUser } from "interfaces";
-import { Enums } from "utils";
+import { Enums, ORM } from "utils";
 import { Auxiliars } from "helpers";
 import { Users } from "assets/data";
 
@@ -12,7 +12,7 @@ export class UserData implements IUserData {
 
   async users(): Promise<ApiResponse<IUser[]>> {
     return await Auxiliars.asyncMethod(() => ({
-      status: Enums.EnumResponse.Success, payload: Users
+      status: Enums.EnumResponse.Success, payload: Users.map((item: IUser) => ORM.populateUser(item))
     }));
   }
 }

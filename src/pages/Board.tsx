@@ -2,40 +2,15 @@ import React, { useEffect, useState } from "react";
 
 import { Box, Grid, Stack } from "@mui/material";
 import { Common, Controller, Custom, Kanban } from "components";
-import { useApp, useService, useTheme } from "contexts";
+import { useApp, useData, useTheme } from "contexts";
 import { ITask } from "interfaces";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { BoardType } from "types";
 
 export const Board = () => {
   const { t } = useApp();
   const { theme } = useTheme();
-  const { task } = useService();
-
-  const [tasks, setTasks] = useState<ITask[]>([]);
-  const [board, setBoard] = useState([[], [], [], [], []]);
-
-  // TODO : retrieve from the database
-  const states = ["To do", "Analysis", "In Progress", "Validation", "Done"];
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  async function fetchData() {
-    const tasks = await task.tasks();
-    console.log(tasks);
-    setTasks(tasks);
-
-    const newState: any = [
-      [...tasks],
-      [...tasks],
-      [...tasks],
-      [...tasks],
-      [...tasks],
-    ];
-
-    setBoard(newState);
-  }
+  const { board } = useData();
 
   function onDragEnd(result: any) {
     const { source, destination } = result;
@@ -151,15 +126,16 @@ export const Board = () => {
     >
       <DragDropContext onDragEnd={onDragEnd}>
         <Grid container width="1" height="1" gap={theme.spacing.md}>
-          {states.map((item: string, i: number) => {
+          {board().map((item: BoardType) => {
             return (
-              <Grid key={i} item xs>
-                <Kanban.Board label={item}>
-                  <Droppable droppableId={item}>
+              <Grid key={item.state._id} item xs>
+                <Kanban.Board label={item.state.name}>
+                  <Droppable droppableId={item.state._id}>
                     {(provided, snapshot) => (
-                      <Box
+                      <Stack
                         height="1"
                         ref={provided.innerRef}
+                        spacing={theme.spacing.md}
                         {...provided.droppableProps}
                         sx={{
                           backgroundColor: snapshot.isDraggingOver
@@ -167,27 +143,29 @@ export const Board = () => {
                             : undefined,
                         }}
                       >
-                        <Draggable
-                          index={i}
-                          key={i.toString()}
-                          draggableId={i.toString()}
-                        >
-                          {(provided, snapshot) => (
-                            <Box
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              sx={{
-                                userSelect: "none",
-                              }}
+                        {item.tasks.map((subitem: ITask, i: number) => {
+                          return (
+                            <Draggable
+                              index={i}
+                              key={subitem._id}
+                              draggableId={subitem._id}
                             >
-                              <Kanban.Task
-                                elm={{ _id: i.toString() } as ITask}
-                              />
-                            </Box>
-                          )}
-                        </Draggable>
-                      </Box>
+                              {(provided, snapshot) => (
+                                <Box
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  sx={{
+                                    userSelect: "none",
+                                  }}
+                                >
+                                  <Kanban.Task elm={subitem} />
+                                </Box>
+                              )}
+                            </Draggable>
+                          );
+                        })}
+                      </Stack>
                     )}
                   </Droppable>
                 </Kanban.Board>

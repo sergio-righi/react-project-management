@@ -41,7 +41,7 @@ export function populateTask(task: ITask): ITask {
 
 export function populateUser(user: IUser): IUser {
   const newUser = { ...user }
-  newUser.flows = populates<IFlow>(Flows, "_id", newUser.flows as string[]);
+  newUser.flows = newUser.flows.map((item: IFlow | string) => populateFlow(findFlowById(item.toString()) ?? {} as IFlow)) ?? [] as IFlow[];
   return newUser;
 }
 

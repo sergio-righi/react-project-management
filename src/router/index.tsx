@@ -3,7 +3,7 @@ import { DefaultLayout, EmptyLayout } from "layouts";
 import { Board, Project, Settings, Table, Task, View } from "pages";
 import { Error } from "components";
 import { Routes as Urls } from "utils";
-import { Protected } from "middlewares";
+import { LoadData, Protected } from "middlewares";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
@@ -11,7 +11,14 @@ export default () => {
     <BrowserRouter>
       <Routes>
         <Route path={Urls.aliases.board} element={<DefaultLayout />}>
-          <Route path={Urls.pages.board.index} element={<Board />} />
+          <Route
+            path={Urls.pages.board.index}
+            element={
+              <LoadData>
+                <Board />
+              </LoadData>
+            }
+          />
         </Route>
 
         <Route path={Urls.aliases.table} element={<DefaultLayout />}>

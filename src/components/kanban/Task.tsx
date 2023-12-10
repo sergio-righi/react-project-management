@@ -1,8 +1,14 @@
 import { Stack } from "@mui/material";
 import { Custom, Icon } from "components";
 import { useTheme } from "contexts";
-import { ITask } from "interfaces";
-import { Draggable } from "react-beautiful-dnd";
+import {
+  ICategory,
+  IEnvironment,
+  IFlow,
+  IPriority,
+  IProject,
+  ITask,
+} from "interfaces";
 
 type Props = {
   elm: ITask;
@@ -23,16 +29,16 @@ export const Task = (props: Props) => {
           size={theme.font.xs}
           color={theme.palette.font.accent}
         >
-          Title Placeholder
+          {(props.elm.project as IProject).name}
         </Custom.Typography>
         <Custom.Typography size={theme.font.sm}>
-          Project Name Placeholder
+          {props.elm.title}
         </Custom.Typography>
       </Stack>
       <Stack direction="row" gap={theme.spacing.sm}>
         <Custom.Chip
           size="small"
-          label="Improvement"
+          label={(props.elm.flow as IFlow).name}
           sx={{
             color: theme.color.accent.text,
             backgroundColor: theme.color.accent.color,
@@ -40,7 +46,7 @@ export const Task = (props: Props) => {
         />
         <Custom.Chip
           size="small"
-          label="DEV"
+          label={(props.elm.environment as IEnvironment).name}
           sx={{
             color: theme.color.accent.text,
             backgroundColor: theme.color.accent.color,
@@ -49,12 +55,16 @@ export const Task = (props: Props) => {
       </Stack>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Stack direction="row" alignItems="center" spacing={theme.spacing.sm}>
-          <Icon.Priority value="critical" />
+          <Icon.Priority
+            value={(props.elm.priority as IPriority).name.toLowerCase()}
+          />
           <Custom.Typography weight={theme.font.light} size={theme.font.xs}>
-            Due in 3 days
+            {props.elm.deadline}
           </Custom.Typography>
         </Stack>
-        <Icon.Category value="story" />
+        <Icon.Category
+          value={(props.elm.category as ICategory).name.toLowerCase()}
+        />
       </Stack>
     </Stack>
   );

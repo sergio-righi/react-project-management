@@ -1,20 +1,20 @@
 [
   {
-    "_id": "6573c58288d03b9406d082d8",
-    "username": "janedoe",
-    "email": "janedoe@email.com",
-    "name": "Jane Doe",
-    "flows": [
-      "6573bf0bb8ad6b408b5c1426"
-    ]
-  },
-  {
     "_id": "6573c2f02a45e5d27962c010",
     "username": "johndoe",
     "email": "johndoe@email.com",
     "name": "John Doe",
     "flows": [
       "6573bf1c890d1e52f102864d"
+    ]
+  },
+  {
+    "_id": "6573c58288d03b9406d082d8",
+    "username": "janedoe",
+    "email": "janedoe@email.com",
+    "name": "Jane Doe",
+    "flows": [
+      "6573bf0bb8ad6b408b5c1426"
     ]
   }
 ]

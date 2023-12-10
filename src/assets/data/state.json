@@ -6,17 +6,17 @@
   },
   {
     "_id": "6573c2654022bd4fe3a6da45",
-    "name": "Opened",
-    "briefdescription": "Tasks that have been created and are ready for action. They are available for assignment or initiation by team members."
+    "name": "Failure",
+    "briefdescription": ""
   },
   {
     "_id": "6573c26a87264af48763a923",
-    "name": "In Progress",
+    "name": "Working on",
     "briefdescription": "Tasks that are actively being worked on. Team members are currently engaged in completing the associated activities and making progress."
   },
   {
     "_id": "6573c26ecce5bbdafa52a8ca",
-    "name": "Closed",
+    "name": "Done",
     "briefdescription": "Tasks that have been successfully completed. They are considered finished, and no further action is required."
   },
   {
@@ -48,5 +48,15 @@
     "_id": "6573c28fdf40bab61647cb0c",
     "name": "On Hold",
     "briefdescription": "Tasks that are temporarily paused or put on hold. They are not actively being worked on, but may resume progress at a later time."
+  },
+  {
+    "_id": "6575e5f0a71cef76aa96b966",
+    "name": "To do",
+    "briefdescription": ""
+  },
+  {
+    "_id": "6575e685da095ef7023e8d33",
+    "name": "Validating",
+    "briefdescription": ""
   }
 ]
