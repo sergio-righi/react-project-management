@@ -15,6 +15,6 @@ export default {
     }
   },
   navbar: {
-    icon: 40,
+    icon: 30,
   }
 } as Component;

@@ -1,3 +1,5 @@
+import { ICategory, IEnvironment, IFlow, IPriority, IProject, IState, IUser } from "interfaces";
+
 export interface JournalType {
   message: string;
   updatedBy: string;
@@ -10,14 +12,14 @@ export interface ITask {
   title: string;
   description: string;
   deadline: string;
-  priority: string;
-  state: string;
-  category: string;
-  assignee: string;
-  project: string;
-  referenceTask: string;
-  flow: string;
-  environment: string;
+  priority: string | IPriority;
+  state: string | IState;
+  category: string | ICategory;
+  assignee: string | IUser;
+  project: string | IProject;
+  referenceTask: string | ITask;
+  flow: string | IFlow;
+  environment: string | IEnvironment;
   estimatedTime: string;
   createdBy: string;
   createdAt: string;

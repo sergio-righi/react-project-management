@@ -19,10 +19,11 @@ export const Board = () => {
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   async function fetchData() {
     const tasks = await task.tasks();
+    console.log(tasks);
     setTasks(tasks);
 
     const newState: any = [
@@ -91,7 +92,7 @@ export const Board = () => {
 
   return (
     <Common.Page
-      header="Project Name Placeholder"
+      header="All Projects"
       subheader="Flow Name Placeholder"
       control={
         <>

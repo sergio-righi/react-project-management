@@ -2,6 +2,326 @@
   {
     "_id": "6573c33ee0b3d31dee1c1c72",
     "number": "T000001",
+    "title": "Improve Login Page",
+    "description": "Enhance the user interface of the login page for better accessibility.",
+    "deadline": "2023-12-15",
+    "priority": "6573bb67d791a9def76f6dfb",
+    "state": "6573c26a87264af48763a923",
+    "category": "6573bd5bb33c3c80614eb5d7",
+    "assignee": "6573c58288d03b9406d082d8",
+    "project": "6573c484b2df65c698766da5",
+    "referenceTask": "",
+    "flow": "6573bf0bb8ad6b408b5c1426",
+    "environment": "6573bb3586406f446ea91355",
+    "estimatedTime": "10h",
+    "createdBy": "6573c2f02a45e5d27962c010",
+    "createdAt": "2023-12-10T08:45:00",
+    "journal": [
+      {
+        "message": "The state has been updated from Opened to In progress",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-10T08:45:00"
+      },
+      {
+        "message": "Priority changed from Medium to Low",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-10T08:45:00"
+      },
+      {
+        "message": "Flow has been updated from Analysis to Design",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-10T08:45:00"
+      },
+      {
+        "message": "Environment has changed from DEV to SIT",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-10T08:45:00"
+      }
+    ]
+  },
+  {
+    "_id": "6573c341e5ab02fcdbda4c29",
+    "number": "T000002",
+    "title": "Fix Bug in User Profile",
+    "description": "Investigate and resolve a bug affecting the user profile functionality.",
+    "deadline": "2023-12-18",
+    "priority": "6573bb94a859b621a65d849a",
+    "state": "6573c26a87264af48763a923",
+    "category": "6573bd5734abdaafe82b9328",
+    "assignee": "6573c2f02a45e5d27962c010",
+    "project": "6573c484b2df65c698766da5",
+    "referenceTask": "",
+    "flow": "6573bf1c890d1e52f102864d",
+    "environment": "6573bb3d4f16ac5a6d03ac7d",
+    "estimatedTime": "8h",
+    "createdBy": "6573c58288d03b9406d082d8",
+    "createdAt": "2023-12-12T10:20:00",
+    "journal": [
+      {
+        "message": "The state has been updated from Opened to In progress",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-12T10:20:00"
+      },
+      {
+        "message": "Priority changed from High to Medium",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-12T10:20:00"
+      },
+      {
+        "message": "Flow has been updated from Analysis to Design",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-12T10:20:00"
+      },
+      {
+        "message": "Environment has changed from DEV to SIT",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-12T10:20:00"
+      }
+    ]
+  },
+  {
+    "_id": "6573c34d1bbfe5db518b8627",
+    "number": "T000003",
+    "title": "Create Dashboard Widgets",
+    "description": "Design and implement widgets for the project dashboard.",
+    "deadline": "2023-12-22",
+    "priority": "6573bb90d02e8854f91fa277",
+    "state": "6573c26ecce5bbdafa52a8ca",
+    "category": "6573bd5f8b5b898ec2c68054",
+    "assignee": "6573c58288d03b9406d082d8",
+    "project": "6573c484b2df65c698766da5",
+    "referenceTask": "",
+    "flow": "6573bf165027c0a814939aa3",
+    "environment": "6573bb42f09b43c122a81ddd",
+    "estimatedTime": "15h",
+    "createdBy": "6573c2f02a45e5d27962c010",
+    "createdAt": "2023-12-15T14:45:00",
+    "journal": [
+      {
+        "message": "The state has been updated from Opened to Testing",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-15T14:45:00"
+      },
+      {
+        "message": "Priority changed from Medium to High",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-15T14:45:00"
+      },
+      {
+        "message": "Flow has been updated from Analysis to Design",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-15T14:45:00"
+      },
+      {
+        "message": "Environment has changed from DEV to UAT",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-15T14:45:00"
+      }
+    ]
+  },
+  {
+    "_id": "6573c358d2a64bfecc9d60c3",
+    "number": "T000004",
+    "title": "Enhance User Permissions",
+    "description": "Improve the user permissions system for better security and access control.",
+    "deadline": "2023-12-28",
+    "priority": "6573bb90d02e8854f91fa277",
+    "state": "6573c27641b353522d4e3bf2",
+    "category": "6573bd685e4a03fceeecc2c0",
+    "assignee": "6573c2f02a45e5d27962c010",
+    "project": "6573c484b2df65c698766da5",
+    "referenceTask": "",
+    "flow": "6573bf222f2d0576b97cbada",
+    "environment": "6573bb48e8d5ca00eedebdad",
+    "estimatedTime": "12h",
+    "createdBy": "6573c58288d03b9406d082d8",
+    "createdAt": "2023-12-20T09:15:00",
+    "journal": [
+      {
+        "message": "The state has been updated from Opened to On Hold",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-20T09:15:00"
+      },
+      {
+        "message": "Priority changed from High to Medium",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-20T09:15:00"
+      },
+      {
+        "message": "Flow has been updated from Analysis to Deployment",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-20T09:15:00"
+      },
+      {
+        "message": "Environment has changed from DEV to PROD",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-20T09:15:00"
+      }
+    ]
+  },
+  {
+    "_id": "6573c360c53c482ed1c15525",
+    "number": "T000005",
+    "title": "Implement Search Functionality",
+    "description": "Integrate a powerful search feature to enhance user experience.",
+    "deadline": "2024-01-05",
+    "priority": "6573bb98b690719728c19afa",
+    "state": "6573c27c3a53800eab2b9ffd",
+    "category": "6573bd6ca3155becb6f9be63",
+    "assignee": "6573c58288d03b9406d082d8",
+    "project": "6573c484b2df65c698766da5",
+    "referenceTask": "",
+    "flow": "6573bf1c890d1e52f102864d",
+    "environment": "6573bb3d4f16ac5a6d03ac7d",
+    "estimatedTime": "18h",
+    "createdBy": "6573c2f02a45e5d27962c010",
+    "createdAt": "2023-12-22T11:30:00",
+    "journal": [
+      {
+        "message": "The state has been updated from Opened to Testing",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-22T11:30:00"
+      },
+      {
+        "message": "Priority changed from Critical to High",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-22T11:30:00"
+      },
+      {
+        "message": "Flow has been updated from Analysis to Design",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-22T11:30:00"
+      },
+      {
+        "message": "Environment has changed from DEV to UAT",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-22T11:30:00"
+      }
+    ]
+  },
+  {
+    "_id": "6573c36975d1ebe903cd1f0e",
+    "number": "T000006",
+    "title": "Optimize Database Queries",
+    "description": "Identify and optimize slow-performing database queries for better application performance.",
+    "deadline": "2024-01-10",
+    "priority": "6573bb94a859b621a65d849a",
+    "state": "6573c285c2522e89053e2d7a",
+    "category": "6573bd685e4a03fceeecc2c0",
+    "assignee": "6573c2f02a45e5d27962c010",
+    "project": "6573c484b2df65c698766da5",
+    "referenceTask": "",
+    "flow": "6573bf222f2d0576b97cbada",
+    "environment": "6573bb3586406f446ea91355",
+    "estimatedTime": "25h",
+    "createdBy": "6573c58288d03b9406d082d8",
+    "createdAt": "2023-12-28T13:45:00",
+    "journal": [
+      {
+        "message": "The state has been updated from Opened to Testing",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-28T13:45:00"
+      },
+      {
+        "message": "Priority changed from High to Medium",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-28T13:45:00"
+      },
+      {
+        "message": "Flow has been updated from Analysis to Deployment",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-28T13:45:00"
+      },
+      {
+        "message": "Environment has changed from DEV to PROD",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-28T13:45:00"
+      }
+    ]
+  },
+  {
+    "_id": "6573c37174a3b2fb2607681e",
+    "number": "T000007",
+    "title": "Implement OAuth Integration",
+    "description": "Integrate OAuth authentication for enhanced security and user authentication.",
+    "deadline": "2024-01-15",
+    "priority": "6573bb90d02e8854f91fa277",
+    "state": "6573c27641b353522d4e3bf2",
+    "category": "6573bd6ca3155becb6f9be63",
+    "assignee": "6573c2f02a45e5d27962c010",
+    "project": "6573c484b2df65c698766da5",
+    "referenceTask": "",
+    "flow": "6573bf1c890d1e52f102864d",
+    "environment": "6573bb3d4f16ac5a6d03ac7d",
+    "estimatedTime": "20h",
+    "createdBy": "6573c58288d03b9406d082d8",
+    "createdAt": "2023-12-31T09:30:00",
+    "journal": [
+      {
+        "message": "The state has been updated from Opened to In progress",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-31T09:30:00"
+      },
+      {
+        "message": "Priority changed from Medium to Low",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-31T09:30:00"
+      },
+      {
+        "message": "Flow has been updated from Analysis to Design",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-31T09:30:00"
+      },
+      {
+        "message": "Environment has changed from DEV to SIT",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-31T09:30:00"
+      }
+    ]
+  },
+  {
+    "_id": "6573c378e6a5eb77b86a89c6",
+    "number": "T000008",
+    "title": "Enhance User Notifications",
+    "description": "Improve the notification system to keep users informed about important events.",
+    "deadline": "2024-01-20",
+    "priority": "6573bb98b690719728c19afa",
+    "state": "6573c27c3a53800eab2b9ffd",
+    "category": "6573bd5734abdaafe82b9328",
+    "assignee": "6573c2f02a45e5d27962c010",
+    "project": "6573c484b2df65c698766da5",
+    "referenceTask": "",
+    "flow": "6573bf1c890d1e52f102864d",
+    "environment": "6573bb3d4f16ac5a6d03ac7d",
+    "estimatedTime": "15h",
+    "createdBy": "6573c58288d03b9406d082d8",
+    "createdAt": "2024-01-05T14:15:00",
+    "journal": [
+      {
+        "message": "The state has been updated from Opened to Testing",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2024-01-05T14:15:00"
+      },
+      {
+        "message": "Priority changed from Critical to High",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2024-01-05T14:15:00"
+      },
+      {
+        "message": "Flow has been updated from Analysis to Design",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2024-01-05T14:15:00"
+      },
+      {
+        "message": "Environment has changed from DEV to UAT",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2024-01-05T14:15:00"
+      }
+    ]
+  },
+  {
+    "_id": "6575da12b9af8a72f4bcff09",
+    "number": "T000009",
     "title": "Implement Feature X",
     "description": "Add new functionality to improve user experience.",
     "deadline": "2023-12-31",
@@ -9,7 +329,7 @@
     "state": "6573c26a87264af48763a923",
     "category": "6573bd6ca3155becb6f9be63",
     "assignee": "6573c2f02a45e5d27962c010",
-    "project": "6573c2f02a45e5d27962c010",
+    "project": "6573c484b2df65c698766da5",
     "referenceTask": "",
     "flow": "6573bf1c890d1e52f102864d",
     "environment": "6573bb3586406f446ea91355",

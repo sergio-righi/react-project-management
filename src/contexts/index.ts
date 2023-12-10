@@ -5,6 +5,12 @@ export {
 } from './App';
 
 export {
+  DataContext,
+  DataProvider,
+  useData,
+} from './Data';
+
+export {
   ServiceContext,
   ServiceProvider,
   useService,
