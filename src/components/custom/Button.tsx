@@ -3,11 +3,12 @@ import { Button as MUIButton, ButtonProps, SxProps } from "@mui/material";
 import { useTheme } from "contexts";
 import { Auxiliars } from "helpers";
 
-type Props = ButtonProps & {
+export type Props = ButtonProps & {
   sx?: any;
   text?: boolean;
   submit?: boolean;
   tabIndex?: number;
+  selected?: boolean;
   secondary?: boolean;
   children: React.ReactNode | string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -22,6 +23,21 @@ export const Button = ({
   const { theme } = useTheme();
   const accentColor = props.sx?.backgroundColor ?? theme.color.accent.color;
 
+  const backgroundColor: string = props.selected
+    ? theme.color.accent.color
+    : !props.selected
+    ? theme.palette.theme
+    : props.sx && "backgroundColor" in props.sx
+    ? String(props.sx.backgroundColor)
+    : secondary || text
+    ? "transparent"
+    : accentColor;
+
+  const stylesheet = {
+    backgroundColor: backgroundColor,
+    color: secondary || text ? accentColor : Auxiliars.getContrast(accentColor),
+  };
+
   function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
     props.onClick && props.onClick(event);
   }
@@ -33,12 +49,10 @@ export const Button = ({
       tabIndex={props.tabIndex}
       variant={secondary ? "outlined" : text ? "text" : "contained"}
       sx={{
+        ...stylesheet,
         textTransform: "capitalize",
         borderRadius: theme.border.radius,
         borderColor: secondary ? accentColor : null,
-        backgroundColor: secondary || text ? "transparent" : accentColor,
-        color:
-          secondary || text ? accentColor : Auxiliars.getContrast(accentColor),
         "&:hover": {
           opacity: 0.8,
           color:

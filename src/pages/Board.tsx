@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Box, Grid, Stack } from "@mui/material";
-import { Custom, Kanban } from "components";
+import { Common, Controller, Custom, Kanban } from "components";
 import { useApp, useService, useTheme } from "contexts";
 import { ITask } from "interfaces";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
@@ -90,100 +90,111 @@ export const Board = () => {
   }
 
   return (
-    <Stack direction="column" width="1" flex="1">
-      <Box component="header" width="1" p={theme.spacing.md}>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <Stack direction="column" gap={theme.spacing.xxs}>
+    <Common.Page
+      header="Project Name Placeholder"
+      subheader="Flow Name Placeholder"
+      control={
+        <>
+          <Stack direction="row" spacing={theme.spacing.sm} alignItems="center">
             <Custom.Typography
               size={theme.font.xs}
+              weight={theme.font.medium}
               color={theme.palette.font.accent}
             >
-              Flow Name Placeholder
+              Projects
             </Custom.Typography>
-            <Custom.Typography size={theme.font.lg}>
-              Project Name Placeholder
+            <Controller.Button
+              size="small"
+              selected={["2"]}
+              items={[
+                {
+                  id: "1",
+                  children: "All",
+                },
+                {
+                  id: "2",
+                  children: "ABC",
+                },
+                {
+                  id: "3",
+                  children: "XYZ",
+                },
+              ]}
+            />
+          </Stack>
+          <Stack direction="row" spacing={theme.spacing.md} alignItems="center">
+            <Custom.Typography
+              size={theme.font.xs}
+              weight={theme.font.medium}
+              color={theme.palette.font.accent}
+            >
+              Tasks
             </Custom.Typography>
+            <Controller.Button
+              size="small"
+              selected={["1"]}
+              items={[
+                {
+                  id: "1",
+                  children: "All",
+                },
+                {
+                  id: "2",
+                  children: "Mine",
+                },
+              ]}
+            />
           </Stack>
-          <Stack direction="row" spacing={theme.spacing.lg}>
-            <Stack direction="row" spacing={theme.spacing.md}>
-              <Custom.Button sx={{ backgroundColor: "#753535" }}>
-                All
-              </Custom.Button>
-              <Custom.Button sx={{ backgroundColor: "#753535" }}>
-                Project ABC
-              </Custom.Button>
-            </Stack>
-            <Stack direction="row" spacing={theme.spacing.md}>
-              <Custom.Button sx={{ backgroundColor: "#357556" }}>
-                All
-              </Custom.Button>
-              <Custom.Button sx={{ backgroundColor: "#357556" }}>
-                My Issues
-              </Custom.Button>
-            </Stack>
-          </Stack>
-        </Stack>
-      </Box>
-
-      <Box
-        flex="1"
-        width="1"
-        component="main"
-        p={theme.spacing.md}
-        sx={{ overflowY: "auto" }}
-      >
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Grid container width="1" height="1" gap={theme.spacing.md}>
-            {states.map((item: string, i: number) => {
-              return (
-                <Grid key={i} item xs>
-                  <Kanban.Board label={item}>
-                    <Droppable droppableId={item}>
-                      {(provided, snapshot) => (
-                        <Box
-                          height="1"
-                          ref={provided.innerRef}
-                          {...provided.droppableProps}
-                          sx={{
-                            backgroundColor: snapshot.isDraggingOver
-                              ? theme.palette.border
-                              : undefined,
-                          }}
+        </>
+      }
+    >
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Grid container width="1" height="1" gap={theme.spacing.md}>
+          {states.map((item: string, i: number) => {
+            return (
+              <Grid key={i} item xs>
+                <Kanban.Board label={item}>
+                  <Droppable droppableId={item}>
+                    {(provided, snapshot) => (
+                      <Box
+                        height="1"
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                        sx={{
+                          backgroundColor: snapshot.isDraggingOver
+                            ? theme.palette.border
+                            : undefined,
+                        }}
+                      >
+                        <Draggable
+                          index={i}
+                          key={i.toString()}
+                          draggableId={i.toString()}
                         >
-                          <Draggable
-                            index={i}
-                            key={i.toString()}
-                            draggableId={i.toString()}
-                          >
-                            {(provided, snapshot) => (
-                              <Box
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                sx={{
-                                  userSelect: "none",
-                                }}
-                              >
-                                <Kanban.Task
-                                  elm={{ _id: i.toString() } as ITask}
-                                />
-                              </Box>
-                            )}
-                          </Draggable>
-                        </Box>
-                      )}
-                    </Droppable>
-                  </Kanban.Board>
-                </Grid>
-              );
-            })}
-          </Grid>
-        </DragDropContext>
-      </Box>
-    </Stack>
+                          {(provided, snapshot) => (
+                            <Box
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              sx={{
+                                userSelect: "none",
+                              }}
+                            >
+                              <Kanban.Task
+                                elm={{ _id: i.toString() } as ITask}
+                              />
+                            </Box>
+                          )}
+                        </Draggable>
+                      </Box>
+                    )}
+                  </Droppable>
+                </Kanban.Board>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </DragDropContext>
+    </Common.Page>
   );
 };

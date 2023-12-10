@@ -1,7 +1,10 @@
 export { Accordion } from './Accordion';
 export { Autocomplete } from './Autocomplete';
 export { Alert } from './Alert';
+
 export { Button } from './Button';
+export type { Props as ButtonProps } from './Button';
+
 export { Card } from './Card';
 export { Checkbox } from './Checkbox';
 

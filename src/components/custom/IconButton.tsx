@@ -23,40 +23,5 @@ export const IconButton = ({
 }: Props) => {
   const { theme } = useTheme();
 
-  const textColor = iconColor ?? theme.palette.font.accent;
-  const stylesheet = outlined
-    ? {
-        display: "inline-block",
-        borderRadius: theme.border.circle,
-        border: `1px solid ${textColor}`,
-      }
-    : {};
-
-  return label ? (
-    <Box
-      onClick={props.onClick}
-      sx={{ cursor: !!props.onClick ? "pointer" : "initial" }}
-    >
-      <Stack
-        alignItems="center"
-        justifyContent="start"
-        spacing={theme.spacing.sm}
-      >
-        <Box {...stylesheet}>
-          <MUIIconButton {...props} sx={{ color: textColor }}>
-            {props.children}
-          </MUIIconButton>
-        </Box>
-        {label && (
-          <Box display="inline-flex" maxWidth={48}>
-            <Custom.Typography align="center" variant="h6" color={textColor}>
-              {label}
-            </Custom.Typography>
-          </Box>
-        )}
-      </Stack>
-    </Box>
-  ) : (
-    <MUIIconButton {...props}>{props.children}</MUIIconButton>
-  );
+  return <MUIIconButton {...props}>{props.children}</MUIIconButton>;
 };

@@ -2,7 +2,8 @@
   "title": {
     "board": "Board",
     "project": "Projects",
-    "task": "Task",
+    "table": "Table",
+    "task": "Tasks",
     "settings": "Settings"
   }
 }

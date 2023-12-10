@@ -1,10 +1,9 @@
 import { Component } from 'themes/interfaces';
 
 export default {
-  button: {
-    toggleButton: {
-      width: 50,
-      height: 50,
+  controller: {
+    button: {
+      gap: 0.25
     }
   },
   input: {

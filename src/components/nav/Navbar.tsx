@@ -7,10 +7,12 @@ import { Nav } from "components";
 import {
   AssignmentRounded,
   FactCheckRounded,
+  GridOnRounded,
   LogoutRounded,
   SettingsRounded,
   ViewKanbanRounded,
 } from "@mui/icons-material";
+import { Routes } from "utils";
 
 type Props = {};
 
@@ -26,26 +28,23 @@ export const Navbar = (props: Props) => {
       py={theme.spacing.md}
       bgcolor={theme.palette.theme}
     >
-      <Stack
-        width="1"
-        height="1"
-        direction="column"
-        alignItems="center"
-        spacing={theme.spacing.xl}
-      >
+      <Stack width="1" height="1" direction="column" alignItems="center">
         <Nav.NavbarItem>
           <UserAvatar />
         </Nav.NavbarItem>
-        <Nav.NavbarItem label={t.title.board}>
+        <Nav.NavbarItem label={t.title.board} to={Routes.strings.board}>
           <ViewKanbanRounded />
         </Nav.NavbarItem>
-        <Nav.NavbarItem label={t.title.project}>
+        <Nav.NavbarItem label={t.title.table} to={Routes.strings.table}>
+          <GridOnRounded />
+        </Nav.NavbarItem>
+        <Nav.NavbarItem label={t.title.project} to={Routes.strings.projects}>
           <AssignmentRounded />
         </Nav.NavbarItem>
-        <Nav.NavbarItem label={t.title.task}>
+        <Nav.NavbarItem label={t.title.task} to={Routes.strings.tasks}>
           <FactCheckRounded />
         </Nav.NavbarItem>
-        <Nav.NavbarItem label={t.title.settings}>
+        <Nav.NavbarItem label={t.title.settings} to={Routes.strings.settings}>
           <SettingsRounded />
         </Nav.NavbarItem>
         <Nav.NavbarItem sx={{ mt: "auto !important" }}>

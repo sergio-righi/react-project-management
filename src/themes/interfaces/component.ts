@@ -1,8 +1,7 @@
 export interface Component {
-  button: {
-    toggleButton: {
-      width: number;
-      height: number;
+  controller: {
+    button: {
+      gap: number;
     }
   },
   input: {
