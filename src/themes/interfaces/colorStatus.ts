@@ -4,4 +4,5 @@ export interface ColorStatus {
   warning: ColorSchema;
   success: ColorSchema;
   error: ColorSchema;
+  info: ColorSchema;
 }

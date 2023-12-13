@@ -10,9 +10,10 @@ export default {
   accent: { color: "#00796b", text: "#ffffff" } as ColorSchema,
   secondary: { color: "#999999", text: "#ffffff" } as ColorSchema,
   status: {
-    warning: { color: "#FEDB60", text: "#404040" } as ColorSchema,
-    success: { color: "#57A75B", text: "#ffffff" } as ColorSchema,
-    error: { color: "#E15858", text: "#ffffff" } as ColorSchema,
+    info: { color: "#6883BA", text: "#ffffff" } as ColorSchema,
+    warning: { color: "#F6DB79", text: "#404040" } as ColorSchema,
+    success: { color: "#78A58A", text: "#ffffff" } as ColorSchema,
+    error: { color: "#88292F", text: "#ffffff" } as ColorSchema,
   } as ColorStatus,
   disabled: { color: "#b3b3b3", accent: "#959595" } as ColorSchema,
   overlay: "rgba(0, 0, 0, 0.5)",
