@@ -1,7 +1,12 @@
 [
   {
     "_id": "6573c484b2df65c698766da5",
-    "name": "Project ABC",
+    "name": "ABC",
+    "briefdescription": "Represents a problem that needs to be fixed"
+  },
+  {
+    "_id": "662cfc98765ad380d91fcefa",
+    "name": "XYZ",
     "briefdescription": "Represents a problem that needs to be fixed"
   }
 ]

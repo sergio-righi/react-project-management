@@ -1,5 +1,6 @@
 export type { ICategory } from './category';
 export type { IEnvironment } from './environment';
+export type { IFilter } from './filter';
 export type { IFlow } from './flow';
 export type { IPriority } from './priority';
 export type { IProject } from './project';

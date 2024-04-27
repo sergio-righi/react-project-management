@@ -52,7 +52,7 @@ export const Button = ({
           sx={
             {
               ...props.sxItem,
-              borderRadius: 0,
+              borderRadius: theme.border.radius,
               borderTopLeftRadius: i === 0 ? theme.border.radius : 0,
               borderTopRightRadius:
                 i === props.items.length - 1 ? theme.border.radius : 0,

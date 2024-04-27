@@ -1,4 +1,5 @@
 const aliases = {
+  backlog: "/backlog",
   board: "/board",
   table: "/table",
   task: "/tasks",
@@ -20,6 +21,7 @@ const pages = {
 }
 
 const strings = {
+  backlog: aliases.backlog,
   board: aliases.board,
   projects: aliases.projects,
   table: aliases.table,

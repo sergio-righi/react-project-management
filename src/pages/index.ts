@@ -1,3 +1,4 @@
+export { Backlog } from "./Backlog";
 export { Board } from "./Board";
 export { Project } from "./Project";
 export { Settings } from "./Settings";

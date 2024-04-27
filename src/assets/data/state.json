@@ -5,11 +5,6 @@
     "briefdescription": "Tasks in the initial stage, created but not yet actively worked on. They are in a preliminary state and may undergo further refinement."
   },
   {
-    "_id": "6573c2654022bd4fe3a6da45",
-    "name": "Failure",
-    "briefdescription": ""
-  },
-  {
     "_id": "6573c26a87264af48763a923",
     "name": "Working on",
     "briefdescription": "Tasks that are actively being worked on. Team members are currently engaged in completing the associated activities and making progress."

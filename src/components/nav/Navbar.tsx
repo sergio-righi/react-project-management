@@ -10,6 +10,7 @@ import {
   GridOnRounded,
   LogoutRounded,
   SettingsRounded,
+  WebStoriesRounded,
   ViewKanbanRounded,
 } from "@mui/icons-material";
 import { Routes } from "utils";
@@ -43,6 +44,9 @@ export const Navbar = (props: Props) => {
         </Nav.NavbarItem>
         <Nav.NavbarItem label={t.title.task} to={Routes.strings.tasks}>
           <FactCheckRounded />
+        </Nav.NavbarItem>
+        <Nav.NavbarItem label={t.title.backlog} to={Routes.strings.backlog}>
+          <WebStoriesRounded />
         </Nav.NavbarItem>
         <Nav.NavbarItem label={t.title.settings} to={Routes.strings.settings}>
           <SettingsRounded />

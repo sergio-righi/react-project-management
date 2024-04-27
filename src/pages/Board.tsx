@@ -10,7 +10,7 @@ import { BoardType } from "types";
 export const Board = () => {
   const { t } = useApp();
   const { theme } = useTheme();
-  const { board } = useData();
+  const { board, filters, projects } = useData();
 
   function onDragEnd(result: any) {
     const { source, destination } = result;
@@ -81,20 +81,16 @@ export const Board = () => {
             </Custom.Typography>
             <Controller.Button
               size="small"
-              selected={["2"]}
+              selected={["1"]}
               items={[
                 {
                   id: "1",
                   children: "All",
                 },
-                {
-                  id: "2",
-                  children: "ABC",
-                },
-                {
-                  id: "3",
-                  children: "XYZ",
-                },
+                ...projects.map((item) => ({
+                  id: item._id,
+                  children: item.name,
+                })),
               ]}
             />
           </Stack>
@@ -104,7 +100,7 @@ export const Board = () => {
               weight={theme.font.medium}
               color={theme.palette.font.accent}
             >
-              Tasks
+              Filters
             </Custom.Typography>
             <Controller.Button
               size="small"
@@ -114,10 +110,10 @@ export const Board = () => {
                   id: "1",
                   children: "All",
                 },
-                {
-                  id: "2",
-                  children: "Mine",
-                },
+                ...filters.map((item) => ({
+                  id: item._id,
+                  children: item.name,
+                })),
               ]}
             />
           </Stack>

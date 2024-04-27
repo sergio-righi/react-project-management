@@ -1,7 +1,8 @@
-import { ICategory, IEnvironment, IFlow, IPriority, IProject, IState, ITask, IUser } from "interfaces";
+import { ICategory, IEnvironment, IFilter, IFlow, IPriority, IProject, IState, ITask, IUser } from "interfaces";
 
 import Category from "assets/data/category.json";
 import Environment from "assets/data/environment.json";
+import Filter from "assets/data/filter.json";
 import Flow from "assets/data/flow.json";
 import Priority from "assets/data/priority.json";
 import Project from "assets/data/project.json";
@@ -11,6 +12,7 @@ import User from "assets/data/user.json";
 
 export const Categories = Category as ICategory[];
 export const Environments = Environment as IEnvironment[];
+export const Filters = Filter as IFilter[];
 export const Flows = Flow as IFlow[];
 export const Priorities = Priority as IPriority[];
 export const Projects = Project as IProject[];

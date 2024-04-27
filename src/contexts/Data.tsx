@@ -2,6 +2,7 @@ import React, { createContext, useContext } from "react";
 import {
   ICategory,
   IEnvironment,
+  IFilter,
   IFlow,
   IPriority,
   IProject,
@@ -15,6 +16,8 @@ interface ProvidedValueType {
   board: () => BoardType[];
   environment: IEnvironment | null;
   setEnvironment: (environment: IEnvironment) => void;
+  filter: IFilter | null;
+  setFilter: (filter: IFilter) => void;
   flow: IFlow | null;
   setFlow: (flow: IFlow) => void;
   project: IProject | null;
@@ -27,6 +30,8 @@ interface ProvidedValueType {
   setCategories: (categories: ICategory[]) => void;
   environments: IEnvironment[];
   setEnvironments: (environments: IEnvironment[]) => void;
+  filters: IFilter[];
+  setFilters: (filters: IFilter[]) => void;
   flows: IFlow[];
   setFlows: (flows: IFlow[]) => void;
   priorities: IPriority[];
@@ -48,6 +53,8 @@ export const DataContext = createContext<ProvidedValueType>({
   board: () => [],
   environment: initialState.obj,
   setEnvironment: () => {},
+  filter: initialState.obj,
+  setFilter: () => {},
   flow: initialState.obj,
   setFlow: () => {},
   project: initialState.obj,
@@ -61,6 +68,8 @@ export const DataContext = createContext<ProvidedValueType>({
   setCategories: () => {},
   environments: initialState.array,
   setEnvironments: () => {},
+  filters: initialState.array,
+  setFilters: () => {},
   flows: initialState.array,
   setFlows: () => {},
   priorities: initialState.array,
@@ -81,6 +90,7 @@ export const DataProvider = React.memo<Props>(({ children }) => {
   const [environment, setEnvironment] = React.useState<IEnvironment | null>(
     initialState.obj
   );
+  const [filter, setFilter] = React.useState<IFilter | null>(initialState.obj);
   const [flow, setFlow] = React.useState<IFlow | null>(initialState.obj);
   const [project, setProject] = React.useState<IProject | null>(
     initialState.obj
@@ -94,6 +104,7 @@ export const DataProvider = React.memo<Props>(({ children }) => {
   const [environments, setEnvironments] = React.useState<IEnvironment[]>(
     initialState.array
   );
+  const [filters, setFilters] = React.useState<IFilter[]>(initialState.array);
   const [flows, setFlows] = React.useState<IFlow[]>(initialState.array);
   const [priorities, setPriorities] = React.useState<IPriority[]>(
     initialState.array
@@ -130,6 +141,8 @@ export const DataProvider = React.memo<Props>(({ children }) => {
       board,
       environment,
       setEnvironment,
+      filter,
+      setFilter,
       flow,
       setFlow,
       project,
@@ -142,6 +155,8 @@ export const DataProvider = React.memo<Props>(({ children }) => {
       setCategories,
       environments,
       setEnvironments,
+      filters,
+      setFilters,
       flows,
       setFlows,
       priorities,
@@ -159,6 +174,8 @@ export const DataProvider = React.memo<Props>(({ children }) => {
     categories,
     environment,
     environments,
+    filter,
+    filters,
     flow,
     flows,
     priorities,

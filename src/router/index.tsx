@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { DefaultLayout, EmptyLayout } from "layouts";
-import { Board, Project, Settings, Table, Task, View } from "pages";
+import { Backlog, Board, Project, Settings, Table, Task, View } from "pages";
 import { Error } from "components";
 import { Routes as Urls } from "utils";
 import { LoadData, Protected } from "middlewares";
@@ -28,6 +28,10 @@ export default () => {
         <Route path={Urls.aliases.task} element={<DefaultLayout />}>
           <Route path={Urls.pages.task.index} element={<Task />} />
           <Route path={Urls.pages.task.view} element={<View />} />
+        </Route>
+
+        <Route path={Urls.aliases.backlog} element={<DefaultLayout />}>
+          <Route index element={<Backlog />} />
         </Route>
 
         <Route path={Urls.aliases.projects} element={<DefaultLayout />}>
