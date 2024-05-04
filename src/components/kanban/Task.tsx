@@ -14,9 +14,10 @@ import {
 
 type Props = {
   elm: ITask;
+  accent?: boolean;
 };
 
-export const Task = (props: Props) => {
+export const Task = ({ accent = false, ...props }: Props) => {
   const { theme } = useTheme();
   const { locale, t } = useApp();
 
@@ -25,7 +26,11 @@ export const Task = (props: Props) => {
       p={theme.spacing.md}
       spacing={theme.spacing.sm}
       borderRadius={theme.border.radius}
-      bgcolor={theme.palette.background.color}
+      bgcolor={
+        accent
+          ? theme.palette.background.accent
+          : theme.palette.background.color
+      }
     >
       <Stack width={1} direction="row" justifyContent="space-between">
         <Custom.Typography

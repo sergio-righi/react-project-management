@@ -26,7 +26,14 @@ export default () => {
         </Route>
 
         <Route path={Urls.aliases.task} element={<DefaultLayout />}>
-          <Route path={Urls.pages.task.index} element={<Task />} />
+          <Route
+            path={Urls.pages.task.index}
+            element={
+              <LoadData>
+                <Task />
+              </LoadData>
+            }
+          />
           <Route path={Urls.pages.task.view} element={<View />} />
         </Route>
 

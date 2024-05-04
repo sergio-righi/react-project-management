@@ -4,6 +4,10 @@
     "in_date": "in {{day}} days",
     "today": "today"
   },
+  "filter": {
+    "all": "All",
+    "mine": "Mine"
+  },
   "title": {
     "backlog": "Backlog",
     "board": "Board",

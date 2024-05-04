@@ -3,16 +3,23 @@ import React, { useEffect, useState } from "react";
 import { Box, Grid, Stack } from "@mui/material";
 import { Common, Controller, Custom, Kanban } from "components";
 import { useApp, useData, useTheme } from "contexts";
-import { ITask } from "interfaces";
+import { IFilter, IProject, ITask } from "interfaces";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { BoardType } from "types";
-import { Auxiliars } from "helpers";
 
 export const Board = () => {
   const { t } = useApp();
   const { theme } = useTheme();
-  const { board, filters, flow, flows, project, projects, setProject } =
-    useData();
+  const {
+    filters,
+    flow,
+    flows,
+    getBoard,
+    getFlow,
+    project,
+    projects,
+    setProject,
+  } = useData();
 
   function onDragEnd(result: any) {
     const { source, destination } = result;
@@ -69,8 +76,8 @@ export const Board = () => {
 
   return (
     <Common.Page
-      header="All Projects"
-      subheader={Auxiliars.get(flows, flow)?.name}
+      header={t.title.board}
+      subheader={getFlow()?.name}
       control={
         <>
           <Stack direction="row" spacing={theme.spacing.sm} alignItems="center">
@@ -79,22 +86,22 @@ export const Board = () => {
               weight={theme.font.medium}
               color={theme.palette.font.accent}
             >
-              Projects
+              {t.title.project}
             </Custom.Typography>
             <Controller.Button
               size="small"
-              selected={[project]}
+              selected={project}
               items={[
                 {
                   id: "",
-                  children: "All",
+                  children: t.filter.all,
                 },
-                ...projects.map((item) => ({
+                ...projects.map((item: IProject) => ({
                   id: item._id,
                   children: item.name,
                 })),
               ]}
-              onSelect={(value: string[]) => setProject(value[0])}
+              onSelect={(value: string) => setProject(value)}
             />
           </Stack>
           <Stack direction="row" spacing={theme.spacing.md} alignItems="center">
@@ -107,13 +114,13 @@ export const Board = () => {
             </Custom.Typography>
             <Controller.Button
               size="small"
-              selected={["1"]}
+              selected={""}
               items={[
                 {
-                  id: "1",
-                  children: "All",
+                  id: "",
+                  children: t.filter.all,
                 },
-                ...filters.map((item) => ({
+                ...filters.map((item: IFilter) => ({
                   id: item._id,
                   children: item.name,
                 })),
@@ -125,7 +132,7 @@ export const Board = () => {
     >
       <DragDropContext onDragEnd={onDragEnd}>
         <Grid container width="1" height="1" gap={theme.spacing.xs}>
-          {board().map((item: BoardType) => {
+          {getBoard().map((item: BoardType) => {
             return (
               <Grid key={item.state._id} item xs>
                 <Kanban.Board label={item.state.name}>

@@ -9,7 +9,7 @@ type Props = {
   multiple?: boolean;
   disabled?: boolean;
   items: Custom.ButtonProps[];
-  selected?: (string | number)[];
+  selected?: (string | number)[] | string;
   onSelect?: (value: any) => void;
   size?: "small" | "medium" | "large";
 };
@@ -20,20 +20,20 @@ export const Button = ({
   ...props
 }: Props) => {
   const { theme } = useTheme();
-  const [selected, setSelected] = useState<(string | number)[]>(
-    props.selected ?? []
+  const [selected, setSelected] = useState<(string | number)[] | string>(
+    multiple ? props.selected ?? [] : props.selected ?? ""
   );
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
-    const newSelected = [...selected];
+    let newSelected;
     const id = String(event.currentTarget.id);
-    const index = newSelected.indexOf(id);
     if (multiple) {
+      newSelected = [...selected];
+      const index = newSelected.indexOf(id);
       if (index === -1) newSelected.push(id);
       else newSelected.splice(index, 1);
     } else {
-      newSelected.splice(0, 1);
-      if (index === -1) newSelected.push(id);
+      newSelected = selected === id ? props.items[0].id ?? "" : id;
     }
     setSelected(newSelected);
     props.onSelect && props.onSelect(newSelected);
@@ -64,7 +64,11 @@ export const Button = ({
           size={props.size}
           disabled={disabled}
           onClick={handleClick}
-          selected={selected.indexOf(String(item.id)) !== -1}
+          selected={
+            multiple
+              ? selected.indexOf(String(item.id)) !== -1
+              : selected === item.id
+          }
         />
       ))}
     </Stack>
