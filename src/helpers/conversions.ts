@@ -307,3 +307,24 @@ export const toRelativeDate = (str: string | number, t: any, locale: string = "e
       (Checks.isDateEquals(dateWithoutTime, yesterday)) ? dateOnly ? t.yesterday : Combines.interpolate(t.yesterday_at, { time: date.toLocaleTimeString(locale, { ...Constants.TIME_FORMAT }) }) :
         Math.abs(days) <= 3 ? days > 0 ? Combines.interpolate(t.day_ago, { day: Math.abs(days) }) : Combines.interpolate(t.in_day, { day: Math.abs(days) }) : dateOnly ? date.toLocaleDateString(locale, { ...Constants.DATE_FORMAT }) : date.toLocaleString(locale, { ...Constants.DATE_FORMAT, ...Constants.TIME_FORMAT });
 }
+
+/**
+ * function to return the delay in days
+ * @param {string} date the value to be calculated
+ * @return {string} delay in days
+ */
+
+export const toDueString = (date: string, t: any, locale: string = "en"): string => {
+  const currentDate = new Date();
+  const targetDate = new Date(date);
+  const timeDiff = targetDate.getTime() - currentDate.getTime();
+  const dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+  if (dayDiff < 0) {
+    return Combines.interpolate(t.date.day_ago, { day: Math.abs(dayDiff) });
+  } else if (dayDiff === 0) {
+    return t.date.today;
+  } else {
+    return Combines.interpolate(t.date.in_day, { day: dayDiff });
+  }
+}

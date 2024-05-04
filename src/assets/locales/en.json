@@ -1,4 +1,9 @@
 {
+  "date": {
+    "day_ago": "{{day}} days ago",
+    "in_date": "in {{day}} days",
+    "today": "today"
+  },
   "title": {
     "backlog": "Backlog",
     "board": "Board",

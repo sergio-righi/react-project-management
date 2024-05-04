@@ -198,3 +198,14 @@ export const greeting = (): string => {
   const hour = new Date().getHours();
   return hour < 12 ? "good_morning" : hour > 12 && hour < 18 ? "good_afternoon" : hour > 22 ? "hello" : "good_evening";
 };
+
+/**
+ * function to find object based on it
+ * @param {T[]} array of objects 
+ * @param {string} target ID
+ * @returns {T} object based on ID
+ */
+
+export const get = <T>(array: T[], target: string): T => {
+  return array.find((item: T) => (item as any)._id === target) as T;
+}

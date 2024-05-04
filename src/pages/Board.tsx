@@ -6,11 +6,13 @@ import { useApp, useData, useTheme } from "contexts";
 import { ITask } from "interfaces";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { BoardType } from "types";
+import { Auxiliars } from "helpers";
 
 export const Board = () => {
   const { t } = useApp();
   const { theme } = useTheme();
-  const { board, filters, projects } = useData();
+  const { board, filters, flow, flows, project, projects, setProject } =
+    useData();
 
   function onDragEnd(result: any) {
     const { source, destination } = result;
@@ -68,7 +70,7 @@ export const Board = () => {
   return (
     <Common.Page
       header="All Projects"
-      subheader="Flow Name Placeholder"
+      subheader={Auxiliars.get(flows, flow)?.name}
       control={
         <>
           <Stack direction="row" spacing={theme.spacing.sm} alignItems="center">
@@ -81,10 +83,10 @@ export const Board = () => {
             </Custom.Typography>
             <Controller.Button
               size="small"
-              selected={["1"]}
+              selected={[project]}
               items={[
                 {
-                  id: "1",
+                  id: "",
                   children: "All",
                 },
                 ...projects.map((item) => ({
@@ -92,6 +94,7 @@ export const Board = () => {
                   children: item.name,
                 })),
               ]}
+              onSelect={(value: string[]) => setProject(value[0])}
             />
           </Stack>
           <Stack direction="row" spacing={theme.spacing.md} alignItems="center">
@@ -121,7 +124,7 @@ export const Board = () => {
       }
     >
       <DragDropContext onDragEnd={onDragEnd}>
-        <Grid container width="1" height="1" gap={theme.spacing.md}>
+        <Grid container width="1" height="1" gap={theme.spacing.xs}>
           {board().map((item: BoardType) => {
             return (
               <Grid key={item.state._id} item xs>

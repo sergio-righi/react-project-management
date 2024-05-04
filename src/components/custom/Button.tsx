@@ -26,7 +26,7 @@ export const Button = ({
   const backgroundColor: string = props.selected
     ? theme.color.accent.color
     : !props.selected
-    ? theme.palette.theme
+    ? theme.palette.background.accent
     : props.sx && "backgroundColor" in props.sx
     ? String(props.sx.backgroundColor)
     : secondary || text

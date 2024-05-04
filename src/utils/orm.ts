@@ -22,7 +22,7 @@ export function populateMany<T>(values: T[], fn: (item: T) => T): T[] {
 
 export function populateFlow(flow: IFlow): IFlow {
   const newFlow = { ...flow }
-  newFlow.states = populates<IState>(States, "_id", newFlow.states as string[]);
+  newFlow.states = Object.keys(newFlow.states as any).map(item => populate<IState>(States, "_id", (newFlow.states as any)[item] as string));
   return newFlow
 }
 

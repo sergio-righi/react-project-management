@@ -11,21 +11,24 @@ import {
   IUser,
 } from "interfaces";
 import { BoardType } from "types";
+import { Auxiliars } from "helpers";
 
 interface ProvidedValueType {
   board: () => BoardType[];
-  environment: IEnvironment | null;
-  setEnvironment: (environment: IEnvironment) => void;
-  filter: IFilter | null;
-  setFilter: (filter: IFilter) => void;
-  flow: IFlow | null;
-  setFlow: (flow: IFlow) => void;
-  project: IProject | null;
-  setProject: (project: IProject) => void;
-  task: ITask | null;
-  setTask: (task: ITask) => void;
+  // session
+  environment: string;
+  setEnvironment: (environment: string) => void;
+  filter: string;
+  setFilter: (filter: string) => void;
+  flow: string;
+  setFlow: (flow: string) => void;
+  project: string;
+  setProject: (project: string) => void;
+  task: string;
+  setTask: (task: string) => void;
   user: IUser | null;
   setUser: (user: IUser) => void;
+  // data
   categories: ICategory[];
   setCategories: (categories: ICategory[]) => void;
   environments: IEnvironment[];
@@ -46,20 +49,22 @@ interface ProvidedValueType {
 
 const initialState = {
   obj: null,
+  empty: "",
   array: [],
 };
 
 export const DataContext = createContext<ProvidedValueType>({
   board: () => [],
-  environment: initialState.obj,
+  // session
+  environment: initialState.empty,
   setEnvironment: () => {},
-  filter: initialState.obj,
+  filter: initialState.empty,
   setFilter: () => {},
-  flow: initialState.obj,
+  flow: initialState.empty,
   setFlow: () => {},
-  project: initialState.obj,
+  project: initialState.empty,
   setProject: () => {},
-  task: initialState.obj,
+  task: initialState.empty,
   setTask: () => {},
   user: initialState.obj,
   setUser: () => {},
@@ -87,15 +92,13 @@ interface Props {
 }
 
 export const DataProvider = React.memo<Props>(({ children }) => {
-  const [environment, setEnvironment] = React.useState<IEnvironment | null>(
-    initialState.obj
+  const [environment, setEnvironment] = React.useState<string>(
+    initialState.empty
   );
-  const [filter, setFilter] = React.useState<IFilter | null>(initialState.obj);
-  const [flow, setFlow] = React.useState<IFlow | null>(initialState.obj);
-  const [project, setProject] = React.useState<IProject | null>(
-    initialState.obj
-  );
-  const [task, setTask] = React.useState<ITask | null>(initialState.obj);
+  const [filter, setFilter] = React.useState<string>(initialState.empty);
+  const [flow, setFlow] = React.useState<string>(initialState.empty);
+  const [project, setProject] = React.useState<string>(initialState.empty);
+  const [task, setTask] = React.useState<string>(initialState.empty);
   const [user, setUser] = React.useState<IUser | null>(initialState.obj);
 
   const [categories, setCategories] = React.useState<ICategory[]>(
@@ -118,23 +121,33 @@ export const DataProvider = React.memo<Props>(({ children }) => {
   const setUserCallback = React.useCallback((newUser: IUser | null) => {
     setUser((currentUser: IUser | null) => {
       if (newUser) {
-        setFlow(newUser.flows[0] as IFlow);
+        setFlow((newUser.flows[0] as IFlow)._id);
       }
       return newUser;
     });
   }, []);
 
   const board = React.useCallback(() => {
-    if (!flow) return [] as BoardType[];
-    return flow.states.map((state: string | IState) => {
+    if (!flow || !user) return [] as BoardType[];
+
+    const filtered = tasks?.filter(
+      (item: ITask) =>
+        (item.flow as IFlow)._id === flow &&
+        ((item.project as IProject)._id === project ||
+          project === initialState.empty)
+    );
+
+    const states = Auxiliars.get<IFlow>(user?.flows as any, flow).states ?? [];
+
+    return (states as IState[]).map((state: string | IState) => {
       const boardItem = {} as BoardType;
       boardItem.state = state as IState;
-      boardItem.tasks = tasks?.filter(
-        (task: ITask) => (task.state as IState)._id === (state as IState)._id
+      boardItem.tasks = filtered?.filter(
+        (item: ITask) => (item.state as IState)._id === (state as IState)._id
       );
       return boardItem;
     }) as BoardType[];
-  }, [flow, tasks, user]);
+  }, [flow, project, tasks, user]);
 
   const MemoizedValue = React.useMemo(() => {
     const value: ProvidedValueType = {

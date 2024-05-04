@@ -4,5 +4,7 @@ export interface IFlow {
   _id: string;
   name: string;
   briefdescription: string;
-  states: string[] | IState[];
+  states: {
+    [key: string]: string;
+  } | IState[]
 }

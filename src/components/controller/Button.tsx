@@ -10,7 +10,7 @@ type Props = {
   disabled?: boolean;
   items: Custom.ButtonProps[];
   selected?: (string | number)[];
-  onSelect?: (value: any[]) => void;
+  onSelect?: (value: any) => void;
   size?: "small" | "medium" | "large";
 };
 

@@ -13,22 +13,33 @@ export const Board = (props: Props) => {
   const { theme } = useTheme();
 
   return (
-    <Stack
-      height="1"
-      direction="column"
-      p={theme.spacing.md}
-      gap={theme.spacing.md}
-      bgcolor={theme.palette.theme}
-      borderRadius={theme.border.radius}
-    >
-      <Custom.Typography
-        size={theme.font.sm}
-        weight={theme.font.medium}
-        color={theme.palette.font.accent}
+    <Stack height={1} direction="column" gap={theme.spacing.xs}>
+      <Box
+        border={1}
+        px={theme.spacing.md}
+        py={theme.spacing.sm}
+        borderColor={theme.palette.border}
+        borderRadius={theme.border.radius}
+        bgcolor={theme.palette.background.accent}
       >
-        {props.label}
-      </Custom.Typography>
-      {props.children}
+        <Custom.Typography
+          size={theme.font.sm}
+          weight={theme.font.medium}
+          // color={theme.palette.font.accent}
+        >
+          {props.label}
+        </Custom.Typography>
+      </Box>
+      <Box
+        height={1}
+        p={theme.spacing.md}
+        border={theme.border.radius}
+        borderColor={theme.palette.border}
+        borderRadius={theme.border.radius}
+        bgcolor={theme.palette.background.accent}
+      >
+        {props.children}
+      </Box>
     </Stack>
   );
 };

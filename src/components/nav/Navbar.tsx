@@ -27,7 +27,7 @@ export const Navbar = (props: Props) => {
       height="1"
       component="aside"
       py={theme.spacing.md}
-      bgcolor={theme.palette.theme}
+      bgcolor={theme.palette.background.accent}
     >
       <Stack width="1" height="1" direction="column" alignItems="center">
         <Nav.NavbarItem>

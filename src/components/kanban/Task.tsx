@@ -1,6 +1,8 @@
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
+import { UserAvatar } from "assets/images";
 import { Custom, Icon } from "components";
-import { useTheme } from "contexts";
+import { useApp, useTheme } from "contexts";
+import { Conversions } from "helpers";
 import {
   ICategory,
   IEnvironment,
@@ -16,6 +18,7 @@ type Props = {
 
 export const Task = (props: Props) => {
   const { theme } = useTheme();
+  const { locale, t } = useApp();
 
   return (
     <Stack
@@ -24,34 +27,48 @@ export const Task = (props: Props) => {
       borderRadius={theme.border.radius}
       bgcolor={theme.palette.background.color}
     >
-      <Stack direction="column">
+      <Stack width={1} direction="row" justifyContent="space-between">
         <Custom.Typography
-          size={theme.font.xs}
-          color={theme.palette.font.accent}
+          size={theme.font.sm}
+          className="o-ellipsis"
+          weight={theme.font.bold}
         >
-          {(props.elm.project as IProject).name}
-        </Custom.Typography>
-        <Custom.Typography size={theme.font.sm}>
           {props.elm.title}
         </Custom.Typography>
       </Stack>
       <Stack direction="row" gap={theme.spacing.sm}>
-        <Custom.Chip
+        {/* <Custom.Chip
           size="small"
           label={(props.elm.flow as IFlow).name}
           sx={{
             color: theme.color.accent.text,
             backgroundColor: theme.color.accent.color,
           }}
+        /> */}
+        <Custom.Chip
+          size="small"
+          label={(props.elm.project as IProject).name}
+          sx={{
+            color: theme.color.accent.text,
+            backgroundColor: theme.color.accent.color,
+          }}
         />
         <Custom.Chip
+          size="small"
+          label={(props.elm.category as ICategory).name}
+          sx={{
+            color: theme.color.accent.text,
+            backgroundColor: theme.color.accent.color,
+          }}
+        />
+        {/* <Custom.Chip
           size="small"
           label={(props.elm.environment as IEnvironment).name}
           sx={{
             color: theme.color.accent.text,
             backgroundColor: theme.color.accent.color,
           }}
-        />
+        /> */}
       </Stack>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Stack direction="row" alignItems="center" spacing={theme.spacing.sm}>
@@ -59,12 +76,10 @@ export const Task = (props: Props) => {
             value={(props.elm.priority as IPriority).name.toLowerCase()}
           />
           <Custom.Typography weight={theme.font.light} size={theme.font.xs}>
-            {props.elm.deadline}
+            {Conversions.toDueString(props.elm.deadline, t, locale)}
           </Custom.Typography>
         </Stack>
-        <Icon.Category
-          value={(props.elm.category as ICategory).name.toLowerCase()}
-        />
+        <UserAvatar width={25} height={25} />
       </Stack>
     </Stack>
   );
