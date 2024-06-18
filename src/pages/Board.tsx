@@ -10,16 +10,8 @@ import { BoardType } from "types";
 export const Board = () => {
   const { t } = useApp();
   const { theme } = useTheme();
-  const {
-    filters,
-    flow,
-    flows,
-    getBoard,
-    getFlow,
-    project,
-    projects,
-    setProject,
-  } = useData();
+  const { filters, getBoard, getFlow, project, projects, setProject } =
+    useData();
 
   function onDragEnd(result: any) {
     const { source, destination } = result;

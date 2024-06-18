@@ -1,12 +1,18 @@
 {
   "date": {
     "day_ago": "{{day}} days ago",
-    "in_date": "in {{day}} days",
+    "in_day": "in {{day}} days",
     "today": "today"
   },
   "filter": {
     "all": "All",
     "mine": "Mine"
+  },
+  "label": {
+    "task": "Tasks"
+  },
+  "placeholder": {
+    "no_record": "Nothing to be displayed..."
   },
   "title": {
     "backlog": "Backlog",

@@ -15,17 +15,15 @@ export const Priority = (props: Props) => {
 
   return (
     <>
-      {props.value === "low" && (
-        <PriorityLow fill={theme.color.status.info.color} />
-      )}
+      {props.value === "low" && <PriorityLow fill={theme.palette.font.color} />}
       {props.value === "medium" && (
-        <PriorityMedium fill={theme.color.status.success.color} />
+        <PriorityMedium fill={theme.palette.font.color} />
       )}
       {props.value === "high" && (
-        <PriorityHigh fill={theme.color.status.warning.color} />
+        <PriorityHigh fill={theme.palette.font.color} />
       )}
       {props.value === "critical" && (
-        <PriorityCritical fill={theme.color.status.error.color} />
+        <PriorityCritical fill={theme.palette.font.color} />
       )}
     </>
   );

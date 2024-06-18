@@ -183,7 +183,7 @@ export const DataProvider = React.memo<Props>(({ children }) => {
       );
       return boardItem;
     }) as BoardType[];
-  }, [flow, user]);
+  }, [flow, project, user]);
 
   const MemoizedValue = React.useMemo(() => {
     const value: ProvidedValueType = {

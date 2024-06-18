@@ -2,6 +2,7 @@ import { Box, Stack } from "@mui/material";
 import { useApp, useTheme } from "contexts";
 import { UserAvatar } from "assets/images";
 import { Nav } from "components";
+import { Routes } from "utils";
 
 // icons
 import {
@@ -13,7 +14,6 @@ import {
   WebStoriesRounded,
   ViewKanbanRounded,
 } from "@mui/icons-material";
-import { Routes } from "utils";
 
 type Props = {};
 

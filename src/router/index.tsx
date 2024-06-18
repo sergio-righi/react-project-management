@@ -22,7 +22,14 @@ export default () => {
         </Route>
 
         <Route path={Urls.aliases.table} element={<DefaultLayout />}>
-          <Route path={Urls.pages.table.index} element={<Table />} />
+          <Route
+            path={Urls.pages.table.index}
+            element={
+              <LoadData>
+                <Table />
+              </LoadData>
+            }
+          />
         </Route>
 
         <Route path={Urls.aliases.task} element={<DefaultLayout />}>
@@ -38,7 +45,14 @@ export default () => {
         </Route>
 
         <Route path={Urls.aliases.backlog} element={<DefaultLayout />}>
-          <Route index element={<Backlog />} />
+          <Route
+            index
+            element={
+              <LoadData>
+                <Backlog />
+              </LoadData>
+            }
+          />
         </Route>
 
         <Route path={Urls.aliases.projects} element={<DefaultLayout />}>

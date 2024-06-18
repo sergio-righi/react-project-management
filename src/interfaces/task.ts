@@ -1,10 +1,4 @@
-import { ICategory, IEnvironment, IFlow, IPriority, IProject, IState, IUser } from "interfaces";
-
-export interface JournalType {
-  message: string;
-  updatedBy: string;
-  updatedAt: string;
-}
+import { ICategory, IEnvironment, IFlow, IJournal, IPriority, IProject, IState, IUser } from "interfaces";
 
 export interface ITask {
   _id: string;
@@ -23,5 +17,5 @@ export interface ITask {
   estimatedTime: string;
   createdBy: string;
   createdAt: string;
-  journal: JournalType[];
+  journal: IJournal[];
 }

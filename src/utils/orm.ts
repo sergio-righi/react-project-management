@@ -26,6 +26,15 @@ export function populateFlow(flow: IFlow): IFlow {
   return newFlow
 }
 
+export function populateProject(project: IProject): IProject {
+  const newProject = { ...project }
+  newProject.category = findCategoryById(newProject.category.toString()) ?? {} as ICategory;
+  newProject.priority = findPriorityById(newProject.priority.toString()) ?? {} as IPriority;
+  newProject.state = findStateById(newProject.state.toString()) ?? {} as IState;
+  newProject.tasks = populates<ITask>(Tasks, "project", [project._id]) ?? [];
+  return newProject;
+}
+
 export function populateTask(task: ITask): ITask {
   const newTask = { ...task }
   newTask.category = findCategoryById(newTask.category.toString()) ?? {} as ICategory;

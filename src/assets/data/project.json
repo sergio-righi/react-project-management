@@ -1,12 +1,40 @@
 [
   {
     "_id": "6573c484b2df65c698766da5",
-    "name": "ABC",
-    "briefdescription": "Represents a problem that needs to be fixed"
+    "name": "Fusion Watch",
+    "briefdescription": "Represents a problem that needs to be fixed",
+    "deadline": "2025-01-10",
+    "priority": "6573bb90d02e8854f91fa277",
+    "state": "6573c26ecce5bbdafa52a8ca",
+    "category": "6573bd5f8b5b898ec2c68054",
+    "createdBy": "6573c58288d03b9406d082d8",
+    "createdAt": "2023-12-28T13:45:00",
+    "journal": [
+      {
+        "message": "Priority changed from High to Medium",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-28T13:45:00"
+      }
+    ],
+    "tasks": []
   },
   {
     "_id": "662cfc98765ad380d91fcefa",
-    "name": "XYZ",
-    "briefdescription": "Represents a problem that needs to be fixed"
+    "name": "Secure Storage",
+    "briefdescription": "Represents a problem that needs to be fixed",
+    "deadline": "2025-01-10",
+    "priority": "6573bb94a859b621a65d849a",
+    "state": "6573c28fdf40bab61647cb0c",
+    "category": "6573bd5f8b5b898ec2c68054",
+    "createdBy": "6573c58288d03b9406d082d8",
+    "createdAt": "2023-12-28T13:45:00",
+    "journal": [
+      {
+        "message": "Priority changed from High to Medium",
+        "updatedBy": "6573c2f02a45e5d27962c010",
+        "updatedAt": "2023-12-28T13:45:00"
+      }
+    ],
+    "tasks": []
   }
 ]
