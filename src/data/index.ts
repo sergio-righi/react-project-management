@@ -1,9 +1,6 @@
 export { CategoryData } from "./category";
 export type { ICategoryData } from "./category";
 
-export { EnvironmentData } from "./environment";
-export type { IEnvironmentData } from "./environment";
-
 export { FilterData } from "./filter";
 export type { IFilterData } from "./filter";
 

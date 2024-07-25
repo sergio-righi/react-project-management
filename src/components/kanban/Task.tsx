@@ -3,14 +3,7 @@ import { UserAvatar } from "assets/images";
 import { Custom, Icon } from "components";
 import { useApp, useTheme } from "contexts";
 import { Conversions } from "helpers";
-import {
-  ICategory,
-  IEnvironment,
-  IFlow,
-  IPriority,
-  IProject,
-  ITask,
-} from "interfaces";
+import { ICategory, IFlow, IPriority, IProject, ITask } from "interfaces";
 
 type Props = {
   elm: ITask;

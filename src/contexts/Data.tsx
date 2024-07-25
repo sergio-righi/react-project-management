@@ -1,7 +1,6 @@
 import React, { createContext, useContext } from "react";
 import {
   ICategory,
-  IEnvironment,
   IFilter,
   IFlow,
   IPriority,
@@ -19,8 +18,6 @@ interface ProvidedValueType {
   getProject: () => IProject;
   getTasks: () => ITask[];
   // session
-  environment: string;
-  setEnvironment: (environment: string) => void;
   filter: string;
   setFilter: (filter: string) => void;
   flow: string;
@@ -34,8 +31,6 @@ interface ProvidedValueType {
   // data
   categories: ICategory[];
   setCategories: (categories: ICategory[]) => void;
-  environments: IEnvironment[];
-  setEnvironments: (environments: IEnvironment[]) => void;
   filters: IFilter[];
   setFilters: (filters: IFilter[]) => void;
   flows: IFlow[];
@@ -62,8 +57,6 @@ export const DataContext = createContext<ProvidedValueType>({
   getProject: () => ({} as IProject),
   getTasks: () => initialState.array as ITask[],
   // session
-  environment: initialState.empty,
-  setEnvironment: () => {},
   filter: initialState.empty,
   setFilter: () => {},
   flow: initialState.empty,
@@ -77,8 +70,6 @@ export const DataContext = createContext<ProvidedValueType>({
   // data
   categories: initialState.array,
   setCategories: () => {},
-  environments: initialState.array,
-  setEnvironments: () => {},
   filters: initialState.array,
   setFilters: () => {},
   flows: initialState.array,
@@ -108,9 +99,6 @@ export const DataProvider = React.memo<Props>(({ children }) => {
   const [user, setUser] = React.useState<IUser | null>(initialState.obj);
 
   const [categories, setCategories] = React.useState<ICategory[]>(
-    initialState.array
-  );
-  const [environments, setEnvironments] = React.useState<IEnvironment[]>(
     initialState.array
   );
   const [filters, setFilters] = React.useState<IFilter[]>(initialState.array);
@@ -191,8 +179,6 @@ export const DataProvider = React.memo<Props>(({ children }) => {
       getFlow,
       getProject,
       getTasks,
-      environment,
-      setEnvironment,
       filter,
       setFilter,
       flow,
@@ -205,8 +191,6 @@ export const DataProvider = React.memo<Props>(({ children }) => {
       setUser: setUserCallback,
       categories,
       setCategories,
-      environments,
-      setEnvironments,
       filters,
       setFilters,
       flows,
@@ -226,8 +210,6 @@ export const DataProvider = React.memo<Props>(({ children }) => {
     getFlow,
     getTasks,
     categories,
-    environment,
-    environments,
     filter,
     filters,
     flow,

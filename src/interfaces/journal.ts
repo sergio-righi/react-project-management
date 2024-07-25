@@ -1,6 +1,6 @@
 
 export interface IJournal {
   message: string;
-  updatedBy: string;
+  createdBy: string;
   updatedAt: string;
 }

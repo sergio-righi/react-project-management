@@ -47,11 +47,11 @@
   {
     "_id": "6575e5f0a71cef76aa96b966",
     "name": "To do",
-    "briefdescription": ""
+    "briefdescription": "Tasks that are planned and prioritized for future work. They are not yet started but are scheduled to be addressed in the near term."
   },
   {
     "_id": "6575e685da095ef7023e8d33",
     "name": "Validating",
-    "briefdescription": ""
+    "briefdescription": "Tasks that are in the process of being reviewed or checked for accuracy, correctness, or compliance with requirements before they can be considered complete."
   }
 ]

@@ -28,5 +28,10 @@
     "_id": "6573bd6ca3155becb6f9be63",
     "name": "New Feature",
     "briefdescription": "Represents a task that has to be implemented"
+  },
+  {
+    "_id": "66a245c5172109f486374a9d",
+    "name": "Investigation",
+    "briefdescription": "Represents a task that aims to check the viability of an requirement"
   }
 ]

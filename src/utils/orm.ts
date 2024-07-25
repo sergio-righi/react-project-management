@@ -1,6 +1,6 @@
 import { Enums } from "utils";
-import { ICategory, IEnvironment, IFlow, IPriority, IProject, IState, ITask, IUser } from "interfaces";
-import { Categories, Environments, Flows, Priorities, Projects, States, Tasks, Users } from "assets/data";
+import { ICategory, IFlow, IPriority, IProject, IState, ITask, IUser } from "interfaces";
+import { Categories, Flows, Priorities, Projects, States, Tasks, Users } from "assets/data";
 
 function populate<T extends {}>(values: T[], property: string, value: string): T {
   return values.find((item: T) => {
@@ -38,7 +38,6 @@ export function populateProject(project: IProject): IProject {
 export function populateTask(task: ITask): ITask {
   const newTask = { ...task }
   newTask.category = findCategoryById(newTask.category.toString()) ?? {} as ICategory;
-  newTask.environment = findEnvironmentById(newTask.environment.toString()) ?? {} as IEnvironment;
   newTask.flow = findFlowById(newTask.flow.toString()) ?? {} as IFlow;
   newTask.priority = findPriorityById(newTask.priority.toString()) ?? {} as IPriority;
   newTask.project = findProjectById(newTask.project.toString()) ?? {} as IProject;
@@ -63,17 +62,6 @@ export function populateUser(user: IUser): IUser {
 export function findCategoryById(id: string): ICategory | undefined {
   const category = Categories.find((item: ICategory) => item._id === id);
   return category ? category : undefined;
-}
-
-/**
- * function to find a environment by id
- * @param {string} id environment id 
- * @returns {IEnvironment} the environment
- */
-
-export function findEnvironmentById(id: string): IEnvironment | undefined {
-  const environment = Environments.find((item: IEnvironment) => item._id === id);
-  return environment ? environment : undefined;
 }
 
 /**

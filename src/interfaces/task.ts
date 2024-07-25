@@ -1,4 +1,4 @@
-import { ICategory, IEnvironment, IFlow, IJournal, IPriority, IProject, IState, IUser } from "interfaces";
+import { ICategory, IFlow, IJournal, IPriority, IProject, IState, IUser } from "interfaces";
 
 export interface ITask {
   _id: string;
@@ -13,9 +13,10 @@ export interface ITask {
   project: string | IProject;
   referenceTask: string | ITask;
   flow: string | IFlow;
-  environment: string | IEnvironment;
+  workedTime: string;
   estimatedTime: string;
   createdBy: string;
   createdAt: string;
+  comments: IJournal[];
   journal: IJournal[];
 }
