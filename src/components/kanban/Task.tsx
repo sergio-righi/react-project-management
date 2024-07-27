@@ -2,8 +2,9 @@ import { Box, Stack } from "@mui/material";
 import { UserAvatar } from "assets/images";
 import { Custom, Icon } from "components";
 import { useApp, useTheme } from "contexts";
-import { Conversions } from "helpers";
-import { ICategory, IFlow, IPriority, IProject, ITask } from "interfaces";
+import { Auxiliars, Conversions } from "helpers";
+import { ICategory, IComponent, IPriority, IProject, ITask } from "interfaces";
+import { EnumColor } from "utils/enums";
 
 type Props = {
   elm: ITask;
@@ -13,6 +14,12 @@ type Props = {
 export const Task = ({ accent = false, ...props }: Props) => {
   const { theme } = useTheme();
   const { locale, t } = useApp();
+
+  const bgColor = Conversions.fromEnumToValue(
+    EnumColor,
+    (props.elm.component as IComponent).color,
+    theme.color.accent.color
+  );
 
   return (
     <Stack
@@ -42,20 +49,12 @@ export const Task = ({ accent = false, ...props }: Props) => {
         </Custom.Typography>
       </Stack>
       <Stack direction="row" gap={theme.spacing.sm}>
-        {/* <Custom.Chip
-          size="small"
-          label={(props.elm.flow as IFlow).name}
-          sx={{
-            color: theme.color.accent.text,
-            backgroundColor: theme.color.accent.color,
-          }}
-        /> */}
         <Custom.Chip
           size="small"
-          label={(props.elm.project as IProject).name}
+          label={(props.elm.component as IComponent).name}
           sx={{
-            color: theme.color.accent.text,
-            backgroundColor: theme.color.accent.color,
+            color: Auxiliars.getContrast(bgColor),
+            backgroundColor: bgColor,
           }}
         />
         <Custom.Chip
@@ -66,14 +65,6 @@ export const Task = ({ accent = false, ...props }: Props) => {
             backgroundColor: theme.color.accent.color,
           }}
         />
-        {/* <Custom.Chip
-          size="small"
-          label={(props.elm.environment as IEnvironment).name}
-          sx={{
-            color: theme.color.accent.text,
-            backgroundColor: theme.color.accent.color,
-          }}
-        /> */}
       </Stack>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Stack direction="row" alignItems="center" spacing={theme.spacing.sm}>

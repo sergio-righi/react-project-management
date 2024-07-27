@@ -35,3 +35,12 @@ export const toHexColor = (value: string): string => value.replace(Expressions.i
  */
 
 export const toPhone = (value: string): string => toNumber(value)?.replace(/^(\d{3})(\d{3})(\d{4})$/, '($1) $2-$3');
+
+/**
+ * function to apply prefix to the given value
+ * @param {string} prefix the value to be prefixed
+ * @param {string} value the given string
+ * @return {string} the new string in "number" format
+ */
+
+export const toUniqueNumber = (prefix: string, value: string): string => [prefix, value.length <= 4 ? value : value.padStart(4, "0")].join("-");

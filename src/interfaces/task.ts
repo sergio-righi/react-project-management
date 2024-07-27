@@ -1,4 +1,4 @@
-import { ICategory, IFlow, IJournal, IPriority, IProject, IState, IUser } from "interfaces";
+import { ICategory, IComponent, IFlow, IJournal, IPriority, IProject, IState, IUser } from "interfaces";
 
 export interface ITask {
   _id: string;
@@ -9,7 +9,8 @@ export interface ITask {
   priority: string | IPriority;
   state: string | IState;
   category: string | ICategory;
-  assignee: string | IUser;
+  component: string | IComponent;
+  assignees: string[] | IUser[];
   project: string | IProject;
   referenceTask: string | ITask;
   flow: string | IFlow;

@@ -1,5 +1,6 @@
 import { Enums } from "utils";
-import { ICategory, IFlow, IPriority, IProject, IState, ITask, IUser } from "interfaces";
+import { Sanitizes } from "helpers";
+import { ICategory, IComponent, IFlow, IPriority, IProject, IState, ITask, IUser } from "interfaces";
 import { Categories, Flows, Priorities, Projects, States, Tasks, Users } from "assets/data";
 
 function populate<T extends {}>(values: T[], property: string, value: string): T {
@@ -14,6 +15,13 @@ function populates<T extends {}>(values: T[], property: string, value: string[])
     const propValue = (item as Record<string, string>)[property];
     return value.includes(propValue);
   }) || ({} as T);
+}
+
+function populateFn<T extends {}>(values: T[], property: string, value: string[], fn: Function) {
+  return (values.filter((item: T) => {
+    const propValue = (item as Record<string, string>)[property];
+    return value.includes(propValue);
+  }) || ({} as T)).map((item: T) => fn(item));
 }
 
 export function populateMany<T>(values: T[], fn: (item: T) => T): T[] {
@@ -31,7 +39,7 @@ export function populateProject(project: IProject): IProject {
   newProject.category = findCategoryById(newProject.category.toString()) ?? {} as ICategory;
   newProject.priority = findPriorityById(newProject.priority.toString()) ?? {} as IPriority;
   newProject.state = findStateById(newProject.state.toString()) ?? {} as IState;
-  newProject.tasks = populates<ITask>(Tasks, "project", [project._id]) ?? [];
+  newProject.tasks = populateFn<ITask>(Tasks, "project", [project._id], populateTask) ?? [];
   return newProject;
 }
 
@@ -41,9 +49,11 @@ export function populateTask(task: ITask): ITask {
   newTask.flow = findFlowById(newTask.flow.toString()) ?? {} as IFlow;
   newTask.priority = findPriorityById(newTask.priority.toString()) ?? {} as IPriority;
   newTask.project = findProjectById(newTask.project.toString()) ?? {} as IProject;
+  newTask.number = Sanitizes.toUniqueNumber(newTask.project.prefix, newTask.number);
+  newTask.component = populate<IComponent>(newTask.project.components as IComponent[], "_id", newTask.component.toString());
   newTask.state = findStateById(newTask.state.toString()) ?? {} as IState;
   newTask.referenceTask = findTaskById(newTask.referenceTask.toString()) ?? {} as ITask;
-  newTask.assignee = findUserById(newTask.assignee.toString()) ?? {} as IUser;
+  newTask.assignees = populates<IUser>(Users, "_id", task.assignees as []) ?? [];
   return newTask;
 }
 

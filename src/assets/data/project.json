@@ -4,6 +4,15 @@
     "name": "Fusion Watch",
     "briefdescription": "Represents a problem that needs to be fixed",
     "deadline": "2025-01-10",
+    "prefix": "WATCH",
+    "components": [
+      {
+        "_id": "66a4f3505de9d53b49700da7",
+        "name": "Network",
+        "color": "DarkBlue",
+        "briefdescription": ""
+      }
+    ],
     "priority": "6573bb90d02e8854f91fa277",
     "state": "6573c26ecce5bbdafa52a8ca",
     "category": "6573bd5f8b5b898ec2c68054",
@@ -23,6 +32,15 @@
     "name": "Secure Storage",
     "briefdescription": "Represents a problem that needs to be fixed",
     "deadline": "2025-01-10",
+    "prefix": "SECURE",
+    "components": [
+      {
+        "_id": "66a4f35ba21a23b6db39d66f",
+        "name": "Network",
+        "color": "DarkBrown",
+        "briefdescription": ""
+      }
+    ],
     "priority": "6573bb94a859b621a65d849a",
     "state": "6573c28fdf40bab61647cb0c",
     "category": "6573bd5f8b5b898ec2c68054",

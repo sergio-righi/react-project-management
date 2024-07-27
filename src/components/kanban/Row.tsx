@@ -2,7 +2,9 @@ import { Stack } from "@mui/material";
 import { UserAvatar } from "assets/images";
 import { Custom, Icon } from "components";
 import { useTheme } from "contexts";
-import { ICategory, IPriority, IProject, IState, ITask } from "interfaces";
+import { Auxiliars, Conversions } from "helpers";
+import { ICategory, IComponent, IPriority, IState, ITask } from "interfaces";
+import { EnumColor } from "utils/enums";
 
 type Props = {
   elm: ITask;
@@ -11,6 +13,12 @@ type Props = {
 
 export const Row = ({ accent = false, ...props }: Props) => {
   const { theme } = useTheme();
+
+  const bgColor = Conversions.fromEnumToValue(
+    EnumColor,
+    (props.elm.component as IComponent).color,
+    theme.color.accent.color
+  );
 
   return (
     <Stack
@@ -27,13 +35,8 @@ export const Row = ({ accent = false, ...props }: Props) => {
       }
     >
       <Stack direction="row" alignItems="center" spacing={theme.spacing.sm}>
-        <Custom.Chip
-          size="small"
-          label={(props.elm.category as ICategory).name}
-          sx={{
-            color: theme.color.accent.text,
-            backgroundColor: theme.color.accent.color,
-          }}
+        <Icon.Priority
+          value={(props.elm.priority as IPriority).name.toLowerCase()}
         />
         <Custom.Typography
           size={theme.font.sm}
@@ -45,16 +48,6 @@ export const Row = ({ accent = false, ...props }: Props) => {
         <Custom.Typography size={theme.font.sm} weight={theme.font.bold}>
           {props.elm.title}
         </Custom.Typography>
-      </Stack>
-      <Stack direction="row" alignItems="center" spacing={theme.spacing.sm}>
-        <Custom.Chip
-          size="small"
-          label={(props.elm.project as IProject).name}
-          sx={{
-            color: theme.color.accent.text,
-            backgroundColor: theme.color.accent.color,
-          }}
-        />
         <Custom.Chip
           size="small"
           label={(props.elm.state as IState).name}
@@ -63,8 +56,23 @@ export const Row = ({ accent = false, ...props }: Props) => {
             backgroundColor: theme.color.accent.color,
           }}
         />
-        <Icon.Priority
-          value={(props.elm.priority as IPriority).name.toLowerCase()}
+      </Stack>
+      <Stack direction="row" alignItems="center" spacing={theme.spacing.sm}>
+        <Custom.Chip
+          size="small"
+          label={(props.elm.component as IComponent).name}
+          sx={{
+            color: Auxiliars.getContrast(bgColor),
+            backgroundColor: bgColor,
+          }}
+        />
+        <Custom.Chip
+          size="small"
+          label={(props.elm.category as ICategory).name}
+          sx={{
+            color: theme.color.accent.text,
+            backgroundColor: theme.color.accent.color,
+          }}
         />
         <UserAvatar width={25} height={25} />
       </Stack>

@@ -328,3 +328,17 @@ export const toDueString = (date: string, t: any, locale: string = "en"): string
     return Combines.interpolate(t.date.in_day, { day: dayDiff });
   }
 }
+
+/**
+ * function to return the value from a given enum or default
+ * @param {Enum} e the given enum
+ * @param {string} key the key to be search
+ * @param {string} defaultValue the value to be used if not found
+ * @return {string} the respective value or default
+ */
+
+export const fromEnumToValue = (e: any, key: string, defaultValue: string): string => {
+  return e[
+    key as keyof typeof e
+  ] ?? defaultValue
+}
