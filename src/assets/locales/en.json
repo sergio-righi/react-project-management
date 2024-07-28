@@ -1,4 +1,8 @@
 {
+  "action": {
+    "add": "Add",
+    "edit": "Edit"
+  },
   "date": {
     "day_ago": "{{day}} days ago",
     "in_day": "in {{day}} days",
@@ -9,7 +13,8 @@
     "mine": "Mine"
   },
   "label": {
-    "task": "Tasks"
+    "task": "Task",
+    "project": "Project"
   },
   "placeholder": {
     "no_record": "Nothing to be displayed..."

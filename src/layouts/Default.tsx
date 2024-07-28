@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import { DataProvider, ServiceProvider, useTheme } from "contexts";
 import { ThemeProvider } from "@mui/material/styles";
 import { Themes } from "utils";
-import { Nav } from "components";
+import { Common, Nav } from "components";
 
 export const DefaultLayout = () => {
   const { theme } = useTheme();
@@ -21,6 +21,7 @@ export const DefaultLayout = () => {
           >
             <Nav.Navbar />
             <Outlet />
+            <Common.Footer />
           </Stack>
         </DataProvider>
       </ThemeProvider>

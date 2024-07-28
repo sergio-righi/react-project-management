@@ -2,7 +2,14 @@ import { useEffect } from "react";
 import { useData, useService } from "contexts";
 
 export const LoadData = ({ children }: { children: any }) => {
-  const { filter, flow, project, state, task, user } = useService();
+  const {
+    filterService,
+    flowService,
+    projectService,
+    stateService,
+    taskService,
+    userService,
+  } = useService();
   const { setFilters, setFlows, setProjects, setStates, setTasks, setUser } =
     useData();
 
@@ -16,27 +23,27 @@ export const LoadData = ({ children }: { children: any }) => {
   }, []);
 
   async function fetchFilter() {
-    setFilters(await filter.filters());
+    setFilters(await filterService.filters());
   }
 
   async function fetchFlow() {
-    setFlows(await flow.flows());
+    setFlows(await flowService.flows());
   }
 
   async function fetchProject() {
-    setProjects(await project.projects());
+    setProjects(await projectService.projects());
   }
 
   async function fetchState() {
-    setStates(await state.states());
+    setStates(await stateService.states());
   }
 
   async function fetchTask() {
-    setTasks(await task.tasks());
+    setTasks(await taskService.tasks());
   }
 
   async function fetchUser() {
-    const users = await user.users();
+    const users = await userService.users();
     setUser(users[0]);
   }
 

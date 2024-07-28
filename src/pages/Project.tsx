@@ -7,12 +7,12 @@ import { useEffect, useState } from "react";
 export const Project = () => {
   const { t } = useApp();
   const { theme } = useTheme();
-  const { project } = useService();
+  const { projectService } = useService();
   const [projects, setProjects] = useState<IProject[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      setProjects(await project.projects());
+      setProjects(await projectService.projects());
     };
     fetchData();
   }, []);

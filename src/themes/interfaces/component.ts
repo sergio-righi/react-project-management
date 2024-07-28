@@ -2,6 +2,13 @@ export interface Component {
   controller: {
     button: {
       gap: number;
+    },
+    fab: {
+      height: {
+        sm: number,
+        md: number,
+        lg: number,
+      }
     }
   },
   input: {

@@ -13,7 +13,10 @@ export type { Props as ChipProps } from './Chip';
 
 export { DataGrid } from './DataGrid';
 export { Divider } from './Divider';
+
 export { Fab } from './Fab';
+export type { Props as FabProps } from './Fab';
+
 export { IconButton } from './IconButton';
 export { Modal } from './Modal';
 export { Paper } from './Paper';

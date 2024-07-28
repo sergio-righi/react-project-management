@@ -4,6 +4,13 @@ export default {
   controller: {
     button: {
       gap: 0.25
+    },
+    fab: {
+      height: {
+        sm: 34,
+        md: 40,
+        lg: 48,
+      }
     }
   },
   input: {

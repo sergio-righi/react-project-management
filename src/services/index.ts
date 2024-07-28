@@ -8,23 +8,23 @@ import { TaskService, ITaskService } from "./task";
 import { UserService, IUserService } from "./user";
 
 export interface IProvidedService {
-  category: ICategoryService
-  filter: IFilterService
-  flow: IFlowService
-  priority: IPriorityService
-  project: IProjectService
-  state: IStateService
-  task: ITaskService
-  user: IUserService
+  categoryService: ICategoryService
+  filterService: IFilterService
+  flowService: IFlowService
+  priorityService: IPriorityService
+  projectService: IProjectService
+  stateService: IStateService
+  taskService: ITaskService
+  userService: IUserService
 }
 
 export const initializeService = (): IProvidedService => ({
-  category: new CategoryService(),
-  filter: new FilterService(),
-  flow: new FlowService(),
-  priority: new PriorityService(),
-  project: new ProjectService(),
-  state: new StateService(),
-  task: new TaskService(),
-  user: new UserService(),
+  categoryService: new CategoryService(),
+  filterService: new FilterService(),
+  flowService: new FlowService(),
+  priorityService: new PriorityService(),
+  projectService: new ProjectService(),
+  stateService: new StateService(),
+  taskService: new TaskService(),
+  userService: new UserService(),
 })

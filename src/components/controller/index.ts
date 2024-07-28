@@ -1,5 +1,6 @@
 export { Button } from "./Button";
 export { Chip } from "./Chip";
+export { Fab } from "./Fab";
 export { HorizontalScroll } from "./HorizontalScroll";
 
 export { InlineEdit } from "./InlineEdit";

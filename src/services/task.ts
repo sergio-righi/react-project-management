@@ -3,6 +3,7 @@ import { ITask } from "interfaces";
 
 export interface ITaskService {
   tasks(): Promise<ITask[]>;
+  find(id: string): Promise<ITask | null>;
 }
 
 export class TaskService implements ITaskService {
@@ -20,5 +21,16 @@ export class TaskService implements ITaskService {
   async tasks() {
     const { payload } = await this.taskData.tasks();
     return payload ?? [];
+  }
+
+  /**
+   * fetch a task by id
+   * @param {string} id the task id
+   * @returns {ITask} a task if found
+   */
+
+  async find(id: string) {
+    const { payload } = await this.taskData.find(id);
+    return payload;
   }
 }
