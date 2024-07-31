@@ -1,7 +1,8 @@
 {
   "action": {
     "add": "Add",
-    "edit": "Edit"
+    "edit": "Edit",
+    "save": "Save"
   },
   "date": {
     "day_ago": "{{day}} days ago",
@@ -13,8 +14,20 @@
     "mine": "Mine"
   },
   "label": {
+    "assignees": "Assignees",
+    "briefdescription": "Brief description",
+    "category": "Category",
+    "component": "Component",
+    "deadline": "Deadline",
+    "description": "Description",
+    "estimatedTime": "Estimated Time",
+    "name": "Name",
+    "prefix": "Prefix",
+    "priority": "Priority",
+    "project": "Project",
+    "state": "State",
     "task": "Task",
-    "project": "Project"
+    "title": "Title"
   },
   "placeholder": {
     "no_record": "Nothing to be displayed..."

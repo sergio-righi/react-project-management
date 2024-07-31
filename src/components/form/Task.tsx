@@ -3,7 +3,7 @@ import { Custom } from "components";
 import { useApp, useService, useTheme } from "contexts";
 import { useForm } from "hooks";
 import { Constants, Enums } from "utils";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import { Feedback, PairValue } from "types";
 import { ITask } from "interfaces";
 import { Auxiliars, Sanitizes, Validations } from "helpers";
@@ -16,7 +16,13 @@ type Props = {
 export const Task = (props: Props) => {
   const { theme } = useTheme();
   const { setFeedback, t } = useApp();
-  const { taskService } = useService();
+  const {
+    categoryService,
+    priorityService,
+    projectService,
+    stateService,
+    userService,
+  } = useService();
 
   const fromJSON = {
     ...props.task,
@@ -43,7 +49,33 @@ export const Task = (props: Props) => {
     updateCallback
   );
 
+  const [users, setUsers] = useState<PairValue[]>([]);
+  const [states, setStates] = useState<PairValue[]>([]);
+  const [projects, setProjects] = useState<PairValue[]>([]);
+  const [components, setComponents] = useState<PairValue[]>([]);
+  const [categories, setCategories] = useState<PairValue[]>([]);
+  const [priorities, setPriorities] = useState<PairValue[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setCategories(await categoryService.asPairValue());
+      setPriorities(await priorityService.asPairValue());
+      setStates(await stateService.asPairValue());
+      setProjects(await projectService.asPairValue());
+      setUsers(await userService.asPairValue());
+    };
+    fetchData();
+  }, []);
+
   useEffect(() => setState(fromJSON), [props.task]);
+
+  async function onProjectChange(event: SelectChangeEvent<string>) {
+    setComponents(
+      await projectService.componentsAsPairValue(event.target.value as string)
+    );
+
+    onDropdownChange(event);
+  }
 
   function toJSON(task: any) {
     return Auxiliars.removeFromObject({
@@ -108,42 +140,9 @@ export const Task = (props: Props) => {
             value={state.title}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Custom.Select
-            name="state"
-            // required={true}
-            label={t.label.state}
-            value={state.state}
-            items={
-              [
-                // {
-                //   key: Enums.EnumGender.Female,
-                //   value: t.label.female,
-                // } as PairValue,
-              ]
-            }
-            onDropdownChange={onDropdownChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Custom.Select
-            name="priority"
-            // required={true}
-            label={t.label.priority}
-            value={state.priority}
-            items={
-              [
-                // {
-                //   key: Enums.EnumGender.Female,
-                //   value: t.label.female,
-                // } as PairValue,
-              ]
-            }
-            onDropdownChange={onDropdownChange}
-          />
-        </Grid>
         <Grid item xs={12}>
           <Custom.TextField
+            multiline
             name="description"
             required={true}
             onChange={onChange}
@@ -153,18 +152,31 @@ export const Task = (props: Props) => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Custom.Select
+            name="state"
+            // required={true}
+            label={t.label.state}
+            value={state.state}
+            items={states}
+            onDropdownChange={onDropdownChange}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Custom.Select
+            name="priority"
+            // required={true}
+            label={t.label.priority}
+            value={state.priority}
+            items={priorities}
+            onDropdownChange={onDropdownChange}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Custom.Select
             name="category"
             // required={true}
             label={t.label.category}
             value={state.category}
-            items={
-              [
-                // {
-                //   key: Enums.EnumGender.Female,
-                //   value: t.label.female,
-                // } as PairValue,
-              ]
-            }
+            items={categories}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -174,15 +186,8 @@ export const Task = (props: Props) => {
             // required={true}
             label={t.label.project}
             value={state.project}
-            items={
-              [
-                // {
-                //   key: Enums.EnumGender.Female,
-                //   value: t.label.female,
-                // } as PairValue,
-              ]
-            }
-            onDropdownChange={onDropdownChange}
+            items={projects}
+            onDropdownChange={onProjectChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -191,31 +196,18 @@ export const Task = (props: Props) => {
             // required={true}
             label={t.label.component}
             value={state.component}
-            items={
-              [
-                // {
-                //   key: Enums.EnumGender.Female,
-                //   value: t.label.female,
-                // } as PairValue,
-              ]
-            }
+            items={components}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Custom.Select
+            multiple
             name="assignees"
             // required={true}
             label={t.label.assignees}
-            value={state.assignees}
-            items={
-              [
-                // {
-                //   key: Enums.EnumGender.Female,
-                //   value: t.label.female,
-                // } as PairValue,
-              ]
-            }
+            value={state.assignees as string[]}
+            items={users}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -243,7 +235,7 @@ export const Task = (props: Props) => {
         </Grid>
         <Grid item xs={12}>
           <Box>
-            <Custom.Button submit>{t.action.submit}</Custom.Button>
+            <Custom.Button submit>{t.action.save}</Custom.Button>
           </Box>
         </Grid>
       </Grid>

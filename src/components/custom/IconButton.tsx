@@ -23,5 +23,9 @@ export const IconButton = ({
 }: Props) => {
   const { theme } = useTheme();
 
-  return <MUIIconButton {...props}>{props.children}</MUIIconButton>;
+  return (
+    <MUIIconButton {...props} sx={{ color: iconColor }}>
+      {props.children}
+    </MUIIconButton>
+  );
 };

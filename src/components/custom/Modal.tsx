@@ -47,7 +47,7 @@ export const Modal = ({
     >
       <Custom.Paper
         sx={{
-          width: "80%",
+          width: "60%",
           maxHeight: "80%",
           display: "flex",
           flexDirection: "column",
@@ -61,7 +61,10 @@ export const Modal = ({
           justifyContent="space-between"
         >
           <Custom.Typography variant="h4">{title}</Custom.Typography>
-          <Custom.IconButton onClick={onClose}>
+          <Custom.IconButton
+            onClick={onClose}
+            iconColor={theme.palette.font.color}
+          >
             <CloseRounded />
           </Custom.IconButton>
         </Stack>

@@ -13,7 +13,7 @@ type FormHookResult<T> = {
   onInput: (name: string, value: string) => void;
   onReset: () => void;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onDropdownChange: (event: SelectChangeEvent<number>) => void;
+  onDropdownChange: (event: SelectChangeEvent<any>) => void;
   onCustomChange: (name: string, value: any) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
   onValidate: (fields: Fields) => { isValid: boolean, response: Fields };
@@ -110,7 +110,7 @@ export const useForm = <T extends FormValues>(
     updateCallback && updateCallback(event.target.name, event.target.value, newValues, validate(newValues));
   };
 
-  const onDropdownChange = (event: SelectChangeEvent<number>) => {
+  const onDropdownChange = (event: SelectChangeEvent<any>) => {
     const newValues = { ...values, [event.target.name]: event.target.value };
     setValues(newValues);
     updateCallback && updateCallback(event.target.name, event.target.value, newValues, validate(newValues));

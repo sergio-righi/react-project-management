@@ -11,7 +11,7 @@ const theme: Theme = {
     theme: "#2D2D2D",
     border: "#252525",
     shadow: "0 1px 2px rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15)",
-    input: { color: "#F5F5F5", accent: "#DBDBDB" } as ColorSchema,
+    input: { color: "#F5F5F5", accent: "#BDBDBD" } as ColorSchema,
     font: { color: "#FFFFFF", accent: "#BDBDBD" } as ColorFont,
     background: { color: "#252525", accent: "#303030", textAccent: "#FFFFFF" } as ColorSchema,
   } as Palette,

@@ -17,24 +17,30 @@ type Props = {
   name?: string;
   label?: string;
   items: PairValue[];
+  multiple?: boolean;
   disabled?: boolean;
-  value?: number | "";
-  onChange?: (value: number) => void;
-  onDropdownChange?: (event: SelectChangeEvent<number>) => void;
+  value?: any;
+  onChange?: (value: any) => void;
+  onDropdownChange?: (event: SelectChangeEvent<any>) => void;
 };
 
-export const Select = (props: Props) => {
+export const Select = ({ multiple = false, ...props }: Props) => {
   const { theme } = useTheme();
-  const [value, setValue] = useState<number | "">(props.value ?? "");
+  const [value, setValue] = useState<any>(
+    props.value ? props.value : multiple ? [] : ""
+  );
 
-  useEffect(() => setValue(props.value ?? ""), [props.value]);
+  useEffect(
+    () => setValue(props.value ? props.value : multiple ? [] : ""),
+    [props.value]
+  );
 
-  const handleChange = (value: number): void => {
+  const handleChange = (value: any): void => {
     setValue(value);
     props.onChange && props.onChange(value);
   };
 
-  const handleDropdownChange = (event: SelectChangeEvent<number>): void =>
+  const handleDropdownChange = (event: SelectChangeEvent<any>): void =>
     props.onDropdownChange && props.onDropdownChange(event);
 
   return (
@@ -60,6 +66,7 @@ export const Select = (props: Props) => {
             value={value}
             name={props.name}
             labelId={props.id}
+            // multiple={multiple}
             disabled={props.disabled}
             onChange={handleDropdownChange}
             input={<OutlinedInput label={props.label} />}
@@ -75,6 +82,9 @@ export const Select = (props: Props) => {
               },
               "& .MuiSelect-select": {
                 color: theme.palette.font.color,
+              },
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: theme.palette.input.accent,
               },
             }}
             MenuProps={{

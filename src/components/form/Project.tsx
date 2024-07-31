@@ -16,7 +16,8 @@ type Props = {
 export const Project = (props: Props) => {
   const { theme } = useTheme();
   const { setFeedback, t } = useApp();
-  const { projectService } = useService();
+  const { categoryService, priorityService, projectService, stateService } =
+    useService();
 
   const fromJSON = {
     ...props.project,
@@ -42,6 +43,22 @@ export const Project = (props: Props) => {
     submitCallback,
     updateCallback
   );
+
+  const [states, setStates] = useState<PairValue[]>([]);
+  const [projects, setProjects] = useState<PairValue[]>([]);
+  const [components, setComponents] = useState<PairValue[]>([]);
+  const [categories, setCategories] = useState<PairValue[]>([]);
+  const [priorities, setPriorities] = useState<PairValue[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setCategories(await categoryService.asPairValue());
+      setPriorities(await priorityService.asPairValue());
+      setStates(await stateService.asPairValue());
+      setProjects(await projectService.asPairValue());
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => setState(fromJSON), [props.project]);
 
@@ -99,7 +116,7 @@ export const Project = (props: Props) => {
   return (
     <Box component="form" onSubmit={onSubmit}>
       <Grid container spacing={theme.spacing.sm}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <Custom.TextField
             name="name"
             required={true}
@@ -108,7 +125,7 @@ export const Project = (props: Props) => {
             value={state.name}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <Custom.TextField
             name="briefdescription"
             required={true}
@@ -132,14 +149,7 @@ export const Project = (props: Props) => {
             // required={true}
             label={t.label.state}
             value={state.state}
-            items={
-              [
-                // {
-                //   key: Enums.EnumGender.Female,
-                //   value: t.label.female,
-                // } as PairValue,
-              ]
-            }
+            items={states}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -149,14 +159,7 @@ export const Project = (props: Props) => {
             // required={true}
             label={t.label.priority}
             value={state.priority}
-            items={
-              [
-                // {
-                //   key: Enums.EnumGender.Female,
-                //   value: t.label.female,
-                // } as PairValue,
-              ]
-            }
+            items={priorities}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -166,14 +169,7 @@ export const Project = (props: Props) => {
             // required={true}
             label={t.label.category}
             value={state.category}
-            items={
-              [
-                // {
-                //   key: Enums.EnumGender.Female,
-                //   value: t.label.female,
-                // } as PairValue,
-              ]
-            }
+            items={categories}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -192,7 +188,7 @@ export const Project = (props: Props) => {
         </Grid>
         <Grid item xs={12}>
           <Box>
-            <Custom.Button submit>{t.action.submit}</Custom.Button>
+            <Custom.Button submit>{t.action.save}</Custom.Button>
           </Box>
         </Grid>
       </Grid>

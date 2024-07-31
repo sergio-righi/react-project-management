@@ -18,6 +18,10 @@ export const Task = (props: Props) => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [task, setTask] = useState<ITask>({} as ITask);
 
+  const modalTitle = `${props.taskId ? t.action.edit : t.action.add} ${
+    t.label.task
+  }`;
+
   useEffect(() => {
     const fetchData = async () => {
       if (props.taskId) {
@@ -31,7 +35,7 @@ export const Task = (props: Props) => {
 
   return (
     <Custom.Modal
-      title={t.title.task}
+      title={modalTitle}
       open={props.open}
       onClose={props.onClose}
       sx={{ maxHeight: "min(800px, 100vh)" }}

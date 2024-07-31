@@ -18,6 +18,10 @@ export const Project = (props: Props) => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [project, setProject] = useState<IProject>({} as IProject);
 
+  const modalTitle = `${props.projectId ? t.action.edit : t.action.add} ${
+    t.label.project
+  }`;
+
   useEffect(() => {
     const fetchData = async () => {
       if (props.projectId) {
@@ -31,7 +35,7 @@ export const Project = (props: Props) => {
 
   return (
     <Custom.Modal
-      title={t.title.project}
+      title={modalTitle}
       open={props.open}
       onClose={props.onClose}
       sx={{ maxHeight: "min(800px, 100vh)" }}
