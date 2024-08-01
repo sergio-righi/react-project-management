@@ -63,10 +63,16 @@ enum EnumColor {
   DarkOrange = "#E96C14",
 }
 
+enum EnumModalType {
+  Project = "project",
+  Task = "task",
+}
+
 export {
   EnumColor,
   EnumTheme,
   EnumResponse,
   EnumFeedback,
+  EnumModalType,
   EnumValidation
 }

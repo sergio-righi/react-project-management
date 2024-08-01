@@ -1,62 +1,52 @@
 import { useState } from "react";
-import { useApp } from "contexts";
+import { useApp, useTheme } from "contexts";
+import { useNavigate } from "react-router-dom";
 
 // icons
 import { AddRounded } from "@mui/icons-material";
 import { Controller, Custom, Modal } from "components";
+import { EnumModalType } from "utils/enums";
+import { Stack } from "@mui/material";
+import { Routes } from "utils";
 
 type Props = {};
 
 export const Footer = (props: Props) => {
   const { t } = useApp();
-  const [currentState, setCurrentState] = useState<boolean>(false);
+  const { theme } = useTheme();
 
-  const [modalTaskOpened, setModalTaskOpened] = useState<boolean>(false);
-  const [modalProjectOpened, setModalProjectOpened] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-  function handleStateChange(state: boolean) {
-    setCurrentState(state);
+  function handleProjectOnClick() {
+    navigate(Routes.pages.project.popup());
+  }
+
+  function handleTaskOnClick() {
+    navigate(Routes.pages.task.popup());
   }
 
   return (
-    <>
-      <Controller.Fab
-        state={currentState}
-        items={[
-          <Custom.Fab
-            size="small"
-            text={t.label.task}
-            key="add-task"
-            onStateChange={() => setModalTaskOpened(true)}
-          >
-            <AddRounded />
-          </Custom.Fab>,
-          <Custom.Fab
-            size="small"
-            text={t.label.project}
-            key="add-project"
-            onStateChange={() => setModalProjectOpened(true)}
-          >
-            <AddRounded />
-          </Custom.Fab>,
-        ]}
+    <Stack
+      direction="row"
+      position="fixed"
+      spacing={theme.spacing.sm}
+      right={theme.spacing.default}
+      bottom={theme.spacing.default}
+    >
+      <Custom.Fab
+        size="medium"
+        text={t.label.task}
+        onStateChange={handleTaskOnClick}
       >
-        <Custom.Fab
-          closable
-          state={currentState}
-          onStateChange={handleStateChange}
-        >
-          <AddRounded />
-        </Custom.Fab>
-      </Controller.Fab>
-      <Modal.Task
-        open={modalTaskOpened}
-        onClose={() => setModalTaskOpened(false)}
-      />
-      <Modal.Project
-        open={modalProjectOpened}
-        onClose={() => setModalProjectOpened(false)}
-      />
-    </>
+        <AddRounded />
+      </Custom.Fab>
+      <Custom.Fab
+        size="medium"
+        text={t.label.project}
+        onStateChange={handleProjectOnClick}
+      >
+        <AddRounded />
+      </Custom.Fab>
+    </Stack>
   );
 };

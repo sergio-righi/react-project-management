@@ -12,11 +12,9 @@ const root = ReactDOM.createRoot(
 // document.documentElement.setAttribute("theme", "dark");
 
 root.render(
-  // <React.StrictMode>
   <AppProvider initLocale={"EN"}>
     <ThemeProvider initTheme={Dark}>
       <Routers />
     </ThemeProvider>
   </AppProvider>
-  // </React.StrictMode>
 );

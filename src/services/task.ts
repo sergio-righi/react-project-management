@@ -3,7 +3,7 @@ import { ITask } from "interfaces";
 
 export interface ITaskService {
   tasks(): Promise<ITask[]>;
-  find(id: string): Promise<ITask | null>;
+  find(id: string): Promise<ITask>;
 }
 
 export class TaskService implements ITaskService {

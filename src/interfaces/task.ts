@@ -1,3 +1,4 @@
+import { Auxiliars } from "helpers";
 import { ICategory, IComponent, IFlow, IJournal, IPriority, IProject, IState, IUser } from "interfaces";
 
 export interface ITask {
@@ -20,4 +21,26 @@ export interface ITask {
   createdAt: string;
   comments: IJournal[];
   journal: IJournal[];
+}
+
+export const DEFAULT_TASK = {
+  _id: Auxiliars.generateObjectId(),
+  number: "",
+  title: "",
+  description: "",
+  deadline: "",
+  priority: "",
+  state: "",
+  category: "",
+  component: "",
+  assignees: [],
+  project: "",
+  referenceTask: "",
+  flow: "",
+  workedTime: "",
+  estimatedTime: "",
+  createdBy: "",
+  createdAt: "",
+  comments: [],
+  journal: [],
 }

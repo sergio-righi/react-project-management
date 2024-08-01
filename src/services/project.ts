@@ -5,7 +5,7 @@ import { PairValue } from "types";
 export interface IProjectService {
   projects(): Promise<IProject[]>;
   asPairValue(): Promise<PairValue[]>;
-  find(id: string): Promise<IProject | null>;
+  find(id: string): Promise<IProject>;
   components(id: string): Promise<IComponent[]>;
   componentsAsPairValue(id: string): Promise<PairValue[]>;
 }

@@ -5,7 +5,7 @@ import { useForm } from "hooks";
 import { Constants, Enums } from "utils";
 import { Box, Grid } from "@mui/material";
 import { Feedback, PairValue } from "types";
-import { IComponent } from "interfaces";
+import { DEFAULT_COMPONENT, IComponent } from "interfaces";
 import { Auxiliars, Conversions, Sanitizes, Validations } from "helpers";
 import { EnumColor } from "utils/enums";
 
@@ -20,10 +20,8 @@ export const Component = (props: Props) => {
   const { projectService } = useService();
 
   const fromJSON = {
-    _id: props.component._id || Auxiliars.generateObjectId(),
-    name: props.component.name || "",
-    color: props.component.color || "",
-    briefdescription: props.component.briefdescription || "",
+    ...DEFAULT_COMPONENT,
+    ...props.component,
   } as IComponent;
 
   const [state, setState] = useState<IComponent>(fromJSON);

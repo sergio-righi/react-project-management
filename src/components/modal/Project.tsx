@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Custom, Form, Progress } from "components";
 import { useApp, useService } from "contexts";
-import { IProject } from "interfaces";
+import { DEFAULT_PROJECT, IProject } from "interfaces";
 import { SxProps } from "@mui/material";
+import { useSearchParams } from "react-router-dom";
 
 type Props = {
   sx?: SxProps;
   open: boolean;
-  projectId?: string;
   onClose?: () => void;
 };
 
@@ -15,23 +15,25 @@ export const Project = (props: Props) => {
   const { t } = useApp();
   const { projectService } = useService();
 
-  const [loaded, setLoaded] = useState<boolean>(false);
-  const [project, setProject] = useState<IProject>({} as IProject);
+  const [searchParams] = useSearchParams();
+  const [loaded, setLoaded] = useState<boolean>(true);
+  const [project, setProject] = useState<IProject>(DEFAULT_PROJECT);
 
-  const modalTitle = `${props.projectId ? t.action.edit : t.action.add} ${
+  const modalTitle = `${project?._id ? t.action.edit : t.action.add} ${
     t.label.project
   }`;
 
   useEffect(() => {
     const fetchData = async () => {
-      if (props.projectId) {
-        const response = await projectService.find(props.projectId);
-        if (response) setProject(response);
+      const id = searchParams.get("id");
+      if (id) {
+        setProject(await projectService.find(id));
+      } else {
+        setProject(DEFAULT_PROJECT);
       }
-      setLoaded(true);
     };
     fetchData();
-  }, [projectService, props.open, props.projectId]);
+  }, [props.open, searchParams]);
 
   return (
     <Custom.Modal

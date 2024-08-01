@@ -14,6 +14,7 @@ export const DefaultLayout = () => {
     <ServiceProvider>
       <ThemeProvider theme={Themes.defaultTheme(theme)}>
         <DataProvider>
+          <Common.Popup />
           <Stack
             height="1"
             direction="row"

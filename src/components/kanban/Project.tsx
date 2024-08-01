@@ -4,6 +4,8 @@ import { Custom, Icon } from "components";
 import { useApp, useTheme } from "contexts";
 import { Conversions } from "helpers";
 import { ICategory, IPriority, IProject, IState } from "interfaces";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Routes } from "utils";
 
 type Props = {
   elm: IProject;
@@ -13,6 +15,16 @@ type Props = {
 export const Project = ({ accent = false, ...props }: Props) => {
   const { theme } = useTheme();
   const { locale, t } = useApp();
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  function navigateToTask() {
+    navigate({
+      pathname: location.pathname,
+      search: Routes.pages.project.popup(props.elm._id),
+    });
+  }
 
   return (
     <Stack
@@ -35,6 +47,7 @@ export const Project = ({ accent = false, ...props }: Props) => {
           size={theme.font.sm}
           className="o-ellipsis"
           weight={theme.font.bold}
+          onClick={navigateToTask}
         >
           {props.elm.name}
         </Custom.Typography>

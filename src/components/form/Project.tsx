@@ -5,9 +5,8 @@ import { useForm } from "hooks";
 import { Constants, Enums } from "utils";
 import { Box, Grid } from "@mui/material";
 import { Feedback, PairValue } from "types";
-import { IComponent, IProject } from "interfaces";
+import { DEFAULT_PROJECT, IComponent, IProject } from "interfaces";
 import { Auxiliars, Conversions, Sanitizes, Validations } from "helpers";
-import { EnumColor } from "utils/enums";
 
 type Props = {
   project: IProject;
@@ -21,6 +20,7 @@ export const Project = (props: Props) => {
     useService();
 
   const fromJSON = {
+    ...DEFAULT_PROJECT,
     ...props.project,
   } as any;
 

@@ -4,7 +4,9 @@ import { Custom, Icon } from "components";
 import { useApp, useTheme } from "contexts";
 import { Auxiliars, Conversions } from "helpers";
 import { ICategory, IComponent, IPriority, IProject, ITask } from "interfaces";
-import { EnumColor } from "utils/enums";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { Routes } from "utils";
+import { EnumColor, EnumModalType } from "utils/enums";
 
 type Props = {
   elm: ITask;
@@ -15,11 +17,21 @@ export const Task = ({ accent = false, ...props }: Props) => {
   const { theme } = useTheme();
   const { locale, t } = useApp();
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const bgColor = Conversions.fromEnumToValue(
     EnumColor,
     (props.elm.component as IComponent).color,
     theme.color.accent.color
   );
+
+  function navigateToTask() {
+    navigate({
+      pathname: location.pathname,
+      search: Routes.pages.task.popup(props.elm._id),
+    });
+  }
 
   return (
     <Stack
@@ -37,6 +49,7 @@ export const Task = ({ accent = false, ...props }: Props) => {
           size={theme.font.xs}
           weight={theme.font.normal}
           color={theme.palette.font.accent}
+          onClick={navigateToTask}
         >
           {props.elm.number}
         </Custom.Typography>

@@ -1,3 +1,4 @@
+import { Auxiliars } from "helpers";
 import { ICategory, IComponent, IJournal, IPriority, IState, ITask } from "interfaces";
 
 export interface IProject {
@@ -14,4 +15,20 @@ export interface IProject {
   createdAt: string;
   journal: IJournal[];
   tasks: ITask[];
+}
+
+export const DEFAULT_PROJECT: IProject = {
+  _id: Auxiliars.generateObjectId(),
+  name: "",
+  briefdescription: "",
+  deadline: "",
+  prefix: "",
+  components: [],
+  priority: "",
+  state: "",
+  category: "",
+  createdBy: "",
+  createdAt: "",
+  journal: [],
+  tasks: [],
 }

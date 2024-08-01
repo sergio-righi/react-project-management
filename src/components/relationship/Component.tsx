@@ -1,8 +1,7 @@
 import { Stack } from "@mui/material";
 import { Custom, DataGrid, Form } from "components";
 import { useApp, useTheme } from "contexts";
-import { Auxiliars } from "helpers";
-import { IComponent } from "interfaces";
+import { DEFAULT_COMPONENT, IComponent } from "interfaces";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -13,7 +12,7 @@ export const Component = (props: Props) => {
   const { t } = useApp();
   const { theme } = useTheme();
 
-  const [component, setComponent] = useState<IComponent>({} as IComponent);
+  const [component, setComponent] = useState<IComponent>(DEFAULT_COMPONENT);
   const [components, setComponents] = useState<IComponent[]>(
     [] as IComponent[]
   );
@@ -38,7 +37,7 @@ export const Component = (props: Props) => {
       }
     });
 
-    setComponent({} as IComponent);
+    setComponent(DEFAULT_COMPONENT);
   }
 
   return (

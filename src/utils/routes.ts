@@ -1,3 +1,5 @@
+import { EnumModalType } from "utils/enums"
+
 const aliases = {
   backlog: "/backlog",
   board: "/board",
@@ -14,9 +16,17 @@ const pages = {
   table: {
     index: ":project?"
   },
+  project: {
+    popup: (id?: string) => {
+      return id ? `?modal=${EnumModalType.Project}&id=${id}` : `?modal=${EnumModalType.Project}`
+    }
+  },
   task: {
     index: ":project?",
-    view: ":id"
+    view: ":id",
+    popup: (id?: string) => {
+      return id ? `?modal=${EnumModalType.Task}&id=${id}` : `?modal=${EnumModalType.Task}`
+    }
   }
 }
 

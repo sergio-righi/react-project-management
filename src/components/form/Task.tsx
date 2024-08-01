@@ -5,7 +5,7 @@ import { useForm } from "hooks";
 import { Constants, Enums } from "utils";
 import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import { Feedback, PairValue } from "types";
-import { ITask } from "interfaces";
+import { DEFAULT_TASK, ITask } from "interfaces";
 import { Auxiliars, Sanitizes, Validations } from "helpers";
 
 type Props = {
@@ -25,6 +25,7 @@ export const Task = (props: Props) => {
   } = useService();
 
   const fromJSON = {
+    ...DEFAULT_TASK,
     ...props.task,
   } as any;
 
