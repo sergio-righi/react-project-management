@@ -13,10 +13,14 @@
     "all": "All",
     "mine": "Mine"
   },
+  "header": {
+    "component": "Components"
+  },
   "label": {
     "assignees": "Assignees",
     "briefdescription": "Brief description",
     "category": "Category",
+    "color": "Color",
     "component": "Component",
     "deadline": "Deadline",
     "description": "Description",

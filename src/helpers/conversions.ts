@@ -1,5 +1,6 @@
 import { Constants } from "utils";
 import { Auxiliars, Checks, Combines, Sanitizes, Validations } from "helpers";
+import { PairValue } from "types";
 
 /**
  * function to convert date to ISO string with timezone
@@ -341,4 +342,14 @@ export const fromEnumToValue = (e: any, key: string, defaultValue: string): stri
   return e[
     key as keyof typeof e
   ] ?? defaultValue
+}
+
+/**
+ * function to return the values from a given enum
+ * @param {Enum} e the given enum
+ * @return {PairValue[]} the pair value arary
+ */
+
+export const fromEnumToPairValue = (e: any): PairValue[] => {
+  return Object.keys(e).map((key) => ({ key: key, value: key }));
 }

@@ -209,3 +209,25 @@ export const greeting = (): string => {
 export const get = <T>(array: T[], target: string): T => {
   return array.find((item: T) => (item as any)._id === target) as T;
 }
+
+/**
+ * function to generate ObjectId
+ * @returns {string} the string object id
+ */
+
+export const generateObjectId = () => {
+
+  function randomHex(length: number): string {
+    const hexChars = '0123456789abcdef';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += hexChars.charAt(Math.floor(Math.random() * 16));
+    }
+    return result;
+  }
+
+  const timestamp = Math.floor(Date.now() / 1000).toString(16);
+  const randomBytes = randomHex(16);
+
+  return timestamp + randomBytes;
+}

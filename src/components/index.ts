@@ -1,6 +1,7 @@
 export * as Common from './common'
 export * as Controller from './controller'
 export * as Custom from './custom'
+export * as DataGrid from './datagrid'
 export * as Dialog from './dialog'
 export * as Error from './error'
 export * as Form from './form'
@@ -12,3 +13,4 @@ export * as Modal from './modal'
 export * as Nav from './nav'
 export * as Placeholder from './placeholder'
 export * as Progress from './progress'
+export * as Relationship from "./relationship";

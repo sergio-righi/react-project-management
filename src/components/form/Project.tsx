@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import { Custom } from "components";
+import { Custom, Relationship } from "components";
 import { useApp, useService, useTheme } from "contexts";
 import { useForm } from "hooks";
 import { Constants, Enums } from "utils";
 import { Box, Grid } from "@mui/material";
 import { Feedback, PairValue } from "types";
-import { IProject } from "interfaces";
-import { Auxiliars, Sanitizes, Validations } from "helpers";
+import { IComponent, IProject } from "interfaces";
+import { Auxiliars, Conversions, Sanitizes, Validations } from "helpers";
+import { EnumColor } from "utils/enums";
 
 type Props = {
   project: IProject;
@@ -134,7 +135,7 @@ export const Project = (props: Props) => {
             value={state.briefdescription}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
           <Custom.TextField
             name="prefix"
             required={true}
@@ -143,7 +144,7 @@ export const Project = (props: Props) => {
             value={state.prefix}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
           <Custom.Select
             name="state"
             // required={true}
@@ -153,7 +154,7 @@ export const Project = (props: Props) => {
             onDropdownChange={onDropdownChange}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
           <Custom.Select
             name="priority"
             // required={true}
@@ -187,8 +188,13 @@ export const Project = (props: Props) => {
           />
         </Grid>
         <Grid item xs={12}>
+          <Relationship.Component
+            items={(props.project?.components ?? []) as IComponent[]}
+          />
+        </Grid>
+        <Grid item xs={12}>
           <Box>
-            <Custom.Button submit>{t.action.save}</Custom.Button>
+            <Custom.Button>{t.action.save}</Custom.Button>
           </Box>
         </Grid>
       </Grid>
