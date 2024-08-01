@@ -134,23 +134,23 @@ export const List = (props: Props) => {
             borderBottomLeftRadius: theme.border.radius,
             borderBottomRightRadius: theme.border.radius,
           }}
-          subheader={
-            <>
-              <ListSubheader
-                component="div"
-                sx={{
-                  fontWeight: theme.font.bold,
-                  color: theme.palette.font.accent,
-                  bgcolor: theme.palette.background.accent,
-                  borderTopLeftRadius: theme.border.radius,
-                  borderTopRightRadius: theme.border.radius,
-                }}
-              >
-                {props.title}
-              </ListSubheader>
-              <Custom.Divider />
-            </>
-          }
+          // subheader={
+          //   <>
+          //     <ListSubheader
+          //       component="div"
+          //       sx={{
+          //         fontWeight: theme.font.bold,
+          //         color: theme.palette.font.accent,
+          //         bgcolor: theme.palette.background.accent,
+          //         borderTopLeftRadius: theme.border.radius,
+          //         borderTopRightRadius: theme.border.radius,
+          //       }}
+          //     >
+          //       {props.title}
+          //     </ListSubheader>
+          //     <Custom.Divider />
+          //   </>
+          // }
         >
           {items.map((item: any, i: number) => (
             <ListItem

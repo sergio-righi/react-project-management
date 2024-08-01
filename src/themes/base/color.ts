@@ -7,7 +7,7 @@ import {
 
 export default {
   primary: { color: "#9A9A9A", text: "#ffffff" } as ColorSchema,
-  accent: { color: "#25765f", text: "#ffffff" } as ColorSchema,
+  accent: { color: "#6883BA", text: "#ffffff" } as ColorSchema,
   // accent: { color: "#12BB6E", text: "#ffffff" } as ColorSchema,
   secondary: { color: "#999999", text: "#ffffff" } as ColorSchema,
   status: {

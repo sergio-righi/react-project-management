@@ -36,7 +36,7 @@ export const Settings = () => {
       control={<></>}
     >
       <Grid container spacing={theme.spacing.sm}>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} md={4}>
           <Input.List
             label={t.label.category}
             title={t.label.category}
@@ -44,7 +44,7 @@ export const Settings = () => {
             value={categories}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} md={4}>
           <Input.List
             label={t.label.priority}
             title={t.label.priority}
@@ -52,7 +52,7 @@ export const Settings = () => {
             value={priorities}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} md={4}>
           <Input.List
             label={t.label.state}
             title={t.label.state}
