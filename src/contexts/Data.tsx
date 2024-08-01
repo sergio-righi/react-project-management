@@ -43,6 +43,8 @@ interface ProvidedValueType {
   setStates: (states: IState[]) => void;
   tasks: ITask[];
   setTasks: (tasks: ITask[]) => void;
+  users: IUser[];
+  setUsers: (users: IUser[]) => void;
 }
 
 const initialState = {
@@ -82,6 +84,8 @@ export const DataContext = createContext<ProvidedValueType>({
   setStates: () => {},
   tasks: initialState.array,
   setTasks: () => {},
+  users: initialState.array,
+  setUsers: () => {},
 });
 
 interface Props {
@@ -111,6 +115,7 @@ export const DataProvider = React.memo<Props>(({ children }) => {
   );
   const [states, setStates] = React.useState<IState[]>(initialState.array);
   const [tasks, setTasks] = React.useState<ITask[]>(initialState.array);
+  const [users, setUsers] = React.useState<IUser[]>(initialState.array);
 
   const setUserCallback = React.useCallback((newUser: IUser | null) => {
     setUser((currentUser: IUser | null) => {
@@ -203,6 +208,8 @@ export const DataProvider = React.memo<Props>(({ children }) => {
       setStates,
       tasks,
       setTasks,
+      users,
+      setUsers,
     };
     return value;
   }, [
@@ -221,6 +228,8 @@ export const DataProvider = React.memo<Props>(({ children }) => {
     task,
     tasks,
     user,
+    users,
+    setUsers,
   ]);
 
   return (

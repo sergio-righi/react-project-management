@@ -3,24 +3,41 @@ import { useData, useService } from "contexts";
 
 export const LoadData = ({ children }: { children: any }) => {
   const {
+    categoryService,
     filterService,
     flowService,
+    priorityService,
     projectService,
     stateService,
     taskService,
     userService,
   } = useService();
-  const { setFilters, setFlows, setProjects, setStates, setTasks, setUser } =
-    useData();
+  const {
+    setCategories,
+    setFilters,
+    setFlows,
+    setPriorities,
+    setProjects,
+    setStates,
+    setTasks,
+    setUser,
+    setUsers,
+  } = useData();
 
   useEffect(() => {
     fetchUser();
     fetchProject();
     fetchTask();
+    fetchCategory();
     fetchFilter();
     fetchFlow();
+    fetchPriority();
     fetchState();
   }, []);
+
+  async function fetchCategory() {
+    setCategories(await categoryService.categories());
+  }
 
   async function fetchFilter() {
     setFilters(await filterService.filters());
@@ -28,6 +45,10 @@ export const LoadData = ({ children }: { children: any }) => {
 
   async function fetchFlow() {
     setFlows(await flowService.flows());
+  }
+
+  async function fetchPriority() {
+    setPriorities(await priorityService.priorities());
   }
 
   async function fetchProject() {
@@ -45,6 +66,7 @@ export const LoadData = ({ children }: { children: any }) => {
   async function fetchUser() {
     const users = await userService.users();
     setUser(users[0]);
+    setUsers(users);
   }
 
   return children;

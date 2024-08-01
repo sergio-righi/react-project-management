@@ -11,48 +11,20 @@ export default () => {
     <BrowserRouter>
       <Routes>
         <Route path={Urls.aliases.board} element={<DefaultLayout />}>
-          <Route
-            path={Urls.pages.board.index}
-            element={
-              <LoadData>
-                <Board />
-              </LoadData>
-            }
-          />
+          <Route path={Urls.pages.board.index} element={<Board />} />
         </Route>
 
         <Route path={Urls.aliases.table} element={<DefaultLayout />}>
-          <Route
-            path={Urls.pages.table.index}
-            element={
-              <LoadData>
-                <Table />
-              </LoadData>
-            }
-          />
+          <Route path={Urls.pages.table.index} element={<Table />} />
         </Route>
 
         <Route path={Urls.aliases.task} element={<DefaultLayout />}>
-          <Route
-            path={Urls.pages.task.index}
-            element={
-              <LoadData>
-                <Task />
-              </LoadData>
-            }
-          />
+          <Route path={Urls.pages.task.index} element={<Task />} />
           <Route path={Urls.pages.task.view} element={<View />} />
         </Route>
 
         <Route path={Urls.aliases.backlog} element={<DefaultLayout />}>
-          <Route
-            index
-            element={
-              <LoadData>
-                <Backlog />
-              </LoadData>
-            }
-          />
+          <Route index element={<Backlog />} />
         </Route>
 
         <Route path={Urls.aliases.projects} element={<DefaultLayout />}>

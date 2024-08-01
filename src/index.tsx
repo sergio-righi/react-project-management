@@ -9,8 +9,6 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-// document.documentElement.setAttribute("theme", "dark");
-
 root.render(
   <AppProvider initLocale={"EN"}>
     <ThemeProvider initTheme={Dark}>

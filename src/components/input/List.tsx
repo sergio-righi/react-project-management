@@ -14,7 +14,7 @@ import {
 import { useTheme } from "contexts";
 import { Custom, Progress } from "components";
 import { Constants } from "utils";
-import { Validations } from "helpers";
+import { Auxiliars, Validations } from "helpers";
 
 // icons
 import {
@@ -22,12 +22,14 @@ import {
   CloseRounded,
   EditRounded,
   DeleteRounded,
+  SaveRounded,
 } from "@mui/icons-material";
 
 type Props = TextFieldProps & {
   label: string;
   title: string;
-  value: string[];
+  value: any[];
+  onChange: (value: any[]) => void;
 };
 
 export const List = (props: Props) => {
@@ -35,10 +37,10 @@ export const List = (props: Props) => {
 
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
   const [currentValue, setCurrentValue] = useState<string>("");
-  const [items, setItems] = useState<string[]>(props.value);
+  const [items, setItems] = useState<any[]>(props.value);
 
   useEffect(() => {
-    // setCurrentValue(props.value);
+    setItems(props.value);
   }, [props.value]);
 
   function handleInputChange(newValue: string) {
@@ -49,36 +51,38 @@ export const List = (props: Props) => {
     if (Validations.hasValue(currentValue)) {
       const updatedItems = [...items];
       if (currentIndex !== -1) {
-        updatedItems[currentIndex] = currentValue;
+        updatedItems[currentIndex] = {
+          ...updatedItems[currentIndex],
+          name: currentValue,
+        };
         setCurrentIndex(-1);
       } else {
-        updatedItems.push(currentValue);
+        const newItem: any = {
+          _id: Auxiliars.generateObjectId(),
+          name: currentValue,
+        };
+        updatedItems.push(newItem);
       }
       setItems(updatedItems);
       setCurrentValue("");
-      props.onChange &&
-        props.onChange({
-          target: { name: props.name, value: updatedItems },
-        } as any);
+      props.onChange && props.onChange(updatedItems);
     }
   }
 
   function handleDeleteItem(index: number) {
     const updatedItems = items.filter((_, i: number) => i !== index);
     setItems(updatedItems);
-    props.onChange &&
-      props.onChange({
-        target: { name: props.name, value: updatedItems },
-      } as any);
+    props.onChange && props.onChange(updatedItems);
   }
 
   function handleEditItem(index: number) {
-    setCurrentValue(items[index]);
+    setCurrentValue(items[index].name);
     setCurrentIndex(index);
   }
 
   function handleCancel() {
     setCurrentIndex(-1);
+    setCurrentValue("");
   }
 
   return (
@@ -100,14 +104,22 @@ export const List = (props: Props) => {
           endAdornment: (
             <InputAdornment position="end">
               {currentIndex === -1 && (
-                <IconButton aria-label="Add" onClick={handleAddItem}>
+                <Custom.IconButton
+                  aria-label="Add"
+                  onClick={handleAddItem}
+                  iconColor={theme.palette.font.accent}
+                >
                   <AddRounded />
-                </IconButton>
+                </Custom.IconButton>
               )}
               {currentIndex !== -1 && (
-                <IconButton aria-label="Reset" onClick={handleCancel}>
-                  <CloseRounded />
-                </IconButton>
+                <Custom.IconButton
+                  aria-label="Reset"
+                  onClick={handleCancel}
+                  iconColor={theme.palette.font.accent}
+                >
+                  <SaveRounded />
+                </Custom.IconButton>
               )}
             </InputAdornment>
           ),
@@ -117,49 +129,57 @@ export const List = (props: Props) => {
         <MUIList
           sx={{
             overflow: "hidden",
-            mt: theme.spacing.md,
             position: "relative",
+            mt: theme.spacing.md,
             borderBottomLeftRadius: theme.border.radius,
             borderBottomRightRadius: theme.border.radius,
           }}
           subheader={
-            <ListSubheader
-              component="div"
-              sx={{
-                bgcolor: theme.palette.background.accent,
-                borderTopLeftRadius: theme.border.radius,
-                borderTopRightRadius: theme.border.radius,
-              }}
-            >
-              {props.title}
-            </ListSubheader>
+            <>
+              <ListSubheader
+                component="div"
+                sx={{
+                  fontWeight: theme.font.bold,
+                  color: theme.palette.font.accent,
+                  bgcolor: theme.palette.background.accent,
+                  borderTopLeftRadius: theme.border.radius,
+                  borderTopRightRadius: theme.border.radius,
+                }}
+              >
+                {props.title}
+              </ListSubheader>
+              <Custom.Divider />
+            </>
           }
         >
-          {items.map((item: string, i: number) => (
+          {items.map((item: any, i: number) => (
             <ListItem
-              key={i}
+              key={item._id}
               divider
               sx={{
+                color: theme.palette.font.accent,
                 bgcolor: theme.palette.background.accent,
               }}
             >
-              <ListItemText primary={item} />
+              <ListItemText primary={item.name} />
               <ListItemSecondaryAction>
                 <Stack direction="row" spacing={theme.spacing.sm}>
-                  <IconButton
+                  <Custom.IconButton
                     edge="end"
                     aria-label="Edit"
                     onClick={() => handleEditItem(i)}
+                    iconColor={theme.palette.font.accent}
                   >
                     <EditRounded />
-                  </IconButton>
-                  <IconButton
+                  </Custom.IconButton>
+                  <Custom.IconButton
                     edge="end"
                     aria-label="Delete"
                     onClick={() => handleDeleteItem(i)}
+                    iconColor={theme.palette.font.accent}
                   >
                     <DeleteRounded />
-                  </IconButton>
+                  </Custom.IconButton>
                 </Stack>
               </ListItemSecondaryAction>
             </ListItem>

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Custom } from "components";
-import { useApp, useService, useTheme } from "contexts";
+import { useApp, useData, useService, useTheme } from "contexts";
 import { useForm } from "hooks";
 import { Constants, Enums } from "utils";
 import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import { Feedback, PairValue } from "types";
-import { DEFAULT_TASK, ITask } from "interfaces";
-import { Auxiliars, Sanitizes, Validations } from "helpers";
+import { DEFAULT_TASK, IComponent, IProject, ITask } from "interfaces";
+import { Auxiliars, Conversions, Sanitizes, Validations } from "helpers";
 
 type Props = {
   task: ITask;
@@ -16,6 +16,7 @@ type Props = {
 export const Task = (props: Props) => {
   const { theme } = useTheme();
   const { setFeedback, t } = useApp();
+  const { categories, priorities, projects, states, users } = useData();
   const {
     categoryService,
     priorityService,
@@ -38,6 +39,8 @@ export const Task = (props: Props) => {
     },
   };
 
+  const [components, setComponents] = useState<IComponent[]>([]);
+
   const [validationState, setValidationState] = useState({
     deadline: validation.deadline.valid,
   });
@@ -50,30 +53,16 @@ export const Task = (props: Props) => {
     updateCallback
   );
 
-  const [users, setUsers] = useState<PairValue[]>([]);
-  const [states, setStates] = useState<PairValue[]>([]);
-  const [projects, setProjects] = useState<PairValue[]>([]);
-  const [components, setComponents] = useState<PairValue[]>([]);
-  const [categories, setCategories] = useState<PairValue[]>([]);
-  const [priorities, setPriorities] = useState<PairValue[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setCategories(await categoryService.asPairValue());
-      setPriorities(await priorityService.asPairValue());
-      setStates(await stateService.asPairValue());
-      setProjects(await projectService.asPairValue());
-      setUsers(await userService.asPairValue());
-    };
-    fetchData();
-  }, []);
-
   useEffect(() => setState(fromJSON), [props.task]);
 
   async function onProjectChange(event: SelectChangeEvent<string>) {
-    setComponents(
-      await projectService.componentsAsPairValue(event.target.value as string)
+    const project = projects.find(
+      (item: IProject) => item._id === (event.target.value as string)
     );
+
+    if (project) {
+      setComponents(project.components);
+    }
 
     onDropdownChange(event);
   }
@@ -157,7 +146,7 @@ export const Task = (props: Props) => {
             // required={true}
             label={t.label.state}
             value={state.state}
-            items={states}
+            items={Conversions.toPairValue(states)}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -167,7 +156,7 @@ export const Task = (props: Props) => {
             // required={true}
             label={t.label.priority}
             value={state.priority}
-            items={priorities}
+            items={Conversions.toPairValue(priorities)}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -177,7 +166,7 @@ export const Task = (props: Props) => {
             // required={true}
             label={t.label.category}
             value={state.category}
-            items={categories}
+            items={Conversions.toPairValue(categories)}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -187,7 +176,7 @@ export const Task = (props: Props) => {
             // required={true}
             label={t.label.project}
             value={state.project}
-            items={projects}
+            items={Conversions.toPairValue(projects)}
             onDropdownChange={onProjectChange}
           />
         </Grid>
@@ -197,7 +186,7 @@ export const Task = (props: Props) => {
             // required={true}
             label={t.label.component}
             value={state.component}
-            items={components}
+            items={Conversions.toPairValue(components)}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -208,7 +197,7 @@ export const Task = (props: Props) => {
             // required={true}
             label={t.label.assignees}
             value={state.assignees as string[]}
-            items={users}
+            items={Conversions.toPairValue(users)}
             onDropdownChange={onDropdownChange}
           />
         </Grid>

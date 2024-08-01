@@ -353,3 +353,13 @@ export const fromEnumToValue = (e: any, key: string, defaultValue: string): stri
 export const fromEnumToPairValue = (e: any): PairValue[] => {
   return Object.keys(e).map((key) => ({ key: key, value: key }));
 }
+
+/**
+ * function to return the given object array to pair value array
+ * @param {any[]} arr the given object array
+ * @return {PairValue[]} the pair value arary
+ */
+
+export const toPairValue = (arr: any[], key: string = "name"): PairValue[] => {
+  return arr.map((item) => ({ key: item._id, value: item[key] }));
+}

@@ -6,26 +6,29 @@ import { DataProvider, ServiceProvider, useTheme } from "contexts";
 import { ThemeProvider } from "@mui/material/styles";
 import { Themes } from "utils";
 import { Common, Nav } from "components";
+import { LoadData } from "middlewares";
 
 export const DefaultLayout = () => {
   const { theme } = useTheme();
 
   return (
-    <ServiceProvider>
-      <ThemeProvider theme={Themes.defaultTheme(theme)}>
+    <ThemeProvider theme={Themes.defaultTheme(theme)}>
+      <ServiceProvider>
         <DataProvider>
-          <Common.Popup />
-          <Stack
-            height="1"
-            direction="row"
-            bgcolor={theme.palette.background.color}
-          >
-            <Nav.Navbar />
-            <Outlet />
-            <Common.Footer />
-          </Stack>
+          <LoadData>
+            <Common.Popup />
+            <Stack
+              height="1"
+              direction="row"
+              bgcolor={theme.palette.background.color}
+            >
+              <Nav.Navbar />
+              <Outlet />
+              <Common.Footer />
+            </Stack>
+          </LoadData>
         </DataProvider>
-      </ThemeProvider>
-    </ServiceProvider>
+      </ServiceProvider>
+    </ThemeProvider>
   );
 };

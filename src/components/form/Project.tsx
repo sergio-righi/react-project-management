@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Custom, Relationship } from "components";
-import { useApp, useService, useTheme } from "contexts";
+import { useApp, useData, useService, useTheme } from "contexts";
 import { useForm } from "hooks";
 import { Constants, Enums } from "utils";
 import { Box, Grid } from "@mui/material";
@@ -16,8 +16,7 @@ type Props = {
 export const Project = (props: Props) => {
   const { theme } = useTheme();
   const { setFeedback, t } = useApp();
-  const { categoryService, priorityService, projectService, stateService } =
-    useService();
+  const { categories, priorities, states } = useData();
 
   const fromJSON = {
     ...DEFAULT_PROJECT,
@@ -44,22 +43,6 @@ export const Project = (props: Props) => {
     submitCallback,
     updateCallback
   );
-
-  const [states, setStates] = useState<PairValue[]>([]);
-  const [projects, setProjects] = useState<PairValue[]>([]);
-  const [components, setComponents] = useState<PairValue[]>([]);
-  const [categories, setCategories] = useState<PairValue[]>([]);
-  const [priorities, setPriorities] = useState<PairValue[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setCategories(await categoryService.asPairValue());
-      setPriorities(await priorityService.asPairValue());
-      setStates(await stateService.asPairValue());
-      setProjects(await projectService.asPairValue());
-    };
-    fetchData();
-  }, []);
 
   useEffect(() => setState(fromJSON), [props.project]);
 
@@ -146,11 +129,11 @@ export const Project = (props: Props) => {
         </Grid>
         <Grid item xs={12} sm={4}>
           <Custom.Select
-            name="state"
+            name="category"
             // required={true}
-            label={t.label.state}
-            value={state.state}
-            items={states}
+            label={t.label.category}
+            value={state.category}
+            items={Conversions.toPairValue(categories)}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -160,17 +143,17 @@ export const Project = (props: Props) => {
             // required={true}
             label={t.label.priority}
             value={state.priority}
-            items={priorities}
+            items={Conversions.toPairValue(priorities)}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Custom.Select
-            name="category"
+            name="state"
             // required={true}
-            label={t.label.category}
-            value={state.category}
-            items={categories}
+            label={t.label.state}
+            value={state.state}
+            items={Conversions.toPairValue(states)}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -187,11 +170,11 @@ export const Project = (props: Props) => {
             value={state.deadline}
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Relationship.Component
             items={(props.project?.components ?? []) as IComponent[]}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <Box>
             <Custom.Button>{t.action.save}</Custom.Button>
