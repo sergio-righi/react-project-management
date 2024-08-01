@@ -1,21 +1,13 @@
 import { Grid, Stack } from "@mui/material";
 import { Common, Kanban } from "components";
-import { useApp, useService, useTheme } from "contexts";
+import { useApp, useData, useService, useTheme } from "contexts";
 import { IProject } from "interfaces";
 import { useEffect, useState } from "react";
 
 export const Project = () => {
   const { t } = useApp();
   const { theme } = useTheme();
-  const { projectService } = useService();
-  const [projects, setProjects] = useState<IProject[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setProjects(await projectService.projects());
-    };
-    fetchData();
-  }, []);
+  const { projects } = useData();
 
   return (
     <Common.Page
