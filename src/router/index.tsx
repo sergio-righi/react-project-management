@@ -11,7 +11,7 @@ export default () => {
     <BrowserRouter>
       <Routes>
         <Route path={Urls.aliases.board} element={<DefaultLayout />}>
-          <Route path={Urls.pages.board.index} element={<Board />} />
+          <Route index element={<Board />} />
         </Route>
 
         <Route path={Urls.aliases.table} element={<DefaultLayout />}>

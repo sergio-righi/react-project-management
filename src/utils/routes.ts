@@ -2,7 +2,7 @@ import { EnumModalType } from "utils/enums"
 
 const aliases = {
   backlog: "/backlog",
-  board: "/board",
+  board: "/",
   table: "/table",
   task: "/tasks",
   projects: "/projects",
