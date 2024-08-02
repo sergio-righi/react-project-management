@@ -6,7 +6,6 @@ import { useApp, useData, useTheme } from "contexts";
 import { IFilter, IFlow, IProject, ITask } from "interfaces";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { BoardType } from "types";
-import { ORM } from "utils";
 
 export const Board = () => {
   const { t } = useApp();
@@ -159,7 +158,7 @@ export const Board = () => {
               <Grid key={item.flow._id} item xs>
                 <Kanban.Board label={item.flow.name}>
                   <Droppable droppableId={item.flow._id}>
-                    {(provided, snapshot) => (
+                    {(provided: any, snapshot: any) => (
                       <Stack
                         height="1"
                         ref={provided.innerRef}
@@ -178,7 +177,7 @@ export const Board = () => {
                               key={subitem._id}
                               draggableId={subitem._id}
                             >
-                              {(provided, snapshot) => (
+                              {(provided: any, snapshot: any) => (
                                 <Box
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}

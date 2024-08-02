@@ -64,7 +64,7 @@ export const Table = (props: Props) => {
       <DragDropContext onDragEnd={onDragEnd}>
         {tasks.length > 0 && (
           <Droppable droppableId={props.id}>
-            {(provided, snapshot) => (
+            {(provided: any, snapshot: any) => (
               <Grid
                 container
                 width="1"
@@ -74,7 +74,7 @@ export const Table = (props: Props) => {
                 {tasks.map((item: ITask, i: number) => {
                   return (
                     <Draggable index={i} key={item._id} draggableId={item._id}>
-                      {(provided, snapshot) => (
+                      {(provided: any, snapshot: any) => (
                         <Grid
                           key={item._id}
                           item
