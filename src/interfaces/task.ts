@@ -3,7 +3,7 @@ import { ICategory, IComponent, IFlow, IJournal, IPriority, IProject, IState, IU
 
 export interface ITask {
   _id: string;
-  number: string;
+  number: string | number;
   title: string;
   description: string;
   deadline: string;
@@ -24,7 +24,7 @@ export interface ITask {
 }
 
 export const DEFAULT_TASK = {
-  _id: Auxiliars.generateObjectId(),
+  _id: "",
   number: "",
   title: "",
   description: "",

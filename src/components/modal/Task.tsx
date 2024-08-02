@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Custom, Form, Progress } from "components";
-import { useApp, useService } from "contexts";
+import { useApp, useData, useService } from "contexts";
 import { DEFAULT_TASK, ITask } from "interfaces";
 import { SxProps } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
@@ -13,21 +13,22 @@ type Props = {
 
 export const Task = (props: Props) => {
   const { t } = useApp();
-  const { taskService } = useService();
+  const { tasks } = useData();
 
   const [searchParams] = useSearchParams();
   const [loaded, setLoaded] = useState<boolean>(true);
   const [task, setTask] = useState<ITask>(DEFAULT_TASK);
 
-  const modalTitle = `${task?._id ? t.action.edit : t.action.add} ${
-    t.label.task
-  }`;
+  const modalTitle = `${
+    searchParams.get("id") ? t.action.edit : t.action.add
+  } ${t.label.task}`;
 
   useEffect(() => {
     const fetchData = async () => {
       const id = searchParams.get("id");
       if (id) {
-        setTask(await taskService.find(id));
+        const response = tasks.find((item: ITask) => item._id === id);
+        if (response) setTask(response);
       } else {
         setTask(DEFAULT_TASK);
       }

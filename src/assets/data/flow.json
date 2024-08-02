@@ -1,73 +1,22 @@
 [
   {
     "_id": "6573bf0bb8ad6b408b5c1426",
-    "name": "Planning",
-    "briefdescription": "Define project scope, objectives, and requirements in collaboration with stakeholders",
-    "states": {
-      "0": "6573c26025d0612aeb11c1e9",
-      "1": "6573c26a87264af48763a923",
-      "2": "6573c28fdf40bab61647cb0c",
-      "3": "6573c281069ba1ba66009d43",
-      "4": "6573c26ecce5bbdafa52a8ca"
-    }
+    "name": "Review"
   },
   {
     "_id": "6573bf11005cf9bc715f7230",
-    "name": "Analysis",
-    "briefdescription": "Create high-level and low-level design specifications",
-    "states": {
-      "0": "6575e5f0a71cef76aa96b966",
-      "1": "6573c26a87264af48763a923",
-      "2": "6573c281069ba1ba66009d43",
-      "3": "6573c28fdf40bab61647cb0c",
-      "4": "6573c26ecce5bbdafa52a8ca"
-    }
+    "name": "To do"
   },
   {
-    "_id": "6573bf165027c0a814939aa3",
-    "name": "Design",
-    "briefdescription": "UI/UX Designer",
-    "states": {
-      "0": "6575e5f0a71cef76aa96b966",
-      "1": "6573c285c2522e89053e2d7a",
-      "2": "6573c26a87264af48763a923",
-      "3": "6575e685da095ef7023e8d33",
-      "4": "6573c26ecce5bbdafa52a8ca"
-    }
+    "_id": "66ac4067fb77b4c397f5ca5e",
+    "name": "Blocker/Awaiting"
   },
   {
     "_id": "6573bf1c890d1e52f102864d",
-    "name": "Implementation",
-    "briefdescription": "Software Developer",
-    "states": {
-      "0": "6575e5f0a71cef76aa96b966",
-      "1": "6573c285c2522e89053e2d7a",
-      "2": "6573c26a87264af48763a923",
-      "3": "6573c27c3a53800eab2b9ffd",
-      "4": "6573c26ecce5bbdafa52a8ca"
-    }
+    "name": "In progress"
   },
   {
     "_id": "6573bf222f2d0576b97cbada",
-    "name": "Testing",
-    "briefdescription": "Conduct various testing activities, including unit testing, integration testing, system testing, and acceptance testing",
-    "states": {
-      "0": "6575e5f0a71cef76aa96b966",
-      "1": "6573c26a87264af48763a923",
-      "2": "6573c2654022bd4fe3a6da45",
-      "3": "6575e685da095ef7023e8d33",
-      "4": "6573c26ecce5bbdafa52a8ca"
-    }
-  },
-  {
-    "_id": "6573bf2643012be87dff251f",
-    "name": "Deployment",
-    "briefdescription": "Manage the deployment process and ensure smooth transitions between development and production environments",
-    "states": {
-      "0": "6575e5f0a71cef76aa96b966",
-      "1": "6575e685da095ef7023e8d33",
-      "2": "6573c281069ba1ba66009d43",
-      "3": "6573c26ecce5bbdafa52a8ca"
-    }
+    "name": "Testing"
   }
 ]

@@ -25,12 +25,12 @@ export const LoadData = ({ children }: { children: any }) => {
   } = useData();
 
   useEffect(() => {
-    fetchUser();
+    fetchFlow();
     fetchProject();
     fetchTask();
+    fetchUser();
     fetchCategory();
     fetchFilter();
-    fetchFlow();
     fetchPriority();
     fetchState();
   }, []);

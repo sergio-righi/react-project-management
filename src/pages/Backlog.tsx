@@ -7,25 +7,11 @@ import { useEffect, useState } from "react";
 export const Backlog = () => {
   const { t } = useApp();
   const { theme } = useTheme();
-  const { getTasks, project, projects, setProject, states } = useData();
-  const [tasks, setTasks] = useState<ITask[]>([]);
-
-  useEffect(() => {
-    // TODO : it has to be improved
-    const stateCondition = states
-      .filter((item: IState) => item.name === "Draft")
-      .map((item: IState) => item._id);
-    const tasks = getTasks().filter(
-      (item: ITask) =>
-        stateCondition.includes((item.state as IState)._id) &&
-        ((item.project as IProject)._id === project || project === "")
-    );
-    setTasks(tasks);
-  }, [project]);
+  const { getBacklog, project, projects, setProject, states } = useData();
 
   return (
     <Common.Page
-      header={t.title.table}
+      header={t.title.backlog}
       subheader={"Lorem ipsum dolor sit amet"}
       control={
         <>
@@ -59,7 +45,7 @@ export const Backlog = () => {
       <Kanban.Table
         id="abc"
         title={"Lorem ipsum dolor sit amet"}
-        elms={tasks}
+        elms={getBacklog()}
       />
     </Common.Page>
   );

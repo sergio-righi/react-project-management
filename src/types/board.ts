@@ -1,6 +1,6 @@
-import { IState, ITask } from "interfaces";
+import { IFlow, ITask } from "interfaces";
 
 export interface BoardType {
   tasks: ITask[];
-  state: IState;
+  flow: IFlow;
 }

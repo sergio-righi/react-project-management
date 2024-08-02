@@ -14,14 +14,12 @@ import { Auxiliars } from "helpers";
 
 interface ProvidedValueType {
   getBoard: () => BoardType[];
-  getFlow: () => IFlow;
   getProject: () => IProject;
   getTasks: () => ITask[];
+  getBacklog: () => ITask[];
   // session
   filter: string;
   setFilter: (filter: string) => void;
-  flow: string;
-  setFlow: (flow: string) => void;
   project: string;
   setProject: (project: string) => void;
   task: string;
@@ -55,14 +53,12 @@ const initialState = {
 
 export const DataContext = createContext<ProvidedValueType>({
   getBoard: () => initialState.array as BoardType[],
-  getFlow: () => ({} as IFlow),
   getProject: () => ({} as IProject),
   getTasks: () => initialState.array as ITask[],
+  getBacklog: () => initialState.array as ITask[],
   // session
   filter: initialState.empty,
   setFilter: () => {},
-  flow: initialState.empty,
-  setFlow: () => {},
   project: initialState.empty,
   setProject: () => {},
   task: initialState.empty,
@@ -93,11 +89,7 @@ interface Props {
 }
 
 export const DataProvider = React.memo<Props>(({ children }) => {
-  const [environment, setEnvironment] = React.useState<string>(
-    initialState.empty
-  );
   const [filter, setFilter] = React.useState<string>(initialState.empty);
-  const [flow, setFlow] = React.useState<string>(initialState.empty);
   const [project, setProject] = React.useState<string>(initialState.empty);
   const [task, setTask] = React.useState<string>(initialState.empty);
   const [user, setUser] = React.useState<IUser | null>(initialState.obj);
@@ -117,23 +109,6 @@ export const DataProvider = React.memo<Props>(({ children }) => {
   const [tasks, setTasks] = React.useState<ITask[]>(initialState.array);
   const [users, setUsers] = React.useState<IUser[]>(initialState.array);
 
-  const setUserCallback = React.useCallback((newUser: IUser | null) => {
-    setUser((currentUser: IUser | null) => {
-      if (newUser) {
-        setFlow((newUser.flows[0] as IFlow)._id);
-      }
-      return newUser;
-    });
-  }, []);
-
-  /**
-   * function to return the flow object
-   */
-
-  const getFlow = React.useCallback(() => {
-    return Auxiliars.get<IFlow>(flows, flow);
-  }, [flow]);
-
   /**
    * function to return the project object
    */
@@ -142,58 +117,66 @@ export const DataProvider = React.memo<Props>(({ children }) => {
     return project === ""
       ? ({} as IProject)
       : Auxiliars.get<IProject>(projects, project);
-  }, [project]);
+  }, [projects, project]);
 
   /**
    * function to return the filtered tasks
    */
 
   const getTasks = React.useCallback(() => {
-    if (!flow || !user) return [] as ITask[];
-
     return tasks?.filter(
       (item: ITask) =>
-        (item.flow as IFlow)._id === flow &&
+        item.flow !== "" &&
+        Object.keys(item.flow).length > 0 &&
         ((item.project as IProject)._id === project ||
           project === initialState.empty)
     );
-  }, [flow, project]);
+  }, [tasks, project]);
+
+  /**
+   * function to return the backlog tasks
+   */
+
+  const getBacklog = React.useCallback(() => {
+    console.log(tasks);
+    return tasks?.filter(
+      (item: ITask) =>
+        item.flow !== "" &&
+        Object.keys(item.flow).length === 0 &&
+        ((item.project as IProject)._id === project ||
+          project === initialState.empty)
+    );
+  }, [tasks, project]);
 
   /**
    * function to return the filtered tasks
    */
 
   const getBoard = React.useCallback(() => {
-    if (!flow || !user) return [] as BoardType[];
-
-    const states = Auxiliars.get<IFlow>(user?.flows as any, flow).states ?? [];
-
-    return (states as IState[]).map((state: string | IState) => {
+    return (flows as IFlow[]).map((flow: string | IFlow) => {
       const boardItem = {} as BoardType;
-      boardItem.state = state as IState;
+      boardItem.flow = flow as IFlow;
       boardItem.tasks = getTasks().filter(
-        (item: ITask) => (item.state as IState)._id === (state as IState)._id
+        (item: ITask) => (item.flow as IFlow)._id === (flow as IFlow)._id
       );
       return boardItem;
     }) as BoardType[];
-  }, [flow, project, user]);
+  }, [flows, tasks, project]);
 
   const MemoizedValue = React.useMemo(() => {
     const value: ProvidedValueType = {
       getBoard,
-      getFlow,
       getProject,
       getTasks,
+      getBacklog,
       filter,
       setFilter,
-      flow,
-      setFlow,
       project,
       setProject,
       task,
       setTask,
       user,
-      setUser: setUserCallback,
+      setUser,
       categories,
       setCategories,
       filters,
@@ -214,12 +197,12 @@ export const DataProvider = React.memo<Props>(({ children }) => {
     return value;
   }, [
     getBoard,
-    getFlow,
+    getProject,
     getTasks,
+    getBacklog,
     categories,
     filter,
     filters,
-    flow,
     flows,
     priorities,
     project,

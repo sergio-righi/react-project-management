@@ -1,7 +1,7 @@
 [
   {
     "_id": "6573c33ee0b3d31dee1c1c72",
-    "number": "1",
+    "number": 1,
     "title": "Improve Login Page",
     "description": "Enhance the user interface of the login page for better accessibility.",
     "deadline": "2023-12-15",
@@ -51,7 +51,7 @@
   },
   {
     "_id": "6573c341e5ab02fcdbda4c29",
-    "number": "2",
+    "number": 2,
     "title": "Fix Bug in User Profile",
     "description": "Investigate and resolve a bug affecting the user profile functionality.",
     "deadline": "2023-12-18",
@@ -101,7 +101,7 @@
   },
   {
     "_id": "6573c34d1bbfe5db518b8627",
-    "number": "3",
+    "number": 3,
     "title": "Create Dashboard Widgets",
     "description": "Design and implement widgets for the project dashboard.",
     "deadline": "2023-12-22",
@@ -151,7 +151,7 @@
   },
   {
     "_id": "6573c358d2a64bfecc9d60c3",
-    "number": "4",
+    "number": 4,
     "title": "Enhance User Permissions",
     "description": "Improve the user permissions system for better security and access control.",
     "deadline": "2023-12-28",
@@ -201,7 +201,7 @@
   },
   {
     "_id": "6573c360c53c482ed1c15525",
-    "number": "5",
+    "number": 5,
     "title": "Implement Search Functionality",
     "description": "Integrate a powerful search feature to enhance user experience.",
     "deadline": "2025-01-05",
@@ -251,7 +251,7 @@
   },
   {
     "_id": "6573c36975d1ebe903cd1f0e",
-    "number": "6",
+    "number": 6,
     "title": "Optimize Database Queries",
     "description": "Identify and optimize slow-performing database queries for better application performance.",
     "deadline": "2025-01-10",
@@ -301,7 +301,7 @@
   },
   {
     "_id": "6573c37174a3b2fb2607681e",
-    "number": "7",
+    "number": 7,
     "title": "Implement OAuth Integration",
     "description": "Integrate OAuth authentication for enhanced security and user authentication.",
     "deadline": "2025-01-15",
@@ -351,7 +351,7 @@
   },
   {
     "_id": "6573c378e6a5eb77b86a89c6",
-    "number": "8",
+    "number": 8,
     "title": "Enhance User Notifications",
     "description": "Improve the notification system to keep users informed about important events.",
     "deadline": "2025-01-20",
@@ -401,7 +401,7 @@
   },
   {
     "_id": "6575da12b9af8a72f4bcff09",
-    "number": "9",
+    "number": 9,
     "title": "Implement Feature X",
     "description": "Add new functionality to improve user experience.",
     "deadline": "2023-12-31",

@@ -12,7 +12,7 @@ export class UserData implements IUserData {
 
   async users(): Promise<ApiResponse<IUser[]>> {
     return await Auxiliars.asyncMethod(() => ({
-      status: Enums.EnumResponse.Success, payload: Users.map((item: IUser) => ORM.populateUser(item))
+      status: Enums.EnumResponse.Success, payload: Users
     }));
   }
 }

@@ -7,6 +7,7 @@ export interface IProject {
   briefdescription: string;
   deadline: string;
   prefix: string;
+  count: number;
   components: IComponent[];
   priority: string | IPriority;
   state: string | IState;
@@ -18,11 +19,12 @@ export interface IProject {
 }
 
 export const DEFAULT_PROJECT: IProject = {
-  _id: Auxiliars.generateObjectId(),
+  _id: "",
   name: "",
   briefdescription: "",
   deadline: "",
   prefix: "",
+  count: 1,
   components: [],
   priority: "",
   state: "",

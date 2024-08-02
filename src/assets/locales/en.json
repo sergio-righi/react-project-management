@@ -25,6 +25,7 @@
     "deadline": "Deadline",
     "description": "Description",
     "estimatedTime": "Estimated Time",
+    "flow": "Flow",
     "name": "Name",
     "prefix": "Prefix",
     "priority": "Priority",

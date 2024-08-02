@@ -12,7 +12,7 @@ export class FlowData implements IFlowData {
 
   async flows(): Promise<ApiResponse<IFlow[]>> {
     return await Auxiliars.asyncMethod(() => ({
-      status: Enums.EnumResponse.Success, payload: Flows.map((item: IFlow) => ORM.populateFlow(item))
+      status: Enums.EnumResponse.Success, payload: Flows
     }));
   }
 }

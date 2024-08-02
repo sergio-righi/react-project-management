@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Custom, Relationship } from "components";
 import { useApp, useData, useService, useTheme } from "contexts";
 import { useForm } from "hooks";
-import { Constants, Enums } from "utils";
+import { Constants, Enums, ORM } from "utils";
 import { Box, Grid } from "@mui/material";
 import { Feedback, PairValue } from "types";
 import { DEFAULT_PROJECT, IComponent, IProject } from "interfaces";
@@ -16,7 +16,7 @@ type Props = {
 export const Project = (props: Props) => {
   const { theme } = useTheme();
   const { setFeedback, t } = useApp();
-  const { categories, priorities, states } = useData();
+  const { categories, priorities, projects, states, setProjects } = useData();
 
   const fromJSON = {
     ...DEFAULT_PROJECT,
@@ -40,17 +40,17 @@ export const Project = (props: Props) => {
   const { onChange, onDropdownChange, onSubmit } = useForm(
     {},
     undefined,
-    submitCallback,
+    undefined,
     updateCallback
   );
 
   useEffect(() => setState(fromJSON), [props.project]);
 
-  function toJSON(task: any) {
-    return Auxiliars.removeFromObject({
-      ...task,
-    } as any);
-  }
+  // function toJSON(task: any) {
+  //   return Auxiliars.removeFromObject({
+  //     ...task,
+  //   } as any);
+  // }
 
   function updateCallback(name: string, value: any) {
     if (name in state) {
@@ -58,47 +58,56 @@ export const Project = (props: Props) => {
     }
   }
 
-  async function submitCallback() {
-    const response = toJSON(state);
-    console.log(response);
-
+  async function handleOnSubmit() {
     let newValidationState: any = {};
 
     let valid = true;
 
-    // let name: keyof typeof validation;
-    // for (name in validation) {
-    //   if (response.hasOwnProperty(name)) {
-    //     if (validation[name].callback((response as any)[name])) {
-    //       newValidationState[name] = validation[name].valid;
-    //     } else {
-    //       newValidationState[name] = validation[name].invalid;
-    //       valid = false;
-    //     }
-    //   }
-    // }
+    let name: keyof typeof validation;
+    for (name in validation) {
+      if (state.hasOwnProperty(name)) {
+        if (validation[name].callback(state[name])) {
+          newValidationState[name] = validation[name].valid;
+        } else {
+          newValidationState[name] = validation[name].invalid;
+          valid = false;
+        }
+      }
+    }
 
     setValidationState(newValidationState);
 
     if (!valid) return;
 
-    // const response = await projectService.update(toJSON(state));
-    // if (response) {
-    //   setFeedback({
-    //     message: t.message.feedback.request_success,
-    //     severity: Enums.EnumFeedback.Success,
-    //   } as Feedback);
-    //   props.onSubmit && props.onSubmit();
-    // } else {
-    //   setFeedback({
-    //     message: t.message.feedback.request_error,
-    //     severity: Enums.EnumFeedback.Error,
-    //   } as Feedback);
-    // }
+    if (state) {
+      const index = projects.findIndex(
+        (item: IProject) => item._id === state._id
+      );
+      if (index !== -1) {
+        const updatedProjects = [...projects] as IProject[];
+        updatedProjects[index] = state;
+        setProjects(updatedProjects);
+      } else {
+        const response = ORM.populateProject(state as IProject);
+        response._id = Auxiliars.generateObjectId();
+        setProjects([...projects, response] as IProject[]);
+      }
+
+      // setFeedback({
+      //   message: t.message.feedback.request_success,
+      //   severity: Enums.EnumFeedback.Success,
+      // } as Feedback);
+      props.onSubmit && props.onSubmit();
+    } else {
+      // setFeedback({
+      //   message: t.message.feedback.request_error,
+      //   severity: Enums.EnumFeedback.Error,
+      // } as Feedback);
+    }
   }
 
   return (
-    <Box component="form" onSubmit={onSubmit}>
+    <Box component="form">
       <Grid container spacing={theme.spacing.sm}>
         <Grid item xs={12}>
           <Custom.TextField
@@ -132,7 +141,7 @@ export const Project = (props: Props) => {
             name="category"
             // required={true}
             label={t.label.category}
-            value={state.category}
+            value={state.category._id}
             items={Conversions.toPairValue(categories)}
             onDropdownChange={onDropdownChange}
           />
@@ -142,7 +151,7 @@ export const Project = (props: Props) => {
             name="priority"
             // required={true}
             label={t.label.priority}
-            value={state.priority}
+            value={state.priority._id}
             items={Conversions.toPairValue(priorities)}
             onDropdownChange={onDropdownChange}
           />
@@ -152,7 +161,7 @@ export const Project = (props: Props) => {
             name="state"
             // required={true}
             label={t.label.state}
-            value={state.state}
+            value={state.state._id}
             items={Conversions.toPairValue(states)}
             onDropdownChange={onDropdownChange}
           />
@@ -160,7 +169,6 @@ export const Project = (props: Props) => {
         <Grid item xs={12} sm={6}>
           <Custom.TextField
             name="deadline"
-            required={true}
             error={validationState.deadline.error}
             helperText={validationState.deadline.helperText}
             onChange={onChange}
@@ -177,7 +185,9 @@ export const Project = (props: Props) => {
         </Grid> */}
         <Grid item xs={12}>
           <Box>
-            <Custom.Button>{t.action.save}</Custom.Button>
+            <Custom.Button onClick={handleOnSubmit}>
+              {t.action.save}
+            </Custom.Button>
           </Box>
         </Grid>
       </Grid>

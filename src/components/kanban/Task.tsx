@@ -2,7 +2,7 @@ import { Box, Stack } from "@mui/material";
 import { UserAvatar } from "assets/images";
 import { Custom, Icon } from "components";
 import { useApp, useTheme } from "contexts";
-import { Auxiliars, Conversions } from "helpers";
+import { Auxiliars, Conversions, Sanitizes } from "helpers";
 import { ICategory, IComponent, IPriority, IProject, ITask } from "interfaces";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Routes } from "utils";
@@ -51,7 +51,10 @@ export const Task = ({ accent = false, ...props }: Props) => {
           color={theme.palette.font.accent}
           onClick={navigateToTask}
         >
-          {props.elm.number}
+          {Sanitizes.toUniqueNumber(
+            (props.elm.project as IProject).prefix,
+            props.elm.number.toString()
+          )}
         </Custom.Typography>
         <Custom.Typography
           size={theme.font.sm}

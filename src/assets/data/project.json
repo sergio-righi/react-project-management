@@ -5,6 +5,7 @@
     "briefdescription": "Represents a problem that needs to be fixed",
     "deadline": "2025-01-10",
     "prefix": "WATCH",
+    "count": 9,
     "components": [
       {
         "_id": "66a4f3505de9d53b49700da7",
@@ -33,6 +34,7 @@
     "briefdescription": "Represents a problem that needs to be fixed",
     "deadline": "2025-01-10",
     "prefix": "SECURE",
+    "count": 5,
     "components": [
       {
         "_id": "66a4f35ba21a23b6db39d66f",

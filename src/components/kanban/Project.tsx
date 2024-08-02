@@ -19,7 +19,7 @@ export const Project = ({ accent = false, ...props }: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  function navigateToTask() {
+  function navigateToProject() {
     navigate({
       pathname: location.pathname,
       search: Routes.pages.project.popup(props.elm._id),
@@ -43,14 +43,23 @@ export const Project = ({ accent = false, ...props }: Props) => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Custom.Typography
-          size={theme.font.sm}
-          className="o-ellipsis"
-          weight={theme.font.bold}
-          onClick={navigateToTask}
-        >
-          {props.elm.name}
-        </Custom.Typography>
+        <Stack width={1} direction="column">
+          <Custom.Typography
+            size={theme.font.xs}
+            weight={theme.font.normal}
+            color={theme.palette.font.accent}
+            onClick={navigateToProject}
+          >
+            {props.elm.prefix}
+          </Custom.Typography>
+          <Custom.Typography
+            size={theme.font.sm}
+            className="o-ellipsis"
+            weight={theme.font.bold}
+          >
+            {props.elm.name}
+          </Custom.Typography>
+        </Stack>
         <Custom.Typography size={theme.font.xs} weight={theme.font.normal}>
           ({props.elm.tasks.length} {t.label.task.toLowerCase()})
         </Custom.Typography>

@@ -10,8 +10,7 @@ import { BoardType } from "types";
 export const Board = () => {
   const { t } = useApp();
   const { theme } = useTheme();
-  const { filters, getBoard, getFlow, project, projects, setProject } =
-    useData();
+  const { filters, getBoard, project, projects, setProject } = useData();
 
   function onDragEnd(result: any) {
     const { source, destination } = result;
@@ -69,7 +68,7 @@ export const Board = () => {
   return (
     <Common.Page
       header={t.title.board}
-      subheader={getFlow()?.name}
+      subheader={"Lorem ipsum dolor sit amet"}
       control={
         <>
           <Stack direction="row" spacing={theme.spacing.sm} alignItems="center">
@@ -126,9 +125,9 @@ export const Board = () => {
         <Grid container width="1" height="1" gap={theme.spacing.xs}>
           {getBoard().map((item: BoardType) => {
             return (
-              <Grid key={item.state._id} item xs>
-                <Kanban.Board label={item.state.name}>
-                  <Droppable droppableId={item.state._id}>
+              <Grid key={item.flow._id} item xs>
+                <Kanban.Board label={item.flow.name}>
+                  <Droppable droppableId={item.flow._id}>
                     {(provided, snapshot) => (
                       <Stack
                         height="1"

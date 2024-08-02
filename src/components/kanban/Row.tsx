@@ -2,8 +2,15 @@ import { Stack } from "@mui/material";
 import { UserAvatar } from "assets/images";
 import { Custom, Icon } from "components";
 import { useTheme } from "contexts";
-import { Auxiliars, Conversions } from "helpers";
-import { ICategory, IComponent, IPriority, IState, ITask } from "interfaces";
+import { Auxiliars, Conversions, Sanitizes } from "helpers";
+import {
+  ICategory,
+  IComponent,
+  IPriority,
+  IProject,
+  IState,
+  ITask,
+} from "interfaces";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Routes } from "utils";
 import { EnumColor, EnumModalType } from "utils/enums";
@@ -56,7 +63,10 @@ export const Row = ({ accent = false, ...props }: Props) => {
           color={theme.palette.font.accent}
           onClick={navigateToTask}
         >
-          {props.elm.number}
+          {Sanitizes.toUniqueNumber(
+            (props.elm.project as IProject).prefix,
+            props.elm.number.toString()
+          )}
         </Custom.Typography>
         <Custom.Typography size={theme.font.sm} weight={theme.font.bold}>
           {props.elm.title}

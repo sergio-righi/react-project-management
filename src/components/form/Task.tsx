@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Custom } from "components";
-import { useApp, useData, useService, useTheme } from "contexts";
+import { useApp, useData, useTheme } from "contexts";
 import { useForm } from "hooks";
-import { Constants, Enums } from "utils";
+import { Constants, Enums, ORM } from "utils";
 import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import { Feedback, PairValue } from "types";
 import { DEFAULT_TASK, IComponent, IProject, ITask } from "interfaces";
@@ -16,14 +16,17 @@ type Props = {
 export const Task = (props: Props) => {
   const { theme } = useTheme();
   const { setFeedback, t } = useApp();
-  const { categories, priorities, projects, states, users } = useData();
   const {
-    categoryService,
-    priorityService,
-    projectService,
-    stateService,
-    userService,
-  } = useService();
+    categories,
+    flows,
+    priorities,
+    projects,
+    states,
+    tasks,
+    users,
+    setProjects,
+    setTasks,
+  } = useData();
 
   const fromJSON = {
     ...DEFAULT_TASK,
@@ -49,7 +52,7 @@ export const Task = (props: Props) => {
   const { onChange, onDropdownChange, onSubmit } = useForm(
     {},
     undefined,
-    submitCallback,
+    undefined,
     updateCallback
   );
 
@@ -67,11 +70,11 @@ export const Task = (props: Props) => {
     onDropdownChange(event);
   }
 
-  function toJSON(task: any) {
-    return Auxiliars.removeFromObject({
-      ...task,
-    } as any);
-  }
+  // function toJSON(task: any) {
+  //   return Auxiliars.removeFromObject({
+  //     ...task,
+  //   } as any);
+  // }
 
   function updateCallback(name: string, value: any) {
     if (name in state) {
@@ -79,47 +82,69 @@ export const Task = (props: Props) => {
     }
   }
 
-  async function submitCallback() {
-    const response = toJSON(state);
-    console.log(response);
-
+  async function handleOnSubmit() {
     let newValidationState: any = {};
 
     let valid = true;
 
-    // let name: keyof typeof validation;
-    // for (name in validation) {
-    //   if (response.hasOwnProperty(name)) {
-    //     if (validation[name].callback((response as any)[name])) {
-    //       newValidationState[name] = validation[name].valid;
-    //     } else {
-    //       newValidationState[name] = validation[name].invalid;
-    //       valid = false;
-    //     }
-    //   }
-    // }
+    let name: keyof typeof validation;
+
+    for (name in validation) {
+      if (state.hasOwnProperty(name)) {
+        if (validation[name].callback(state[name])) {
+          newValidationState[name] = validation[name].valid;
+        } else {
+          newValidationState[name] = validation[name].invalid;
+          valid = false;
+        }
+      }
+    }
 
     setValidationState(newValidationState);
 
     if (!valid) return;
 
-    // const response = await taskService.update(toJSON(state));
-    // if (response) {
-    //   setFeedback({
-    //     message: t.message.feedback.request_success,
-    //     severity: Enums.EnumFeedback.Success,
-    //   } as Feedback);
-    //   props.onSubmit && props.onSubmit();
-    // } else {
-    //   setFeedback({
-    //     message: t.message.feedback.request_error,
-    //     severity: Enums.EnumFeedback.Error,
-    //   } as Feedback);
-    // }
+    if (state) {
+      const index = tasks.findIndex((item: ITask) => item._id === state._id);
+      if (index !== -1) {
+        const updatedTasks = [...tasks] as ITask[];
+        updatedTasks[index] = state;
+        setTasks(updatedTasks);
+      } else {
+        const response = ORM.populateTask(state as ITask);
+
+        const subindex = projects.findIndex(
+          (item: IProject) => item._id === (response.project as IProject)._id
+        );
+
+        if (subindex !== -1) {
+          const updatedProjects = [...projects] as IProject[];
+
+          response._id = Auxiliars.generateObjectId();
+          response.number = updatedProjects[subindex].count + 1;
+          setTasks([...tasks, response] as ITask[]);
+
+          updatedProjects[subindex].count += 1;
+          console.log(updatedProjects);
+          setProjects(updatedProjects);
+        }
+      }
+
+      // setFeedback({
+      //   message: t.message.feedback.request_success,
+      //   severity: Enums.EnumFeedback.Success,
+      // } as Feedback);
+      props.onSubmit && props.onSubmit();
+    } else {
+      // setFeedback({
+      //   message: t.message.feedback.request_error,
+      //   severity: Enums.EnumFeedback.Error,
+      // } as Feedback);
+    }
   }
 
   return (
-    <Box component="form" onSubmit={onSubmit}>
+    <Box component="form">
       <Grid container spacing={theme.spacing.sm}>
         <Grid item xs={12}>
           <Custom.TextField
@@ -142,11 +167,11 @@ export const Task = (props: Props) => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Custom.Select
-            name="state"
+            name="category"
             // required={true}
-            label={t.label.state}
-            value={state.state}
-            items={Conversions.toPairValue(states)}
+            label={t.label.category}
+            value={state.category._id}
+            items={Conversions.toPairValue(categories)}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -155,18 +180,28 @@ export const Task = (props: Props) => {
             name="priority"
             // required={true}
             label={t.label.priority}
-            value={state.priority}
+            value={state.priority._id}
             items={Conversions.toPairValue(priorities)}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Custom.Select
-            name="category"
+            name="state"
             // required={true}
-            label={t.label.category}
-            value={state.category}
-            items={Conversions.toPairValue(categories)}
+            label={t.label.state}
+            value={state.state._id}
+            items={Conversions.toPairValue(states)}
+            onDropdownChange={onDropdownChange}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Custom.Select
+            name="flow"
+            // required={true}
+            label={t.label.flow}
+            value={state.flow._id}
+            items={Conversions.toPairValue(flows)}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
@@ -175,7 +210,7 @@ export const Task = (props: Props) => {
             name="project"
             // required={true}
             label={t.label.project}
-            value={state.project}
+            value={state.project._id}
             items={Conversions.toPairValue(projects)}
             onDropdownChange={onProjectChange}
           />
@@ -185,18 +220,18 @@ export const Task = (props: Props) => {
             name="component"
             // required={true}
             label={t.label.component}
-            value={state.component}
+            value={state.component._id}
             items={Conversions.toPairValue(components)}
             onDropdownChange={onDropdownChange}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <Custom.Select
             multiple
             name="assignees"
             // required={true}
             label={t.label.assignees}
-            value={state.assignees as string[]}
+            value={state.assignees._id}
             items={Conversions.toPairValue(users)}
             onDropdownChange={onDropdownChange}
           />
@@ -204,7 +239,6 @@ export const Task = (props: Props) => {
         <Grid item xs={12} sm={6}>
           <Custom.TextField
             name="deadline"
-            required={true}
             error={validationState.deadline.error}
             helperText={validationState.deadline.helperText}
             onChange={onChange}
@@ -217,7 +251,6 @@ export const Task = (props: Props) => {
         <Grid item xs={12} sm={6}>
           <Custom.TextField
             name="estimatedTime"
-            required={true}
             onChange={onChange}
             label={t.label.estimatedTime}
             value={state.estimatedTime}
@@ -225,7 +258,9 @@ export const Task = (props: Props) => {
         </Grid>
         <Grid item xs={12}>
           <Box>
-            <Custom.Button submit>{t.action.save}</Custom.Button>
+            <Custom.Button onClick={handleOnSubmit}>
+              {t.action.save}
+            </Custom.Button>
           </Box>
         </Grid>
       </Grid>

@@ -28,12 +28,6 @@ export function populateMany<T>(values: T[], fn: (item: T) => T): T[] {
   return values.map((item: T) => fn(item)) || [];
 }
 
-export function populateFlow(flow: IFlow): IFlow {
-  const newFlow = { ...flow }
-  newFlow.states = Object.keys(newFlow.states as any).map(item => populate<IState>(States, "_id", (newFlow.states as any)[item] as string));
-  return newFlow
-}
-
 export function populateProject(project: IProject): IProject {
   const newProject = { ...project }
   newProject.category = findCategoryById(newProject.category.toString()) ?? {} as ICategory;
@@ -49,7 +43,6 @@ export function populateTask(task: ITask): ITask {
   newTask.flow = findFlowById(newTask.flow.toString()) ?? {} as IFlow;
   newTask.priority = findPriorityById(newTask.priority.toString()) ?? {} as IPriority;
   newTask.project = findProjectById(newTask.project.toString()) ?? {} as IProject;
-  newTask.number = Sanitizes.toUniqueNumber(newTask.project.prefix, newTask.number);
   newTask.component = populate<IComponent>(newTask.project.components as IComponent[], "_id", newTask.component.toString());
   newTask.state = findStateById(newTask.state.toString()) ?? {} as IState;
   newTask.referenceTask = findTaskById(newTask.referenceTask.toString()) ?? {} as ITask;
@@ -57,11 +50,6 @@ export function populateTask(task: ITask): ITask {
   return newTask;
 }
 
-export function populateUser(user: IUser): IUser {
-  const newUser = { ...user }
-  newUser.flows = newUser.flows.map((item: IFlow | string) => populateFlow(findFlowById(item.toString()) ?? {} as IFlow)) ?? [] as IFlow[];
-  return newUser;
-}
 
 /**
  * function to find a category by id
@@ -136,8 +124,7 @@ export function findTaskById(id: string): ITask | undefined {
  */
 
 export function findUserById(id: string): IUser | undefined {
-  const user = Users.find((item: IUser) => item._id === id);
-  return user ? populateUser(user) : undefined;
+  return Users.find((item: IUser) => item._id === id);
 }
 
 /**
