@@ -17,6 +17,7 @@ export interface ITask {
   flow: string | IFlow;
   workedTime: string;
   estimatedTime: string;
+  order: number;
   createdBy: string;
   createdAt: string;
   comments: IJournal[];
@@ -39,6 +40,7 @@ export const DEFAULT_TASK = {
   flow: "",
   workedTime: "",
   estimatedTime: "",
+  order: 0,
   createdBy: "",
   createdAt: "",
   comments: [],

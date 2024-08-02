@@ -152,14 +152,16 @@ export const DataProvider = React.memo<Props>(({ children }) => {
    */
 
   const getBoard = React.useCallback(() => {
-    return (flows as IFlow[]).map((flow: string | IFlow) => {
-      const boardItem = {} as BoardType;
-      boardItem.flow = flow as IFlow;
-      boardItem.tasks = getTasks().filter(
-        (item: ITask) => (item.flow as IFlow)._id === (flow as IFlow)._id
-      );
-      return boardItem;
-    }) as BoardType[];
+    return (flows as IFlow[])
+      .sort((a: IFlow, b: IFlow) => a.order - b.order)
+      .map((flow: string | IFlow) => {
+        const boardItem = {} as BoardType;
+        boardItem.flow = flow as IFlow;
+        boardItem.tasks = getTasks().filter(
+          (item: ITask) => (item.flow as IFlow)._id === (flow as IFlow)._id
+        );
+        return boardItem;
+      }) as BoardType[];
   }, [flows, tasks, project]);
 
   const MemoizedValue = React.useMemo(() => {

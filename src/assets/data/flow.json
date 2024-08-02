@@ -1,22 +1,27 @@
 [
   {
     "_id": "6573bf0bb8ad6b408b5c1426",
-    "name": "Review"
+    "name": "Review",
+    "order": 0
   },
   {
     "_id": "6573bf11005cf9bc715f7230",
-    "name": "To do"
-  },
-  {
-    "_id": "66ac4067fb77b4c397f5ca5e",
-    "name": "Blocker/Awaiting"
+    "name": "To do",
+    "order": 1
   },
   {
     "_id": "6573bf1c890d1e52f102864d",
-    "name": "In progress"
+    "name": "In progress",
+    "order": 2
+  },
+  {
+    "_id": "66ac4067fb77b4c397f5ca5e",
+    "name": "Blocker/Awaiting",
+    "order": 3
   },
   {
     "_id": "6573bf222f2d0576b97cbada",
-    "name": "Testing"
+    "name": "Testing",
+    "order": 4
   }
 ]
