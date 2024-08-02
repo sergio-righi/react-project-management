@@ -2,26 +2,11 @@ import { Stack } from "@mui/material";
 import { Common, Controller, Custom, Kanban } from "components";
 import { useApp, useData, useTheme } from "contexts";
 import { IProject, IState, ITask } from "interfaces";
-import { useEffect, useState } from "react";
 
 export const Table = () => {
   const { t } = useApp();
   const { theme } = useTheme();
-  const { getTasks, project, projects, setProject, states } = useData();
-  const [tasks, setTasks] = useState<ITask[]>([]);
-
-  useEffect(() => {
-    // TODO : it has to be improved
-    const stateCondition = states
-      .filter((item: IState) => item.name !== "Draft")
-      .map((item: IState) => item._id);
-    const tasks = getTasks().filter(
-      (item: ITask) =>
-        stateCondition.includes((item.state as IState)._id) &&
-        ((item.project as IProject)._id === project || project === "")
-    );
-    setTasks(tasks);
-  }, [project]);
+  const { getTasks, project, projects, setProject } = useData();
 
   return (
     <Common.Page
@@ -57,9 +42,9 @@ export const Table = () => {
       }
     >
       <Kanban.Table
-        id="abc"
+        id="kanban-table"
         title={"Lorem ipsum dolor sit amet"}
-        elms={tasks}
+        items={getTasks()}
       />
     </Common.Page>
   );

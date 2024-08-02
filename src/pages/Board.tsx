@@ -3,14 +3,19 @@ import React, { useEffect, useState } from "react";
 import { Box, Grid, Stack } from "@mui/material";
 import { Common, Controller, Custom, Kanban } from "components";
 import { useApp, useData, useTheme } from "contexts";
-import { IFilter, IProject, ITask } from "interfaces";
+import { IFilter, IFlow, IProject, ITask } from "interfaces";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { BoardType } from "types";
+import { ORM } from "utils";
 
 export const Board = () => {
   const { t } = useApp();
   const { theme } = useTheme();
-  const { filters, getBoard, project, projects, setProject } = useData();
+  const { filters, flows, getBoard, project, projects, setProject } = useData();
+
+  const [board, setBoard] = useState<BoardType[]>([]);
+
+  useEffect(() => setBoard(getBoard()), [getBoard]);
 
   function onDragEnd(result: any) {
     const { source, destination } = result;
@@ -20,22 +25,43 @@ export const Board = () => {
       return;
     }
 
-    // const sInd = +source.droppableId;
-    // const dInd = +destination.droppableId;
+    const sourceId = source.droppableId;
+    const destinationId = destination.droppableId;
 
-    // if (sInd === dInd) {
-    //   const items = reorder(board[sInd], source.index, destination.index);
-    //   const newState = [...board] as any;
-    //   newState[sInd] = items;
-    //   setBoard(newState);
-    // } else {
-    //   const result = move(board[sInd], board[dInd], source, destination);
-    //   const newState = [...board];
-    //   newState[sInd] = result[sInd];
-    //   newState[dInd] = result[dInd];
+    const sourceColumnIndex = board.findIndex(
+      (item: BoardType) => item.flow._id === sourceId
+    );
 
-    //   setBoard(newState.filter((group: any) => group.length));
-    // }
+    if (sourceColumnIndex !== -1) {
+      if (sourceId === destinationId) {
+        const items = reorder(
+          board[sourceColumnIndex].tasks,
+          source.index,
+          destination.index
+        );
+        const updatedBoard = [...board] as BoardType[];
+        updatedBoard[sourceColumnIndex].tasks = items as ITask[];
+        setBoard(updatedBoard);
+      } else {
+        const destinationColumnIndex = board.findIndex(
+          (item: BoardType) => item.flow._id === destinationId
+        );
+        if (destinationColumnIndex !== -1) {
+          const result = move(
+            board[sourceColumnIndex].tasks,
+            board[destinationColumnIndex].tasks,
+            source,
+            destination
+          );
+
+          const updatedBoard = [...board] as BoardType[];
+          updatedBoard[sourceColumnIndex].tasks = result[sourceId];
+          updatedBoard[destinationColumnIndex].tasks = result[destinationId];
+
+          setBoard(updatedBoard);
+        }
+      }
+    }
   }
 
   function reorder(list: any, startIndex: any, endIndex: any) {
@@ -57,6 +83,11 @@ export const Board = () => {
     const [removed] = sourceClone.splice(droppableSource.index, 1);
 
     destClone.splice(droppableDestination.index, 0, removed);
+
+    const newItem = destClone[droppableDestination.index] as ITask;
+    newItem.flow = flows.find(
+      (item: IFlow) => item._id === droppableDestination.droppableId
+    ) as IFlow;
 
     const result = {} as any;
     result[droppableSource.droppableId] = sourceClone;
@@ -123,7 +154,7 @@ export const Board = () => {
     >
       <DragDropContext onDragEnd={onDragEnd}>
         <Grid container width="1" height="1" gap={theme.spacing.xs}>
-          {getBoard().map((item: BoardType) => {
+          {board.map((item: BoardType) => {
             return (
               <Grid key={item.flow._id} item xs>
                 <Kanban.Board label={item.flow.name}>

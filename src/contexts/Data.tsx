@@ -138,7 +138,6 @@ export const DataProvider = React.memo<Props>(({ children }) => {
    */
 
   const getBacklog = React.useCallback(() => {
-    console.log(tasks);
     return tasks?.filter(
       (item: ITask) =>
         item.flow !== "" &&

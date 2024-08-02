@@ -58,17 +58,15 @@ export const Task = (props: Props) => {
 
   useEffect(() => setState(fromJSON), [props.task]);
 
-  async function onProjectChange(event: SelectChangeEvent<string>) {
+  useEffect(() => {
     const project = projects.find(
-      (item: IProject) => item._id === (event.target.value as string)
+      (item: IProject) => item._id === state.project._id
     );
 
     if (project) {
       setComponents(project.components);
     }
-
-    onDropdownChange(event);
-  }
+  }, [state.project]);
 
   // function toJSON(task: any) {
   //   return Auxiliars.removeFromObject({
@@ -212,7 +210,7 @@ export const Task = (props: Props) => {
             label={t.label.project}
             value={state.project._id}
             items={Conversions.toPairValue(projects)}
-            onDropdownChange={onProjectChange}
+            onDropdownChange={onDropdownChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>

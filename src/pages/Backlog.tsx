@@ -43,9 +43,9 @@ export const Backlog = () => {
       }
     >
       <Kanban.Table
-        id="abc"
+        id="kanban-backlog"
         title={"Lorem ipsum dolor sit amet"}
-        elms={getBacklog()}
+        items={getBacklog()}
       />
     </Common.Page>
   );

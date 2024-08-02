@@ -43,7 +43,7 @@ export const Project = ({ accent = false, ...props }: Props) => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Stack width={1} direction="column">
+        <Stack direction="column">
           <Custom.Typography
             size={theme.font.xs}
             weight={theme.font.normal}
