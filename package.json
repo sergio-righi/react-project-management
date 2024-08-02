@@ -13,15 +13,15 @@
     "@types/react-dom": "^18.0.10",
     "@types/react-input-mask": "3.0.2",
     "axios": "^1.4.0",
-    "react": "^18.2.0",
+    "react": "^18.3.1",
     "react-beautiful-dnd": "^13.1.1",
-    "react-dom": "^18.2.0",
+    "react-dom": "^18.3.1",
     "react-input-mask": "3.0.0-alpha.2",
     "react-intl": "^6.5.5",
     "react-router-dom": "^6.6.2",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "5.0.1",
     "sass": "^1.57.1",
-    "typescript": "^4.9.4"
+    "typescript": "4.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
