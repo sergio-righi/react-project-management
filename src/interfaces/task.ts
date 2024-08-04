@@ -1,6 +1,11 @@
 import { Auxiliars } from "helpers";
 import { ICategory, IComponent, IFlow, IJournal, IPriority, IProject, IState, IUser } from "interfaces";
 
+interface StateDuration {
+  startDate: string;
+  duration: number;
+}
+
 export interface ITask {
   _id: string;
   number: string | number;
@@ -22,6 +27,7 @@ export interface ITask {
   createdAt: string;
   comments: IJournal[];
   journal: IJournal[];
+  timeline?: Record<string, StateDuration>;
 }
 
 export const DEFAULT_TASK = {
@@ -45,4 +51,5 @@ export const DEFAULT_TASK = {
   createdAt: "",
   comments: [],
   journal: [],
+  timeline: {}
 }

@@ -6,6 +6,7 @@ import { useApp, useData, useTheme } from "contexts";
 import { IFilter, IFlow, IProject, ITask } from "interfaces";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { BoardType } from "types";
+import { Timeline } from "classes";
 
 export const Board = () => {
   const { t } = useApp();
@@ -87,6 +88,9 @@ export const Board = () => {
     newItem.flow = flows.find(
       (item: IFlow) => item._id === droppableDestination.droppableId
     ) as IFlow;
+
+    const timeline = new Timeline(newItem);
+    timeline.moveToState(droppableDestination.droppableId);
 
     const result = {} as any;
     result[droppableSource.droppableId] = sourceClone;

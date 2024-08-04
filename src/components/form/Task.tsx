@@ -123,7 +123,6 @@ export const Task = (props: Props) => {
           setTasks([...tasks, response] as ITask[]);
 
           updatedProjects[subindex].count += 1;
-          console.log(updatedProjects);
           setProjects(updatedProjects);
         }
       }

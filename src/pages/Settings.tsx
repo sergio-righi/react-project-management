@@ -17,7 +17,6 @@ export const Settings = () => {
   } = useData();
 
   function handleCategoryOnUpdate(value: any) {
-    console.log(value);
     setCategories(value as ICategory[]);
   }
 

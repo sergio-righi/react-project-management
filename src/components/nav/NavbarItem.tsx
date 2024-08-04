@@ -23,8 +23,6 @@ export const NavbarItem = (props: Props) => {
     props.onClick && props.onClick();
   }
 
-  console.log(props.to, location.pathname);
-
   const isActive = props.to && location.pathname === props.to;
 
   return (
