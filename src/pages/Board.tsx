@@ -57,6 +57,7 @@ export const Board = () => {
           const updatedBoard = [...board] as BoardType[];
           updatedBoard[sourceColumnIndex].tasks = result[sourceId];
           updatedBoard[destinationColumnIndex].tasks = result[destinationId];
+          console.log(updatedBoard);
 
           setBoard(updatedBoard);
         }
@@ -85,12 +86,14 @@ export const Board = () => {
     destClone.splice(droppableDestination.index, 0, removed);
 
     const newItem = destClone[droppableDestination.index] as ITask;
-    newItem.flow = flows.find(
+    const newFlow = flows.find(
       (item: IFlow) => item._id === droppableDestination.droppableId
     ) as IFlow;
 
     const timeline = new Timeline(newItem);
-    timeline.moveToState(droppableDestination.droppableId);
+    timeline.moveToFlow(newFlow);
+
+    newItem.flow = newFlow;
 
     const result = {} as any;
     result[droppableSource.droppableId] = sourceClone;

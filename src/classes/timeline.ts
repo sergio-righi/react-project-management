@@ -1,4 +1,4 @@
-import { ITask } from "interfaces";
+import { IFlow, ITask } from "interfaces";
 
 export class Timeline {
   private task: ITask;
@@ -10,29 +10,29 @@ export class Timeline {
     }
   }
 
-  public moveToState(stateId: string): void {
+  public moveToFlow(flow: IFlow): void {
     const currentDate = new Date().toISOString();
 
     // Calculate duration if previous state exists
-    const previousStateId = typeof this.task.state === "string" ? this.task.state : this.task.state._id;
-    if (previousStateId && this.task.timeline![previousStateId]) {
-      const previousState = this.task.timeline![previousStateId];
-      const durationInSeconds = this.calculateDurationInSeconds(new Date(previousState.startDate), new Date(currentDate));
-      previousState.duration += durationInSeconds;
+    const previousFlowId = typeof this.task.flow === "string" ? this.task.flow : this.task.flow._id;
+    if (previousFlowId && this.task.timeline![previousFlowId]) {
+      const previousFlow = this.task.timeline![previousFlowId];
+      const durationInSeconds = this.calculateDurationInSeconds(new Date(previousFlow.startDate), new Date(currentDate));
+      previousFlow.duration += durationInSeconds;
     }
 
     // Move to new state
-    if (!this.task.timeline![stateId]) {
-      this.task.timeline![stateId] = {
+    if (!this.task.timeline![flow._id]) {
+      this.task.timeline![flow._id] = {
         startDate: currentDate,
         duration: 0
       };
     } else {
-      this.task.timeline![stateId].startDate = currentDate;
+      this.task.timeline![flow._id].startDate = currentDate;
     }
 
     // Update the current state of the ticket
-    this.task.state = stateId;
+    this.task.flow = flow;
   }
 
   private calculateDurationInSeconds(startDate: Date, endDate: Date): number {
