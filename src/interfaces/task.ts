@@ -23,8 +23,11 @@ export interface ITask {
   workedTime: string;
   estimatedTime: string;
   order: number;
+  isCompleted: boolean;
   createdBy: string;
   createdAt: string;
+  completedBy: string;
+  completedAt: string;
   comments: IJournal[];
   journal: IJournal[];
   timeline?: Record<string, StateDuration>;
@@ -47,8 +50,11 @@ export const DEFAULT_TASK = {
   workedTime: "",
   estimatedTime: "",
   order: 0,
+  isCompleted: false,
   createdBy: "",
   createdAt: "",
+  completedBy: "",
+  completedAt: "",
   comments: [],
   journal: [],
   timeline: {}

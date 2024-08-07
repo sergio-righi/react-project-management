@@ -6,8 +6,6 @@ import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
-  ListSubheader,
-  IconButton,
   InputAdornment,
   Stack,
 } from "@mui/material";
@@ -15,11 +13,16 @@ import { useTheme } from "contexts";
 import { Custom, Progress } from "components";
 import { Constants } from "utils";
 import { Auxiliars, Validations } from "helpers";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "@hello-pangea/dnd";
 
 // icons
 import {
   AddRounded,
-  CloseRounded,
   EditRounded,
   DeleteRounded,
   SaveRounded,
@@ -29,12 +32,12 @@ type Props = TextFieldProps & {
   label: string;
   title: string;
   value: any[];
+  sortable?: boolean;
   onChange: (value: any[]) => void;
 };
 
-export const List = (props: Props) => {
+export const List = ({ sortable = false, ...props }: Props) => {
   const { theme } = useTheme();
-
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
   const [currentValue, setCurrentValue] = useState<string>("");
   const [items, setItems] = useState<any[]>(props.value);
@@ -61,6 +64,11 @@ export const List = (props: Props) => {
           _id: Auxiliars.generateObjectId(),
           name: currentValue,
         };
+
+        if (sortable) {
+          newItem.order = updatedItems.length + 1;
+        }
+
         updatedItems.push(newItem);
       }
       setItems(updatedItems);
@@ -83,6 +91,25 @@ export const List = (props: Props) => {
   function handleCancel() {
     setCurrentIndex(-1);
     setCurrentValue("");
+  }
+
+  function handleDragEnd(result: DropResult) {
+    if (!result.destination) {
+      return;
+    }
+
+    const updatedItems = Array.from(items);
+    const [movedItem] = updatedItems.splice(result.source.index, 1);
+    updatedItems.splice(result.destination.index, 0, movedItem);
+
+    // Update the order property of each item
+    const reorderedItems = updatedItems.map((item, index) => ({
+      ...item,
+      order: index + 1,
+    }));
+
+    setItems(reorderedItems);
+    props.onChange && props.onChange(reorderedItems);
   }
 
   return (
@@ -126,65 +153,68 @@ export const List = (props: Props) => {
         }}
       />
       {items.length > 0 ? (
-        <MUIList
-          sx={{
-            overflow: "hidden",
-            position: "relative",
-            mt: theme.spacing.md,
-            borderBottomLeftRadius: theme.border.radius,
-            borderBottomRightRadius: theme.border.radius,
-          }}
-          // subheader={
-          //   <>
-          //     <ListSubheader
-          //       component="div"
-          //       sx={{
-          //         fontWeight: theme.font.bold,
-          //         color: theme.palette.font.accent,
-          //         bgcolor: theme.palette.background.accent,
-          //         borderTopLeftRadius: theme.border.radius,
-          //         borderTopRightRadius: theme.border.radius,
-          //       }}
-          //     >
-          //       {props.title}
-          //     </ListSubheader>
-          //     <Custom.Divider />
-          //   </>
-          // }
-        >
-          {items.map((item: any, i: number) => (
-            <ListItem
-              key={item._id}
-              divider
-              sx={{
-                color: theme.palette.font.accent,
-                bgcolor: theme.palette.background.accent,
-              }}
-            >
-              <ListItemText primary={item.name} />
-              <ListItemSecondaryAction>
-                <Stack direction="row" spacing={theme.spacing.sm}>
-                  <Custom.IconButton
-                    edge="end"
-                    aria-label="Edit"
-                    onClick={() => handleEditItem(i)}
-                    iconColor={theme.palette.font.accent}
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided) => (
+              <MUIList
+                sx={{
+                  overflow: "hidden",
+                  position: "relative",
+                  mt: theme.spacing.md,
+                  borderBottomLeftRadius: theme.border.radius,
+                  borderBottomRightRadius: theme.border.radius,
+                }}
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {items.map((item: any, i: number) => (
+                  <Draggable
+                    key={item._id}
+                    draggableId={item._id}
+                    index={i}
+                    isDragDisabled={!sortable}
                   >
-                    <EditRounded />
-                  </Custom.IconButton>
-                  <Custom.IconButton
-                    edge="end"
-                    aria-label="Delete"
-                    onClick={() => handleDeleteItem(i)}
-                    iconColor={theme.palette.font.accent}
-                  >
-                    <DeleteRounded />
-                  </Custom.IconButton>
-                </Stack>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
-        </MUIList>
+                    {(provided) => (
+                      <ListItem
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        divider
+                        sx={{
+                          color: theme.palette.font.accent,
+                          bgcolor: theme.palette.background.accent,
+                        }}
+                      >
+                        <ListItemText primary={item.name} />
+                        <ListItemSecondaryAction>
+                          <Stack direction="row" spacing={theme.spacing.sm}>
+                            <Custom.IconButton
+                              edge="end"
+                              aria-label="Edit"
+                              onClick={() => handleEditItem(i)}
+                              iconColor={theme.palette.font.accent}
+                            >
+                              <EditRounded />
+                            </Custom.IconButton>
+                            <Custom.IconButton
+                              edge="end"
+                              aria-label="Delete"
+                              onClick={() => handleDeleteItem(i)}
+                              iconColor={theme.palette.font.accent}
+                            >
+                              <DeleteRounded />
+                            </Custom.IconButton>
+                          </Stack>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </MUIList>
+            )}
+          </Droppable>
+        </DragDropContext>
       ) : (
         <Box
           height={60}

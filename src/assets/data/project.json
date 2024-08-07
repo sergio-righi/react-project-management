@@ -10,8 +10,7 @@
       {
         "_id": "66a4f3505de9d53b49700da7",
         "name": "Network",
-        "color": "DarkBlue",
-        "briefdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+        "color": "DarkBlue"
       }
     ],
     "priority": "6573bb90d02e8854f91fa277",
@@ -39,8 +38,7 @@
       {
         "_id": "66a4f35ba21a23b6db39d66f",
         "name": "Network",
-        "color": "DarkBrown",
-        "briefdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+        "color": "DarkBrown"
       }
     ],
     "priority": "6573bb94a859b621a65d849a",

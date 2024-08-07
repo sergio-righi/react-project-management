@@ -33,14 +33,14 @@ export const Navbar = (props: Props) => {
         <Nav.NavbarItem>
           <UserAvatar />
         </Nav.NavbarItem>
+        <Nav.NavbarItem label={t.title.project} to={Routes.strings.projects}>
+          <AssignmentRounded />
+        </Nav.NavbarItem>
         <Nav.NavbarItem label={t.title.board} to={Routes.strings.board}>
           <ViewKanbanRounded />
         </Nav.NavbarItem>
         <Nav.NavbarItem label={t.title.table} to={Routes.strings.table}>
           <GridOnRounded />
-        </Nav.NavbarItem>
-        <Nav.NavbarItem label={t.title.project} to={Routes.strings.projects}>
-          <AssignmentRounded />
         </Nav.NavbarItem>
         <Nav.NavbarItem label={t.title.task} to={Routes.strings.tasks}>
           <FactCheckRounded />

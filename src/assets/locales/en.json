@@ -14,7 +14,10 @@
     "mine": "Mine"
   },
   "header": {
-    "component": "Components"
+    "component": "Components",
+    "done": "Done",
+    "todo": "To do",
+    "wip": "Working in progress"
   },
   "label": {
     "assignees": "Assignees",
@@ -37,12 +40,20 @@
   "placeholder": {
     "no_record": "Nothing to be displayed..."
   },
+  "subtitle": {
+    "backlog": "Awaiting tasks that the team may deliver in order to achieve a specific outcome",
+    "board": "Ongoing tasks that the team are working on",
+    "project": "Projects that the team is either on planning or in development",
+    "settings": "Configurations and properties",
+    "table": "Ongoing tasks that the team are working on",
+    "tasks": "Ongoing tasks that the team are working on"
+  },
   "title": {
     "backlog": "Backlog",
     "board": "Board",
     "project": "Projects",
+    "settings": "Settings",
     "table": "Table",
-    "task": "Tasks",
-    "settings": "Settings"
+    "task": "Tasks"
   }
 }

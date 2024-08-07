@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import { UserAvatar } from "assets/images";
 import { Custom, Icon } from "components";
-import { useTheme } from "contexts";
+import { useApp, useTheme } from "contexts";
 import { Auxiliars, Conversions, Sanitizes } from "helpers";
 import {
   ICategory,
@@ -21,6 +21,7 @@ type Props = {
 };
 
 export const Row = ({ accent = false, ...props }: Props) => {
+  const { t } = useApp();
   const { theme } = useTheme();
 
   const location = useLocation();
@@ -71,14 +72,25 @@ export const Row = ({ accent = false, ...props }: Props) => {
         <Custom.Typography size={theme.font.sm} weight={theme.font.bold}>
           {props.elm.title}
         </Custom.Typography>
-        <Custom.Chip
-          size="small"
-          label={(props.elm.state as IState).name}
-          sx={{
-            color: theme.color.accent.text,
-            backgroundColor: theme.color.accent.color,
-          }}
-        />
+        {props.elm.isCompleted ? (
+          <Custom.Chip
+            size="small"
+            label={(props.elm.state as IState).name}
+            sx={{
+              color: theme.color.accent.text,
+              backgroundColor: theme.color.accent.color,
+            }}
+          />
+        ) : (
+          <Custom.Chip
+            size="small"
+            label={t.header.done}
+            sx={{
+              color: theme.color.accent.text,
+              backgroundColor: theme.color.accent.color,
+            }}
+          />
+        )}
       </Stack>
       <Stack direction="row" alignItems="center" spacing={theme.spacing.sm}>
         <Custom.Chip

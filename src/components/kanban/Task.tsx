@@ -88,7 +88,9 @@ export const Task = ({ accent = false, ...props }: Props) => {
             value={(props.elm.priority as IPriority).name.toLowerCase()}
           />
           <Custom.Typography weight={theme.font.light} size={theme.font.xs}>
-            {Conversions.toDueString(props.elm.deadline, t, locale)}
+            {props.elm.isCompleted
+              ? Conversions.toRelativeDate(props.elm.completedAt, t, locale)
+              : Conversions.toDueString(props.elm.deadline, t, locale)}
           </Custom.Typography>
         </Stack>
         <UserAvatar width={25} height={25} />

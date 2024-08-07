@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useApp, useTheme } from "contexts";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // icons
 import { AddRounded } from "@mui/icons-material";
@@ -16,6 +16,9 @@ export const Footer = (props: Props) => {
   const { theme } = useTheme();
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isProject = location.pathname.includes("project");
 
   function handleProjectOnClick() {
     navigate(Routes.pages.project.popup());
@@ -33,20 +36,24 @@ export const Footer = (props: Props) => {
       right={theme.spacing.default}
       bottom={theme.spacing.default}
     >
-      <Custom.Fab
-        size="medium"
-        text={t.label.task}
-        onStateChange={handleTaskOnClick}
-      >
-        <AddRounded />
-      </Custom.Fab>
-      <Custom.Fab
-        size="medium"
-        text={t.label.project}
-        onStateChange={handleProjectOnClick}
-      >
-        <AddRounded />
-      </Custom.Fab>
+      {!isProject && (
+        <Custom.Fab
+          // size="medium"
+          // text={t.label.task}
+          onStateChange={handleTaskOnClick}
+        >
+          <AddRounded />
+        </Custom.Fab>
+      )}
+      {isProject && (
+        <Custom.Fab
+          // size="medium"
+          // text={t.label.project}
+          onStateChange={handleProjectOnClick}
+        >
+          <AddRounded />
+        </Custom.Fab>
+      )}
     </Stack>
   );
 };

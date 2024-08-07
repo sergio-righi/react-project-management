@@ -1,8 +1,6 @@
 import { Box, Stack } from "@mui/material";
 import { Custom } from "components";
 import { useTheme } from "contexts";
-import { ITask } from "interfaces";
-import { Droppable } from "react-beautiful-dnd";
 
 type Props = {
   label: string;

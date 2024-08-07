@@ -11,7 +11,7 @@ export const Task = () => {
   return (
     <Common.Page
       header={t.title.task}
-      subheader={"Lorem ipsum dolor sit amet"}
+      subheader={t.subtitle.task}
       control={
         <>
           <Stack direction="row" spacing={theme.spacing.sm} alignItems="center">

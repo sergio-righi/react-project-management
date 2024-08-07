@@ -11,7 +11,7 @@ export const Table = () => {
   return (
     <Common.Page
       header={t.title.table}
-      subheader={"Lorem ipsum dolor sit amet"}
+      subheader={t.subtitle.table}
       control={
         <>
           <Stack direction="row" spacing={theme.spacing.sm} alignItems="center">
@@ -42,8 +42,8 @@ export const Table = () => {
       }
     >
       <Kanban.Table
-        id="kanban-table"
-        title={"Lorem ipsum dolor sit amet"}
+        id="kanban-table-wip"
+        title={t.header.wip}
         items={getTasks()}
       />
     </Common.Page>

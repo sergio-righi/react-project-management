@@ -3,7 +3,7 @@ import { Custom, Kanban, Placeholder } from "components";
 import { useApp, useTheme } from "contexts";
 import { ITask } from "interfaces";
 import { useEffect, useState } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 
 type Props = {
   id: string;

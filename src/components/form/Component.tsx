@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { Custom, Relationship } from "components";
 import { useApp, useService, useTheme } from "contexts";
 import { useForm } from "hooks";
-import { Constants, Enums } from "utils";
 import { Box, Grid } from "@mui/material";
-import { Feedback, PairValue } from "types";
 import { DEFAULT_COMPONENT, IComponent } from "interfaces";
 import { Auxiliars, Conversions, Sanitizes, Validations } from "helpers";
 import { EnumColor } from "utils/enums";
@@ -48,7 +46,7 @@ export const Component = (props: Props) => {
 
   function handleOnSubmit() {
     const response = toJSON(state) as IComponent;
-    if (response.name && response.color && response.briefdescription) {
+    if (response.name && response.color) {
       props.onSubmit && props.onSubmit(response);
     }
   }
@@ -72,15 +70,6 @@ export const Component = (props: Props) => {
             value={state.color}
             items={Conversions.fromEnumToPairValue(EnumColor)}
             onDropdownChange={onDropdownChange}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Custom.TextField
-            required={true}
-            name="briefdescription"
-            onChange={onChange}
-            label={t.label.briefdescription}
-            value={state.briefdescription}
           />
         </Grid>
         <Grid item xs={12}>

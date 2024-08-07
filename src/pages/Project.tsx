@@ -12,7 +12,7 @@ export const Project = () => {
   return (
     <Common.Page
       header={t.title.project}
-      subheader={"Lorem ipsum dolor sit amet"}
+      subheader={t.subtitle.project}
       control={<></>}
     >
       <Grid container width="1" spacing={theme.spacing.sm}>

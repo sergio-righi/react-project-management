@@ -9,10 +9,19 @@ export const Backlog = () => {
   const { theme } = useTheme();
   const { getBacklog, project, projects, setProject, states } = useData();
 
+  const [todo, setTodo] = useState<ITask[]>([]);
+  const [done, setDone] = useState<ITask[]>([]);
+
+  useEffect(() => {
+    const tasks = getBacklog();
+    setTodo(tasks.filter((item: ITask) => !item.isCompleted));
+    setDone(tasks.filter((item: ITask) => item.isCompleted));
+  }, [getBacklog]);
+
   return (
     <Common.Page
       header={t.title.backlog}
-      subheader={"Lorem ipsum dolor sit amet"}
+      subheader={t.subtitle.backlog}
       control={
         <>
           <Stack direction="row" spacing={theme.spacing.sm} alignItems="center">
@@ -42,11 +51,18 @@ export const Backlog = () => {
         </>
       }
     >
-      <Kanban.Table
-        id="kanban-backlog"
-        title={"Lorem ipsum dolor sit amet"}
-        items={getBacklog()}
-      />
+      <Stack spacing={theme.spacing.sm}>
+        <Kanban.Table
+          id="kanban-backlog-todo"
+          title={t.header.todo}
+          items={todo}
+        />
+        <Kanban.Table
+          id="kanban-backlog-done"
+          title={t.header.done}
+          items={done}
+        />
+      </Stack>
     </Common.Page>
   );
 };

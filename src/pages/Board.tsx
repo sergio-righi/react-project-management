@@ -4,7 +4,7 @@ import { Box, Grid, Stack } from "@mui/material";
 import { Common, Controller, Custom, Kanban } from "components";
 import { useApp, useData, useTheme } from "contexts";
 import { IFilter, IFlow, IProject, ITask } from "interfaces";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { BoardType } from "types";
 import { Timeline } from "classes";
 
@@ -105,7 +105,7 @@ export const Board = () => {
   return (
     <Common.Page
       header={t.title.board}
-      subheader={"Lorem ipsum dolor sit amet"}
+      subheader={t.subtitle.board}
       control={
         <>
           <Stack direction="row" spacing={theme.spacing.sm} alignItems="center">

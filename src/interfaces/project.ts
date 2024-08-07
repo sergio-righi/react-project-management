@@ -1,4 +1,3 @@
-import { Auxiliars } from "helpers";
 import { ICategory, IComponent, IJournal, IPriority, IState, ITask } from "interfaces";
 
 export interface IProject {
