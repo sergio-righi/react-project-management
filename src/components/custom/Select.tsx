@@ -20,6 +20,7 @@ type Props = {
   multiple?: boolean;
   disabled?: boolean;
   withNone?: boolean;
+  required?: boolean; // Added required prop
   value?: any;
   onChange?: (value: any) => void;
   onDropdownChange?: (event: SelectChangeEvent<any>) => void;
@@ -28,26 +29,28 @@ type Props = {
 export const Select = ({
   multiple = false,
   withNone = false,
+  required = false, // Default required to false
   ...props
 }: Props) => {
   const { t } = useApp();
   const { theme } = useTheme();
   const [value, setValue] = useState<any>(
-    props.value ? props.value : multiple ? [] : ""
+    props.value ? props.value : multiple ? [] : "" // Adjusted default value handling
   );
 
-  useEffect(
-    () => setValue(props.value ? props.value : multiple ? [] : ""),
-    [props.value]
-  );
+  useEffect(() => {
+    setValue(props.value ? props.value : multiple ? [] : "");
+  }, [props.value]);
 
-  const handleChange = (value: any): void => {
-    setValue(value);
-    props.onChange && props.onChange(value);
+  const handleChange = (newValue: any): void => {
+    setValue(newValue);
+    props.onChange && props.onChange(newValue);
   };
 
-  const handleDropdownChange = (event: SelectChangeEvent<any>): void =>
+  const handleDropdownChange = (event: SelectChangeEvent<any>): void => {
+    setValue(event.target.value);
     props.onDropdownChange && props.onDropdownChange(event);
+  };
 
   return (
     <>
@@ -55,6 +58,7 @@ export const Select = ({
         <FormControl
           variant="outlined"
           sx={{ width: 1, display: "flex", flexDirection: "row" }}
+          required={required} // Pass the required prop to FormControl
         >
           {props.label && (
             <InputLabel
@@ -72,7 +76,8 @@ export const Select = ({
             value={value}
             name={props.name}
             labelId={props.id}
-            // multiple={multiple}
+            multiple={multiple} // Enable multiple selection
+            required={required} // Pass the required prop to MUISelect
             disabled={props.disabled}
             onChange={handleDropdownChange}
             input={<OutlinedInput label={props.label} />}

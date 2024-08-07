@@ -58,22 +58,26 @@ export const Task = (props: Props) => {
   );
 
   useEffect(() => setState(fromJSON), [props.task]);
-
-  useEffect(() => {
-    const project = projects.find(
-      (item: IProject) => item._id === state.project._id
-    );
-
-    if (project) {
-      setComponents(project.components);
-    }
-  }, [state.project]);
+  useEffect(() => updateComponents(state.project._id), [state.project]);
 
   // function toJSON(task: any) {
   //   return Auxiliars.removeFromObject({
   //     ...task,
   //   } as any);
   // }
+
+  function updateComponents(value: string) {
+    const project = projects.find((item: IProject) => item._id === value);
+
+    if (project) {
+      setComponents(project.components);
+    }
+  }
+
+  function handleOnChange(event: SelectChangeEvent<any>) {
+    updateComponents(event.target.value);
+    onDropdownChange(event);
+  }
 
   function updateCallback(name: string, value: any) {
     if (name in state) {
@@ -160,7 +164,7 @@ export const Task = (props: Props) => {
   }
 
   return (
-    <Box component="form">
+    <Box component="form" onSubmit={handleOnSubmit}>
       <Grid container spacing={theme.spacing.sm}>
         <Grid item xs={12}>
           <Custom.TextField
@@ -184,7 +188,7 @@ export const Task = (props: Props) => {
         <Grid item xs={12} sm={6}>
           <Custom.Select
             name="category"
-            // required={true}
+            required={true}
             label={t.label.category}
             value={state.category._id}
             items={Conversions.toPairValue(categories)}
@@ -194,7 +198,7 @@ export const Task = (props: Props) => {
         <Grid item xs={12} sm={6}>
           <Custom.Select
             name="priority"
-            // required={true}
+            required={true}
             label={t.label.priority}
             value={state.priority._id}
             items={Conversions.toPairValue(priorities)}
@@ -204,7 +208,7 @@ export const Task = (props: Props) => {
         <Grid item xs={12} sm={6}>
           <Custom.Select
             name="state"
-            // required={true}
+            required={true}
             label={t.label.state}
             value={state.state._id}
             items={Conversions.toPairValue(states)}
@@ -214,7 +218,6 @@ export const Task = (props: Props) => {
         <Grid item xs={12} sm={6}>
           <Custom.Select
             name="flow"
-            // required={true}
             withNone={true}
             label={t.label.flow}
             value={state.flow._id}
@@ -225,17 +228,17 @@ export const Task = (props: Props) => {
         <Grid item xs={12} sm={6}>
           <Custom.Select
             name="project"
-            // required={true}
+            required={true}
             label={t.label.project}
             value={state.project._id}
             items={Conversions.toPairValue(projects)}
-            onDropdownChange={onDropdownChange}
+            onDropdownChange={handleOnChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Custom.Select
             name="component"
-            // required={true}
+            required={true}
             label={t.label.component}
             value={state.component._id}
             items={Conversions.toPairValue(components)}
@@ -246,9 +249,9 @@ export const Task = (props: Props) => {
           <Custom.Select
             multiple
             name="assignees"
-            // required={true}
+            required={true}
             label={t.label.assignees}
-            value={state.assignees._id}
+            value={state.assignees.map((item: any) => item._id)}
             items={Conversions.toPairValue(users)}
             onDropdownChange={onDropdownChange}
           />
@@ -261,7 +264,6 @@ export const Task = (props: Props) => {
             onChange={onChange}
             label={t.label.deadline}
             mask={Constants.INPUT_MASK.DATE}
-            // maskPlaceholder={Constants.INPUT_MASK_PLACEHOLDER.DATE}
             value={state.deadline}
           />
         </Grid>
@@ -284,9 +286,7 @@ export const Task = (props: Props) => {
         </Grid>
         <Grid item xs={12}>
           <Box>
-            <Custom.Button onClick={handleOnSubmit}>
-              {t.action.save}
-            </Custom.Button>
+            <Custom.Button submit>{t.action.save}</Custom.Button>
           </Box>
         </Grid>
       </Grid>

@@ -34,11 +34,6 @@ export const Component = (props: Props) => {
     },
     { field: "name", headerName: t.label.name, width: 250 },
     {
-      width: 500,
-      field: "briefdescription",
-      headerName: t.label.briefdescription,
-    },
-    {
       width: 100,
       field: "color",
       headerName: t.label.color,

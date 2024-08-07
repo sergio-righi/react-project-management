@@ -58,7 +58,9 @@ export const Project = (props: Props) => {
     }
   }
 
-  async function handleOnSubmit() {
+  async function handleOnSubmit(event: any) {
+    event.preventDefault();
+
     let newValidationState: any = {};
 
     let valid = true;
@@ -107,7 +109,7 @@ export const Project = (props: Props) => {
   }
 
   return (
-    <Box component="form">
+    <Box component="form" onSubmit={handleOnSubmit}>
       <Grid container spacing={theme.spacing.sm}>
         <Grid item xs={12}>
           <Custom.TextField
@@ -139,7 +141,7 @@ export const Project = (props: Props) => {
         <Grid item xs={12} sm={4}>
           <Custom.Select
             name="category"
-            // required={true}
+            required={true}
             label={t.label.category}
             value={state.category._id}
             items={Conversions.toPairValue(categories)}
@@ -149,7 +151,7 @@ export const Project = (props: Props) => {
         <Grid item xs={12} sm={4}>
           <Custom.Select
             name="priority"
-            // required={true}
+            required={true}
             label={t.label.priority}
             value={state.priority._id}
             items={Conversions.toPairValue(priorities)}
@@ -159,7 +161,7 @@ export const Project = (props: Props) => {
         <Grid item xs={12} sm={6}>
           <Custom.Select
             name="state"
-            // required={true}
+            required={true}
             label={t.label.state}
             value={state.state._id}
             items={Conversions.toPairValue(states)}
@@ -185,9 +187,7 @@ export const Project = (props: Props) => {
         </Grid> */}
         <Grid item xs={12}>
           <Box>
-            <Custom.Button onClick={handleOnSubmit}>
-              {t.action.save}
-            </Custom.Button>
+            <Custom.Button submit>{t.action.save}</Custom.Button>
           </Box>
         </Grid>
       </Grid>

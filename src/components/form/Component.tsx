@@ -57,7 +57,6 @@ export const Component = (props: Props) => {
         <Grid item xs={12} sm={6}>
           <Custom.TextField
             name="name"
-            required={true}
             onChange={onChange}
             label={t.label.name}
             value={state.name}
