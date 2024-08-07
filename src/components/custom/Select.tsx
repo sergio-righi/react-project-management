@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Validations } from "helpers";
 import { PairValue } from "types";
-import { useTheme } from "contexts";
+import { useApp, useTheme } from "contexts";
 
 type Props = {
   sx?: any;
@@ -19,12 +19,18 @@ type Props = {
   items: PairValue[];
   multiple?: boolean;
   disabled?: boolean;
+  withNone?: boolean;
   value?: any;
   onChange?: (value: any) => void;
   onDropdownChange?: (event: SelectChangeEvent<any>) => void;
 };
 
-export const Select = ({ multiple = false, ...props }: Props) => {
+export const Select = ({
+  multiple = false,
+  withNone = false,
+  ...props
+}: Props) => {
+  const { t } = useApp();
   const { theme } = useTheme();
   const [value, setValue] = useState<any>(
     props.value ? props.value : multiple ? [] : ""
@@ -96,6 +102,15 @@ export const Select = ({ multiple = false, ...props }: Props) => {
               },
             }}
           >
+            {withNone && (
+              <MenuItem
+                key={t.label.none}
+                value={""}
+                onClick={() => handleChange("")}
+              >
+                {t.label.none}
+              </MenuItem>
+            )}
             {props.items.map((item: PairValue) => (
               <MenuItem
                 key={item.key}

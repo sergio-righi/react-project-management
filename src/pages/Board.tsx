@@ -57,7 +57,6 @@ export const Board = () => {
           const updatedBoard = [...board] as BoardType[];
           updatedBoard[sourceColumnIndex].tasks = result[sourceId];
           updatedBoard[destinationColumnIndex].tasks = result[destinationId];
-          console.log(updatedBoard);
 
           setBoard(updatedBoard);
         }

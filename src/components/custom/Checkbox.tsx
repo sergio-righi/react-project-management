@@ -13,7 +13,7 @@ type Props = CheckboxProps & {
 
 export const Checkbox = (props: Props) => {
   const { theme } = useTheme();
-  const [checked, setChecked] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(props.checked ?? false);
 
   useEffect(() => {
     setChecked(props.checked ?? false);
@@ -46,7 +46,11 @@ export const Checkbox = (props: Props) => {
   }
 
   return Validations.hasValue(props.label) ? (
-    <FormControlLabel control={render()} label={props.label} />
+    <FormControlLabel
+      control={render()}
+      label={props.label}
+      sx={{ marginLeft: "initial" }}
+    />
   ) : (
     render()
   );

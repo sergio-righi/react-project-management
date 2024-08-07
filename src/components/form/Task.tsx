@@ -23,6 +23,7 @@ export const Task = (props: Props) => {
     projects,
     states,
     tasks,
+    user,
     users,
     setProjects,
     setTasks,
@@ -103,10 +104,21 @@ export const Task = (props: Props) => {
     if (!valid) return;
 
     if (state) {
+      const currentDate = new Date().toISOString();
       const index = tasks.findIndex((item: ITask) => item._id === state._id);
       if (index !== -1) {
         const updatedTasks = [...tasks] as ITask[];
-        updatedTasks[index] = state;
+        const values = {
+          ...state,
+          ...(state.isCompleted
+            ? {
+                flow: "",
+                completedBy: user?._id || "",
+                completedAt: currentDate,
+              }
+            : {}),
+        } as ITask;
+        updatedTasks[index] = values;
         setTasks(updatedTasks);
       } else {
         const response = ORM.populateTask(state as ITask);
@@ -120,6 +132,13 @@ export const Task = (props: Props) => {
 
           response._id = Auxiliars.generateObjectId();
           response.number = updatedProjects[subindex].count + 1;
+
+          if (response.isCompleted) {
+            response.flow = "";
+            response.completedBy = user?._id || "";
+            response.completedAt = currentDate;
+          }
+
           setTasks([...tasks, response] as ITask[]);
 
           updatedProjects[subindex].count += 1;
@@ -196,6 +215,7 @@ export const Task = (props: Props) => {
           <Custom.Select
             name="flow"
             // required={true}
+            withNone={true}
             label={t.label.flow}
             value={state.flow._id}
             items={Conversions.toPairValue(flows)}
@@ -251,6 +271,15 @@ export const Task = (props: Props) => {
             onChange={onChange}
             label={t.label.estimatedTime}
             value={state.estimatedTime}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Custom.Checkbox
+            name="isCompleted"
+            onChange={onChange}
+            label={t.label.completed}
+            checked={state.isCompleted}
+            value={state.isCompleted}
           />
         </Grid>
         <Grid item xs={12}>

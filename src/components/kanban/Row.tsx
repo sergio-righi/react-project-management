@@ -75,7 +75,7 @@ export const Row = ({ accent = false, ...props }: Props) => {
         {props.elm.isCompleted ? (
           <Custom.Chip
             size="small"
-            label={(props.elm.state as IState).name}
+            label={t.header.done}
             sx={{
               color: theme.color.accent.text,
               backgroundColor: theme.color.accent.color,
@@ -84,7 +84,7 @@ export const Row = ({ accent = false, ...props }: Props) => {
         ) : (
           <Custom.Chip
             size="small"
-            label={t.header.done}
+            label={(props.elm.state as IState).name}
             sx={{
               color: theme.color.accent.text,
               backgroundColor: theme.color.accent.color,

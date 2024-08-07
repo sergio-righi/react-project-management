@@ -150,8 +150,7 @@ export const DataProvider = React.memo<Props>(({ children }) => {
   const getBacklog = React.useCallback(() => {
     return tasks?.filter(
       (item: ITask) =>
-        item.flow !== "" &&
-        Object.keys(item.flow).length === 0 &&
+        (item.flow === "" || Object.keys(item.flow).length === 0) &&
         ((item.project as IProject)._id === project ||
           project === initialState.empty)
     );

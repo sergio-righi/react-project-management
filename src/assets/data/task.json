@@ -20,36 +20,36 @@
     "order": 0,
     "isCompleted": false,
     "createdBy": "6573c2f02a45e5d27962c010",
-    "createdAt": "2023-12-10T08:45:00",
+    "createdAt": "2023-12-10T08:45:00Z",
     "completedBy": "",
     "completedAt": "",
     "comments": [
       {
         "message": "Lorem ipsum dolor sit amet",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       }
     ],
     "journal": [
       {
         "message": "The state has been updated from Opened to In progress",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-10T08:45:00"
+        "updatedAt": "2023-12-10T08:45:00Z"
       },
       {
         "message": "Priority changed from Medium to Low",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-10T08:45:00"
+        "updatedAt": "2023-12-10T08:45:00Z"
       },
       {
         "message": "Flow has been updated from Analysis to Design",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-10T08:45:00"
+        "updatedAt": "2023-12-10T08:45:00Z"
       },
       {
         "message": "Environment has changed from DEV to SIT",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-10T08:45:00"
+        "updatedAt": "2023-12-10T08:45:00Z"
       }
     ]
   },
@@ -74,36 +74,36 @@
     "order": 0,
     "isCompleted": false,
     "createdBy": "6573c58288d03b9406d082d8",
-    "createdAt": "2023-12-12T10:20:00",
+    "createdAt": "2023-12-12T10:20:00Z",
     "completedBy": "",
     "completedAt": "",
     "comments": [
       {
         "message": "Lorem ipsum dolor sit amet",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       }
     ],
     "journal": [
       {
         "message": "The state has been updated from Opened to In progress",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-12T10:20:00"
+        "updatedAt": "2023-12-12T10:20:00Z"
       },
       {
         "message": "Priority changed from High to Medium",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-12T10:20:00"
+        "updatedAt": "2023-12-12T10:20:00Z"
       },
       {
         "message": "Flow has been updated from Analysis to Design",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-12T10:20:00"
+        "updatedAt": "2023-12-12T10:20:00Z"
       },
       {
         "message": "Environment has changed from DEV to SIT",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-12T10:20:00"
+        "updatedAt": "2023-12-12T10:20:00Z"
       }
     ]
   },
@@ -128,36 +128,36 @@
     "order": 0,
     "isCompleted": true,
     "createdBy": "6573c2f02a45e5d27962c010",
-    "createdAt": "2023-12-15T14:45:00",
+    "createdAt": "2023-12-15T14:45:00Z",
     "completedBy": "6573c2f02a45e5d27962c010",
-    "completedAt": "2023-12-16:45:00",
+    "completedAt": "2023-12-16:45:00Z",
     "comments": [
       {
         "message": "Lorem ipsum dolor sit amet",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       }
     ],
     "journal": [
       {
         "message": "The state has been updated from Opened to Testing",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-15T14:45:00"
+        "updatedAt": "2023-12-15T14:45:00Z"
       },
       {
         "message": "Priority changed from Medium to High",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-15T14:45:00"
+        "updatedAt": "2023-12-15T14:45:00Z"
       },
       {
         "message": "Flow has been updated from Analysis to Design",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-15T14:45:00"
+        "updatedAt": "2023-12-15T14:45:00Z"
       },
       {
         "message": "Environment has changed from DEV to UAT",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-15T14:45:00"
+        "updatedAt": "2023-12-15T14:45:00Z"
       }
     ]
   },
@@ -182,36 +182,36 @@
     "order": 0,
     "isCompleted": false,
     "createdBy": "6573c58288d03b9406d082d8",
-    "createdAt": "2023-12-20T09:15:00",
+    "createdAt": "2023-12-20T09:15:00Z",
     "completedBy": "",
     "completedAt": "",
     "comments": [
       {
         "message": "Lorem ipsum dolor sit amet",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       }
     ],
     "journal": [
       {
         "message": "The state has been updated from Opened to On Hold",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-20T09:15:00"
+        "updatedAt": "2023-12-20T09:15:00Z"
       },
       {
         "message": "Priority changed from High to Medium",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-20T09:15:00"
+        "updatedAt": "2023-12-20T09:15:00Z"
       },
       {
         "message": "Flow has been updated from Analysis to Deployment",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-20T09:15:00"
+        "updatedAt": "2023-12-20T09:15:00Z"
       },
       {
         "message": "Environment has changed from DEV to PROD",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-20T09:15:00"
+        "updatedAt": "2023-12-20T09:15:00Z"
       }
     ]
   },
@@ -236,36 +236,36 @@
     "order": 0,
     "isCompleted": false,
     "createdBy": "6573c2f02a45e5d27962c010",
-    "createdAt": "2023-12-22T11:30:00",
+    "createdAt": "2023-12-22T11:30:00Z",
     "completedBy": "",
     "completedAt": "",
     "comments": [
       {
         "message": "Lorem ipsum dolor sit amet",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       }
     ],
     "journal": [
       {
         "message": "The state has been updated from Opened to Testing",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-22T11:30:00"
+        "updatedAt": "2023-12-22T11:30:00Z"
       },
       {
         "message": "Priority changed from Critical to High",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-22T11:30:00"
+        "updatedAt": "2023-12-22T11:30:00Z"
       },
       {
         "message": "Flow has been updated from Analysis to Design",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-22T11:30:00"
+        "updatedAt": "2023-12-22T11:30:00Z"
       },
       {
         "message": "Environment has changed from DEV to UAT",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-22T11:30:00"
+        "updatedAt": "2023-12-22T11:30:00Z"
       }
     ]
   },
@@ -290,36 +290,36 @@
     "order": 0,
     "isCompleted": false,
     "createdBy": "6573c58288d03b9406d082d8",
-    "createdAt": "2023-12-28T13:45:00",
+    "createdAt": "2023-12-28T13:45:00Z",
     "completedBy": "",
     "completedAt": "",
     "comments": [
       {
         "message": "Lorem ipsum dolor sit amet",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       }
     ],
     "journal": [
       {
         "message": "The state has been updated from Opened to Testing",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-28T13:45:00"
+        "updatedAt": "2023-12-28T13:45:00Z"
       },
       {
         "message": "Priority changed from High to Medium",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-28T13:45:00"
+        "updatedAt": "2023-12-28T13:45:00Z"
       },
       {
         "message": "Flow has been updated from Analysis to Deployment",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-28T13:45:00"
+        "updatedAt": "2023-12-28T13:45:00Z"
       },
       {
         "message": "Environment has changed from DEV to PROD",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-28T13:45:00"
+        "updatedAt": "2023-12-28T13:45:00Z"
       }
     ]
   },
@@ -344,36 +344,36 @@
     "order": 0,
     "isCompleted": false,
     "createdBy": "6573c58288d03b9406d082d8",
-    "createdAt": "2023-12-31T09:30:00",
+    "createdAt": "2023-12-31T09:30:00Z",
     "completedBy": "",
     "completedAt": "",
     "comments": [
       {
         "message": "Lorem ipsum dolor sit amet",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       }
     ],
     "journal": [
       {
         "message": "The state has been updated from Opened to In progress",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       },
       {
         "message": "Priority changed from Medium to Low",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       },
       {
         "message": "Flow has been updated from Analysis to Design",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       },
       {
         "message": "Environment has changed from DEV to SIT",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       }
     ]
   },
@@ -398,36 +398,36 @@
     "order": 0,
     "isCompleted": false,
     "createdBy": "6573c58288d03b9406d082d8",
-    "createdAt": "2024-01-05T14:15:00",
+    "createdAt": "2024-01-05T14:15:00Z",
     "completedBy": "",
     "completedAt": "",
     "comments": [
       {
         "message": "Lorem ipsum dolor sit amet",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       }
     ],
     "journal": [
       {
         "message": "The state has been updated from Opened to Testing",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2024-01-05T14:15:00"
+        "updatedAt": "2024-01-05T14:15:00Z"
       },
       {
         "message": "Priority changed from Critical to High",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2024-01-05T14:15:00"
+        "updatedAt": "2024-01-05T14:15:00Z"
       },
       {
         "message": "Flow has been updated from Analysis to Design",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2024-01-05T14:15:00"
+        "updatedAt": "2024-01-05T14:15:00Z"
       },
       {
         "message": "Environment has changed from DEV to UAT",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2024-01-05T14:15:00"
+        "updatedAt": "2024-01-05T14:15:00Z"
       }
     ]
   },
@@ -452,36 +452,36 @@
     "order": 0,
     "isCompleted": false,
     "createdBy": "6573c58288d03b9406d082d8",
-    "createdAt": "2023-12-20T15:30:00",
+    "createdAt": "2023-12-20T15:30:00Z",
     "completedBy": "",
     "completedAt": "",
     "comments": [
       {
         "message": "Lorem ipsum dolor sit amet",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-31T09:30:00"
+        "updatedAt": "2023-12-31T09:30:00Z"
       }
     ],
     "journal": [
       {
         "message": "The state has been updated from Opened to In progress",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-20T15:30:00"
+        "updatedAt": "2023-12-20T15:30:00Z"
       },
       {
         "message": "Priority changed from Medium to Low",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-20T15:30:00"
+        "updatedAt": "2023-12-20T15:30:00Z"
       },
       {
         "message": "Flow has been updated from Analysis to Design",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-20T15:30:00"
+        "updatedAt": "2023-12-20T15:30:00Z"
       },
       {
         "message": "Enviroment has changed from DEV to SIT",
         "createdBy": "6573c2f02a45e5d27962c010",
-        "updatedAt": "2023-12-20T15:30:00"
+        "updatedAt": "2023-12-20T15:30:00Z"
       }
     ]
   }
