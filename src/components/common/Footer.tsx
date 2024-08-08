@@ -21,11 +21,11 @@ export const Footer = (props: Props) => {
   const isProject = location.pathname.includes("project");
 
   function handleProjectOnClick() {
-    navigate(Routes.pages.project.popup());
+    navigate(Routes.pages.project.form());
   }
 
   function handleTaskOnClick() {
-    navigate(Routes.pages.task.popup());
+    navigate(Routes.pages.task.form());
   }
 
   return (
@@ -37,20 +37,12 @@ export const Footer = (props: Props) => {
       bottom={theme.spacing.default}
     >
       {!isProject && (
-        <Custom.Fab
-          // size="medium"
-          // text={t.label.task}
-          onStateChange={handleTaskOnClick}
-        >
+        <Custom.Fab onStateChange={handleTaskOnClick}>
           <AddRounded />
         </Custom.Fab>
       )}
       {isProject && (
-        <Custom.Fab
-          // size="medium"
-          // text={t.label.project}
-          onStateChange={handleProjectOnClick}
-        >
+        <Custom.Fab onStateChange={handleProjectOnClick}>
           <AddRounded />
         </Custom.Fab>
       )}

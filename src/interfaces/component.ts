@@ -7,7 +7,7 @@ export interface IComponent {
 }
 
 export const DEFAULT_COMPONENT = {
-  _id: Auxiliars.generateObjectId(),
+  _id: "",
   name: "",
   color: ""
 }

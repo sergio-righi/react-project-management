@@ -64,8 +64,10 @@ enum EnumColor {
 }
 
 enum EnumModalType {
-  Project = "project",
-  Task = "task",
+  ProjectForm = "project_form",
+  TaskForm = "task_form",
+  ComponentList = "component_list",
+  ComponentForm = "component_form",
 }
 
 export {

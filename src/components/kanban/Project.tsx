@@ -22,7 +22,7 @@ export const Project = ({ accent = false, ...props }: Props) => {
   function navigateToProject() {
     navigate({
       pathname: location.pathname,
-      search: Routes.pages.project.popup(props.elm._id),
+      search: Routes.pages.project.form(props.elm._id),
     });
   }
 

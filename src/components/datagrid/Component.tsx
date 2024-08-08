@@ -46,7 +46,7 @@ export const Component = (props: Props) => {
 
   return (
     <Custom.DataGrid
-      key="abc"
+      key="datagrid-component"
       columns={columns}
       isLoading={false}
       rows={props.items}

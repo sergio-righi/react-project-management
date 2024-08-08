@@ -85,7 +85,9 @@ export const Task = (props: Props) => {
     }
   }
 
-  async function handleOnSubmit() {
+  async function handleOnSubmit(event: any) {
+    event.preventDefault();
+
     let newValidationState: any = {};
 
     let valid = true;

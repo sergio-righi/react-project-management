@@ -2,11 +2,22 @@ import { useState, useEffect } from "react";
 import { Custom, Relationship } from "components";
 import { useApp, useData, useService, useTheme } from "contexts";
 import { useForm } from "hooks";
-import { Constants, Enums, ORM } from "utils";
-import { Box, Grid } from "@mui/material";
-import { Feedback, PairValue } from "types";
+import { Constants, Enums, ORM, Routes } from "utils";
+import {
+  Box,
+  Grid,
+  List as MUIList,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  Stack,
+} from "@mui/material";
 import { DEFAULT_PROJECT, IComponent, IProject } from "interfaces";
 import { Auxiliars, Conversions, Sanitizes, Validations } from "helpers";
+import { useNavigate } from "react-router-dom";
+
+// icons
+import { ChevronRightRounded } from "@mui/icons-material";
 
 type Props = {
   project: IProject;
@@ -17,6 +28,8 @@ export const Project = (props: Props) => {
   const { theme } = useTheme();
   const { setFeedback, t } = useApp();
   const { categories, priorities, projects, states, setProjects } = useData();
+
+  const navigate = useNavigate();
 
   const fromJSON = {
     ...DEFAULT_PROJECT,
@@ -51,6 +64,10 @@ export const Project = (props: Props) => {
   //     ...task,
   //   } as any);
   // }
+
+  function navigateToComponent() {
+    navigate(Routes.pages.component.list(state._id));
+  }
 
   function updateCallback(name: string, value: any) {
     if (name in state) {
@@ -180,11 +197,43 @@ export const Project = (props: Props) => {
             value={state.deadline}
           />
         </Grid>
-        {/* <Grid item xs={12}>
-          <Relationship.Component
-            items={(props.project?.components ?? []) as IComponent[]}
-          />
-        </Grid> */}
+        {state._id && (
+          <Grid item xs={12}>
+            <MUIList
+              sx={{
+                overflow: "hidden",
+                position: "relative",
+                borderRadius: theme.border.radius,
+              }}
+            >
+              <ListItem
+                divider
+                sx={{
+                  cursor: "pointer",
+                  color: theme.palette.font.accent,
+                  bgcolor: theme.palette.background.color,
+                }}
+                onClick={navigateToComponent}
+              >
+                <ListItemText primary={t.header.component} />
+                <ListItemSecondaryAction>
+                  <Stack direction="row" alignItems="center">
+                    <Custom.Typography>
+                      {state.components.length || 0}
+                    </Custom.Typography>
+                    <Custom.IconButton
+                      edge="end"
+                      aria-label="Edit"
+                      iconColor={theme.palette.font.accent}
+                    >
+                      <ChevronRightRounded />
+                    </Custom.IconButton>
+                  </Stack>
+                </ListItemSecondaryAction>
+              </ListItem>
+            </MUIList>
+          </Grid>
+        )}
         <Grid item xs={12}>
           <Box>
             <Custom.Button submit>{t.action.save}</Custom.Button>

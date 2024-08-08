@@ -11,6 +11,7 @@ import {
   IState,
   ITask,
 } from "interfaces";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Routes } from "utils";
 import { EnumColor, EnumModalType } from "utils/enums";
@@ -27,16 +28,25 @@ export const Row = ({ accent = false, ...props }: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const bgColor = Conversions.fromEnumToValue(
-    EnumColor,
-    (props.elm.component as IComponent).color,
+  const [backgroundColor, setBackgroundColor] = useState<string>(
     theme.color.accent.color
   );
+
+  useEffect(() => {
+    setBackgroundColor(
+      Conversions.fromEnumToValue(
+        EnumColor,
+        (props.elm.component as IComponent).color,
+        theme.color.accent.color
+      )
+    );
+    console.log(props.elm);
+  }, [props.elm.component]);
 
   function navigateToTask() {
     navigate({
       pathname: location.pathname,
-      search: Routes.pages.task.popup(props.elm._id),
+      search: Routes.pages.task.form(props.elm._id),
     });
   }
 
@@ -97,8 +107,8 @@ export const Row = ({ accent = false, ...props }: Props) => {
           size="small"
           label={(props.elm.component as IComponent).name}
           sx={{
-            color: Auxiliars.getContrast(bgColor),
-            backgroundColor: bgColor,
+            color: Auxiliars.getContrast(backgroundColor),
+            backgroundColor: backgroundColor,
           }}
         />
         <Custom.Chip

@@ -1,12 +1,7 @@
 import { Modal } from "components";
 import { useEffect, useState } from "react";
-import {
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { Routes } from "utils";
 import { EnumModalType } from "utils/enums";
 
 export const Popup = () => {
@@ -14,35 +9,63 @@ export const Popup = () => {
   const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
-  const [modalTaskOpened, setModalTaskOpened] = useState<boolean>(false);
-  const [modalProjectOpened, setModalProjectOpened] = useState<boolean>(false);
+  const [modal, setModal] = useState<string>("");
 
   function handleModalClose() {
-    searchParams.delete("id");
-    searchParams.delete("modal");
+    // if (searchParams.has("previous")) {
+    //   searchParams.delete("id");
+    //   searchParams.set("modal", searchParams.get("previous") || "");
+    //   searchParams.delete("previous");
+    // } else {
+    //   searchParams.delete("id");
+    //   searchParams.delete("modal");
+    //   searchParams.delete("ref_id");
+    // }
 
-    setModalTaskOpened(false);
-    setModalProjectOpened(false);
-
-    navigate({
-      pathname: location.pathname,
-      search: searchParams.toString(),
-    });
+    switch (searchParams.get("previous")) {
+      case EnumModalType.ComponentForm:
+        navigate(
+          Routes.pages.component.form(
+            searchParams.get("ref_id") || "",
+            searchParams.get("id") || ""
+          )
+        );
+        break;
+      case EnumModalType.ComponentList:
+        navigate(Routes.pages.component.list(searchParams.get("ref_id") || ""));
+        break;
+      case EnumModalType.ProjectForm:
+        navigate(Routes.pages.project.form(searchParams.get("id") || ""));
+        break;
+      case EnumModalType.TaskForm:
+        navigate(Routes.pages.task.form(searchParams.get("id") || ""));
+        break;
+      default:
+        navigate({
+          pathname: location.pathname,
+          search: "", //searchParams.toString(),
+        });
+    }
   }
 
   useEffect(() => {
-    const modal = searchParams.get("modal");
-    if (modal === EnumModalType.Project) {
-      setModalProjectOpened(true);
-    } else if (modal === EnumModalType.Task) {
-      setModalTaskOpened(true);
-    }
+    setModal(searchParams.get("modal") || "");
   }, [searchParams]);
 
   return (
     <>
-      <Modal.Project open={modalProjectOpened} onClose={handleModalClose} />
-      <Modal.Task open={modalTaskOpened} onClose={handleModalClose} />
+      {modal === EnumModalType.ProjectForm && (
+        <Modal.Project open={true} onClose={handleModalClose} />
+      )}
+      {modal === EnumModalType.TaskForm && (
+        <Modal.Task open={true} onClose={handleModalClose} />
+      )}
+      {modal === EnumModalType.ComponentForm && (
+        <Modal.Component open={true} onClose={handleModalClose} />
+      )}
+      {modal === EnumModalType.ComponentList && (
+        <Modal.ComponentList open={true} onClose={handleModalClose} />
+      )}
     </>
   );
 };

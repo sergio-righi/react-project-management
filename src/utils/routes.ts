@@ -13,19 +13,27 @@ const pages = {
   board: {
     index: ":project?"
   },
+  component: {
+    form: (refId: string, id?: string) => {
+      return id ? `?modal=${EnumModalType.ComponentForm}&ref_id=${refId}&id=${id}&previous=${EnumModalType.ComponentList}` : `?modal=${EnumModalType.ComponentForm}&ref_id=${refId}&previous=${EnumModalType.ComponentList}`
+    },
+    list: (id: string) => {
+      return `?modal=${EnumModalType.ComponentList}&id=${id}&previous=${EnumModalType.ProjectForm}`
+    }
+  },
   table: {
     index: ":project?"
   },
   project: {
-    popup: (id?: string) => {
-      return id ? `?modal=${EnumModalType.Project}&id=${id}` : `?modal=${EnumModalType.Project}`
+    form: (id?: string) => {
+      return id ? `?modal=${EnumModalType.ProjectForm}&id=${id}` : `?modal=${EnumModalType.ProjectForm}`
     }
   },
   task: {
     index: ":project?",
     view: ":id",
-    popup: (id?: string) => {
-      return id ? `?modal=${EnumModalType.Task}&id=${id}` : `?modal=${EnumModalType.Task}`
+    form: (id?: string) => {
+      return id ? `?modal=${EnumModalType.TaskForm}&id=${id}` : `?modal=${EnumModalType.TaskForm}`
     }
   }
 }
