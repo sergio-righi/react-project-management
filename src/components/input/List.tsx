@@ -155,7 +155,7 @@ export const List = ({ sortable = false, ...props }: Props) => {
       {items.length > 0 ? (
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId="droppable">
-            {(provided) => (
+            {(provided: any) => (
               <MUIList
                 sx={{
                   overflow: "hidden",
@@ -174,7 +174,7 @@ export const List = ({ sortable = false, ...props }: Props) => {
                     index={i}
                     isDragDisabled={!sortable}
                   >
-                    {(provided) => (
+                    {(provided: any) => (
                       <ListItem
                         ref={provided.innerRef}
                         {...provided.draggableProps}

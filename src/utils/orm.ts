@@ -43,7 +43,7 @@ export function populateTask(task: ITask): ITask {
   newTask.flow = findFlowById(newTask.flow.toString()) ?? {} as IFlow;
   newTask.priority = findPriorityById(newTask.priority.toString()) ?? {} as IPriority;
   newTask.project = findProjectById(newTask.project.toString()) ?? {} as IProject;
-  newTask.component = populate<IComponent>(newTask.project.components as IComponent[], "_id", newTask.component.toString());
+  // newTask.component = populate<IComponent>(newTask.project.components as IComponent[], "_id", newTask.component.toString());
   newTask.state = findStateById(newTask.state.toString()) ?? {} as IState;
   newTask.referenceTask = findTaskById(newTask.referenceTask.toString()) ?? {} as ITask;
   newTask.assignees = populates<IUser>(Users, "_id", task.assignees as []) ?? [];

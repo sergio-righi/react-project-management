@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 import {
   ICategory,
+  IComponent,
   IFilter,
   IFlow,
   IPriority,
@@ -112,6 +113,31 @@ export const DataProvider = React.memo<Props>(({ children }) => {
   const [users, setUsers] = React.useState<IUser[]>(initialState.array);
 
   /**
+   * function to return the tasks with component
+   */
+
+  const getTasksWithComponent = React.useCallback(() => {
+    return (
+      tasks.map((item: ITask) => {
+        const newProject = projects.find(
+          (subitem: IProject) => subitem._id === (item.project as IProject)._id
+        );
+        const components =
+          (newProject as IProject).components || ([] as IComponent[]);
+        const newComponent = components.find(
+          (subitem: IComponent) =>
+            subitem._id ===
+            (typeof item.component === "string"
+              ? item.component
+              : (item.component as IComponent)._id)
+        ) as IComponent;
+        item.component = newComponent;
+        return item;
+      }) || []
+    );
+  }, [tasks, setProjects, setTasks]);
+
+  /**
    * function to return the project object
    */
 
@@ -125,36 +151,37 @@ export const DataProvider = React.memo<Props>(({ children }) => {
    * function to return the flows in order
    */
 
-  const getFlows = React.useCallback(() => {
-    return (flows as IFlow[]).sort((a: IFlow, b: IFlow) => a.order - b.order);
-  }, [flows]);
+  const getFlows = React.useCallback(
+    () => (flows as IFlow[]).sort((a: IFlow, b: IFlow) => a.order - b.order),
+    [flows]
+  );
 
   /**
    * function to return the filtered tasks
    */
 
   const getTasks = React.useCallback(() => {
-    return tasks?.filter(
+    return getTasksWithComponent().filter(
       (item: ITask) =>
         item.flow !== "" &&
         Object.keys(item.flow).length > 0 &&
         ((item.project as IProject)._id === project ||
           project === initialState.empty)
     );
-  }, [tasks, project]);
+  }, [project, getTasksWithComponent]);
 
   /**
    * function to return the backlog tasks
    */
 
   const getBacklog = React.useCallback(() => {
-    return tasks?.filter(
+    return getTasksWithComponent().filter(
       (item: ITask) =>
         (item.flow === "" || Object.keys(item.flow).length === 0) &&
         ((item.project as IProject)._id === project ||
           project === initialState.empty)
     );
-  }, [tasks, project]);
+  }, [project, getTasksWithComponent]);
 
   /**
    * function to return the filtered tasks
@@ -164,12 +191,12 @@ export const DataProvider = React.memo<Props>(({ children }) => {
     return getFlows().map((flow: string | IFlow) => {
       const boardItem = {} as BoardType;
       boardItem.flow = flow as IFlow;
-      boardItem.tasks = getTasks().filter(
+      boardItem.tasks = getTasksWithComponent().filter(
         (item: ITask) => (item.flow as IFlow)._id === (flow as IFlow)._id
       );
       return boardItem;
     }) as BoardType[];
-  }, [flows, tasks, project]);
+  }, [flows, getTasksWithComponent, project]);
 
   const MemoizedValue = React.useMemo(() => {
     const value: ProvidedValueType = {

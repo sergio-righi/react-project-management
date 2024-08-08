@@ -33,7 +33,6 @@ export const Task = ({ accent = false, ...props }: Props) => {
         theme.color.accent.color
       )
     );
-    console.log(props.elm);
   }, [props.elm.component]);
 
   function navigateToTask() {
