@@ -1,0 +1,93 @@
+@use "../utils" as *;
+
+.react-calendar {
+  max-width: 350px;
+  padding: $margin-lg;
+  @include border-radius($border-radius);
+
+  & > .header {
+    width: 100%;
+    @include d-inline-flex;
+    margin-bottom: $margin-md;
+    @include align-items(center);
+
+    & > .current {
+      @include d-inline-flex;
+      margin-left: $margin-md;
+      font-size: $font-size-md;
+      font-weight: $font-weight-500;
+
+      & > .month {
+        margin-right: $margin-sm;
+        text-transform: capitalize;
+      }
+
+      & > .year {
+      }
+    }
+
+    & > .control {
+      width: 100%;
+      @include d-inline-flex;
+      @include justify-content(flex-end);
+    }
+  }
+
+  & > .content {
+    @include d-flex;
+    @include flex-direction(column);
+
+    & > .weekday {
+      width: 100%;
+      @include d-inline-flex;
+      margin-bottom: $margin-md;
+      @include justify-content(space-between);
+
+      & > .item {
+        opacity: 0.8;
+        font-size: $font-size-sm;
+      }
+    }
+
+    & > .month {
+      @include d-flex;
+      @include flex-direction(column);
+
+      & > .week {
+        width: 100%;
+        @include d-inline-flex;
+        margin-bottom: $margin-sm;
+        @include justify-content(space-between);
+
+        & > .item {
+          cursor: pointer;
+          font-size: $font-size-sm;
+          font-weight: $font-weight-500;
+
+          &.selected {
+            @include border-radius($border-radius-circle);
+          }
+
+          &.today {
+            @include border-radius($border-radius-circle);
+          }
+
+          &.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+
+    & > .weekday > .item,
+    & > .month > .week > .item {
+      width: 35px;
+      height: 35px;
+      @include d-flex;
+      @include align-items(center);
+      border: 1px solid transparent;
+      @include justify-content(center);
+    }
+  }
+}
